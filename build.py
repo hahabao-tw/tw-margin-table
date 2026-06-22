@@ -164,6 +164,10 @@ def parse_simple_margin(text):
         name = fields[0].strip()
         if not name or "商品別" in name or "更新日期" in name:
             continue
+        # 選擇權類流動性較差，且「風險保證金」非每口固定保證金，
+        # 不適合用於「可下單口數」換算，故一律排除。
+        if "選擇權" in name:
+            continue
         n1, n2, n3 = _clean_num(fields[1]), _clean_num(fields[2]), _clean_num(fields[3])
         # 一筆有效資料：商品名 + 結算/維持/原始 三個數字
         if n1 is None or n2 is None or n3 is None:
@@ -434,12 +438,19 @@ def fmt_pct(r):
 CURRENCY_LABEL = {"TWD": "NT$", "USD": "US$", "JPY": "¥", "CNY": "¥CN", "EUR": "€"}
 
 
+# 預設展開的分類（其餘預設摺疊）
+OPEN_BY_DEFAULT = {"index", "stock"}
+
+
 def render_simple_section(sec):
-    parts = [f'<section class="cat" data-cat="{esc(sec["key"])}">']
-    parts.append(f'<h2>{esc(sec["title"])}'
-                 f'<span class="upd">更新：{esc(sec.get("update") or "—")}</span></h2>')
+    is_open = " open" if sec["key"] in OPEN_BY_DEFAULT else ""
+    parts = [f'<details class="cat" data-cat="{esc(sec["key"])}"{is_open}>']
+    parts.append(f'<summary><span class="cat-name">{esc(sec["title"])}</span>'
+                 f'<span class="upd">更新：{esc(sec.get("update") or "—")}</span>'
+                 f'<span class="chev" aria-hidden="true"></span></summary>')
+    parts.append('<div class="catbody">')
     if sec.get("error"):
-        parts.append(f'<p class="err">資料暫時無法取得：{esc(sec["error"])}</p></section>')
+        parts.append(f'<p class="err">資料暫時無法取得：{esc(sec["error"])}</p></div></details>')
         return "".join(parts)
 
     # 是否整段同一幣別
@@ -465,19 +476,31 @@ def render_simple_section(sec):
             f'<td class="r num">{fmt_int(r["margin"])}</td>'
             f'<td class="r num lots">—</td>'
             '</tr>')
-    parts.append('</tbody></table></div></section>')
+    parts.append('</tbody></table></div></div></details>')
     return "".join(parts)
 
 
 def render_stock_section(sec):
-    parts = [f'<section class="cat" data-cat="stock">']
+    is_open = " open" if "stock" in OPEN_BY_DEFAULT else ""
+    parts = [f'<details class="cat" data-cat="stock"{is_open}>']
     matched = sec.get("matched", 0)
     total = len(sec["rows"])
-    parts.append(f'<h2>{esc(sec["title"])}'
-                 f'<span class="upd">更新：{esc(sec.get("update") or "—")}</span></h2>')
+    parts.append(f'<summary><span class="cat-name">{esc(sec["title"])}</span>'
+                 f'<span class="upd">更新：{esc(sec.get("update") or "—")}</span>'
+                 f'<span class="chev" aria-hidden="true"></span></summary>')
+    parts.append('<div class="catbody">')
     if sec.get("error"):
-        parts.append(f'<p class="err">資料暫時無法取得：{esc(sec["error"])}</p></section>')
+        parts.append(f'<p class="err">資料暫時無法取得：{esc(sec["error"])}</p></div></details>')
         return "".join(parts)
+    # 股票期貨專屬搜尋列（可用中文簡稱或股票代號）
+    parts.append('<div class="searchbar">'
+                 '<svg class="sicon" viewBox="0 0 24 24" aria-hidden="true">'
+                 '<circle cx="11" cy="11" r="7"></circle>'
+                 '<line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>'
+                 '<input id="stockSearch" type="search" inputmode="search" '
+                 'autocomplete="off" placeholder="搜尋股票期貨：中文名稱或股票代號（例：台積電、2330）" />'
+                 '<button type="button" id="stockClear" class="sclear" '
+                 'aria-label="清除搜尋">×</button></div>')
     parts.append('<p class="curnote">單位：NT$（TWD）；'
                  '原始保證金 = 收盤價 × 契約乘數 × 原始保證金適用比例。'
                  f'<br>已對到收盤價 {matched}/{total} 檔（無收盤價者以「—」表示）。</p>')
@@ -494,9 +517,12 @@ def render_stock_section(sec):
         tag = kind_label.get(r["kind"], "")
         tagspan = f'<span class="kind">{esc(tag)}</span>' if tag else ""
         sub = f'<span class="ucode">{esc(r["ucode"])}・×{r["mult"]:,}</span>'
+        # 搜尋鍵：中文簡稱 + 標的證券代號 + 英文代碼（小寫）
+        search_key = f'{r["name"]} {r["ucode"]} {r["code"]}'.lower()
         parts.append(
-            '<tr class="mrow" '
+            '<tr class="mrow srow" '
             f'data-margin="{r["margin"] if r["margin"] is not None else ""}" '
+            f'data-search="{esc(search_key)}" '
             'data-currency="TWD">'
             f'<td class="l">{esc(r["name"])}{tagspan}<br>{sub}</td>'
             f'<td class="r num">{fmt_pct(r["ratio"])}</td>'
@@ -504,7 +530,9 @@ def render_stock_section(sec):
             f'<td class="r num">{fmt_int(r["margin"])}</td>'
             f'<td class="r num lots">—</td>'
             '</tr>')
-    parts.append('</tbody></table></div></section>')
+    parts.append('</tbody></table>')
+    parts.append('<p class="noresult" id="stockNoResult" hidden>找不到符合的股票期貨。</p>')
+    parts.append('</div></div></details>')
     return "".join(parts)
 
 
@@ -532,76 +560,171 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <style>
   :root{
     --fs: 16px;
-    --bg:#0f1217; --card:#161b22; --line:#2a313c; --fg:#e6edf3;
-    --muted:#8b97a6; --accent:#4ea1ff; --accent2:#2d8c5f; --warn:#e0883a;
-    --th:#1c232d; --zebra:#12161c;
+    --bg:#0a0e17; --bg2:#0e1422;
+    --card:#121a2b; --card2:#0f1626;
+    --line:#23304a; --line2:#2e3e5e;
+    --fg:#e8eef9; --muted:#8593ab;
+    --accent:#35e0d6;      /* 青綠霓虹 */
+    --accent-b:#4ea1ff;    /* 藍 */
+    --accent-v:#a78bfa;    /* 紫 */
+    --warn:#ffb454;
+    --pos:#35e0d6;
+    --th:#0e1626; --zebra:#0d1320;
+    --glow: 0 0 0 1px rgba(53,224,214,.0);
+    --mono: "SF Mono","JetBrains Mono",ui-monospace,"Roboto Mono","Cascadia Code",Menlo,Consolas,monospace;
   }
   @media (prefers-color-scheme: light){
-    :root{ --bg:#f3f5f8; --card:#ffffff; --line:#dde3ea; --fg:#1b2330;
-           --muted:#5b6675; --th:#eef2f7; --zebra:#f7f9fc; }
+    :root{
+      --bg:#eef2f8; --bg2:#e7ecf5;
+      --card:#ffffff; --card2:#f7f9fd;
+      --line:#dde4ef; --line2:#cfd9ea;
+      --fg:#16203a; --muted:#5c6a85;
+      --accent:#0bb3a8; --accent-b:#2f7ff0; --accent-v:#7c5cff;
+      --warn:#c97a1a; --pos:#0a9d93;
+      --th:#eef3fb; --zebra:#f5f8fd;
+    }
   }
   *{ box-sizing:border-box; }
-  html,body{ margin:0; padding:0; background:var(--bg); color:var(--fg);
+  html,body{ margin:0; padding:0; color:var(--fg);
     font-family:-apple-system,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
     font-size:var(--fs); line-height:1.5; -webkit-text-size-adjust:100%; }
-  .wrap{ max-width:820px; margin:0 auto; padding:0 12px 64px; }
+  body{
+    background:
+      radial-gradient(1100px 520px at 50% -8%, rgba(78,161,255,.10), transparent 60%),
+      radial-gradient(820px 420px at 92% 4%, rgba(167,139,250,.08), transparent 55%),
+      radial-gradient(820px 420px at 6% 8%, rgba(53,224,214,.07), transparent 55%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+    background-attachment: fixed;
+    min-height:100vh;
+  }
+  .wrap{ max-width:840px; margin:0 auto; padding:0 12px 72px; }
 
-  header.bar{ position:sticky; top:0; z-index:20; background:var(--card);
-    border-bottom:1px solid var(--line); padding:10px 12px;
-    margin:0 -12px 14px; backdrop-filter:saturate(1.2) blur(2px); }
-  .bar h1{ font-size:1.05rem; margin:0 0 8px; display:flex; align-items:center; gap:8px; }
-  .bar h1 .dot{ width:9px;height:9px;border-radius:50%;background:var(--accent2); }
+  /* ---- 頂部固定列 ---- */
+  header.bar{ position:sticky; top:0; z-index:30;
+    background:linear-gradient(180deg, rgba(12,18,32,.94), rgba(12,18,32,.80));
+    border-bottom:1px solid var(--line);
+    padding:11px 12px 12px; margin:0 -12px 16px;
+    backdrop-filter:saturate(1.3) blur(10px); -webkit-backdrop-filter:saturate(1.3) blur(10px);
+  }
+  @media (prefers-color-scheme: light){
+    header.bar{ background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.82)); }
+  }
+  .bar h1{ font-size:1.12rem; margin:0 0 9px; display:flex; align-items:center; gap:9px;
+    letter-spacing:.5px; font-weight:700; }
+  .bar h1 .logo{ width:22px;height:22px;flex:0 0 22px; }
+  .bar h1 .ttl{
+    background:linear-gradient(92deg, var(--accent), var(--accent-b) 55%, var(--accent-v));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
   .controls{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
-  .fsgroup{ display:flex; gap:4px; }
-  .fsbtn{ border:1px solid var(--line); background:transparent; color:var(--fg);
-    border-radius:8px; padding:6px 10px; font-size:0.95rem; cursor:pointer; min-width:38px; }
-  .fsbtn:active{ transform:scale(.96); }
-  .fsbtn.mid{ font-weight:600; }
-  .calc{ flex:1 1 200px; display:flex; align-items:center; gap:6px;
-    border:1px solid var(--line); border-radius:10px; padding:4px 8px; background:var(--bg); }
+  .fsgroup{ display:flex; gap:0; border:1px solid var(--line2); border-radius:10px; overflow:hidden; }
+  .fsbtn{ border:0; border-right:1px solid var(--line2); background:transparent; color:var(--fg);
+    padding:7px 11px; font-size:0.95rem; cursor:pointer; min-width:40px; transition:background .15s,color .15s; }
+  .fsbtn:last-child{ border-right:0; }
+  .fsbtn:hover{ background:rgba(78,161,255,.12); }
+  .fsbtn:active{ transform:scale(.95); }
+  .fsbtn.mid{ font-weight:700; }
+  .calc{ flex:1 1 210px; display:flex; align-items:center; gap:7px;
+    border:1px solid var(--line2); border-radius:12px; padding:5px 11px;
+    background:var(--card2);
+    box-shadow:inset 0 0 0 1px rgba(53,224,214,.04);
+    transition:border-color .18s, box-shadow .18s; }
+  .calc:focus-within{ border-color:var(--accent); box-shadow:0 0 0 3px rgba(53,224,214,.16); }
   .calc label{ color:var(--muted); font-size:0.82rem; white-space:nowrap; }
   .calc input{ flex:1; min-width:0; border:0; background:transparent; color:var(--fg);
-    font-size:1.05rem; font-variant-numeric:tabular-nums; outline:none; text-align:right; }
-  .calc .ccy{ color:var(--muted); font-size:0.85rem; }
-  .hint{ color:var(--muted); font-size:0.78rem; margin:6px 2px 0; }
+    font-size:1.08rem; font-family:var(--mono); font-variant-numeric:tabular-nums;
+    outline:none; text-align:right; letter-spacing:.5px; }
+  .calc .ccy{ color:var(--accent); font-size:0.82rem; font-weight:700; }
+  .hint{ color:var(--muted); font-size:0.77rem; margin:8px 2px 0; line-height:1.45; }
 
-  section.cat{ background:var(--card); border:1px solid var(--line);
-    border-radius:14px; margin:0 0 16px; overflow:hidden; }
-  section.cat h2{ font-size:1rem; margin:0; padding:12px 14px 10px;
-    border-bottom:1px solid var(--line); display:flex; align-items:baseline;
-    justify-content:space-between; gap:8px; position:sticky; top:0; }
-  section.cat h2 .upd{ color:var(--muted); font-size:0.74rem; font-weight:400; white-space:nowrap; }
-  .curnote{ color:var(--muted); font-size:0.8rem; margin:8px 14px; }
+  /* ---- 分類（可摺疊） ---- */
+  details.cat{ background:linear-gradient(180deg, var(--card), var(--card2));
+    border:1px solid var(--line); border-radius:16px; margin:0 0 15px; overflow:hidden;
+    box-shadow:0 1px 0 rgba(255,255,255,.02) inset, 0 8px 24px -18px rgba(0,0,0,.6); }
+  details.cat[open]{ border-color:var(--line2); }
+  details.cat > summary{
+    list-style:none; cursor:pointer; user-select:none;
+    display:flex; align-items:center; gap:10px;
+    padding:14px 15px; font-size:1.02rem; font-weight:700; letter-spacing:.4px;
+    position:relative;
+  }
+  details.cat > summary::-webkit-details-marker{ display:none; }
+  summary .cat-name{ position:relative; padding-left:13px; }
+  summary .cat-name::before{ content:""; position:absolute; left:0; top:50%; transform:translateY(-50%);
+    width:4px; height:1.05em; border-radius:3px;
+    background:linear-gradient(180deg, var(--accent), var(--accent-b));
+    box-shadow:0 0 10px rgba(53,224,214,.6); }
+  summary .upd{ margin-left:auto; color:var(--muted); font-size:0.72rem; font-weight:400; white-space:nowrap; }
+  summary .chev{ width:16px; height:16px; flex:0 0 16px; position:relative; }
+  summary .chev::before, summary .chev::after{ content:""; position:absolute; top:7px; width:9px; height:2px;
+    border-radius:2px; background:var(--muted); transition:transform .2s ease; }
+  summary .chev::before{ left:0; transform:rotate(45deg); }
+  summary .chev::after{ right:0; transform:rotate(-45deg); }
+  details[open] > summary .chev::before{ transform:rotate(-45deg); }
+  details[open] > summary .chev::after{ transform:rotate(45deg); }
+  summary:hover .cat-name{ color:var(--accent); }
+  .catbody{ border-top:1px solid var(--line); }
+
+  .curnote{ color:var(--muted); font-size:0.79rem; margin:10px 14px; line-height:1.5; }
   .err{ color:var(--warn); font-size:0.86rem; margin:12px 14px; }
+  .noresult{ color:var(--muted); font-size:0.86rem; margin:14px; text-align:center; }
 
+  /* ---- 搜尋列（股票期貨） ---- */
+  .searchbar{ display:flex; align-items:center; gap:8px; margin:12px 14px 4px;
+    border:1px solid var(--line2); border-radius:12px; padding:8px 11px; background:var(--card2);
+    transition:border-color .18s, box-shadow .18s; }
+  .searchbar:focus-within{ border-color:var(--accent-b); box-shadow:0 0 0 3px rgba(78,161,255,.16); }
+  .searchbar .sicon{ width:17px;height:17px;flex:0 0 17px; fill:none; stroke:var(--muted);
+    stroke-width:2; stroke-linecap:round; }
+  .searchbar input{ flex:1; min-width:0; border:0; background:transparent; color:var(--fg);
+    font-size:0.95rem; outline:none; }
+  .searchbar input::placeholder{ color:var(--muted); }
+  .sclear{ border:0; background:transparent; color:var(--muted); font-size:1.2rem; line-height:1;
+    cursor:pointer; padding:0 4px; visibility:hidden; }
+  .searchbar.has-q .sclear{ visibility:visible; }
+
+  /* ---- 表格 ---- */
   .tw{ width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
-  table{ width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; }
-  th,td{ padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
-  thead th{ position:sticky; top:0; background:var(--th); font-size:0.8rem;
-    color:var(--muted); font-weight:600; white-space:nowrap; z-index:1; }
+  table{ width:100%; border-collapse:collapse; }
+  th,td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  thead th{ position:sticky; top:0; background:var(--th); font-size:0.76rem;
+    color:var(--muted); font-weight:600; white-space:nowrap; z-index:1; letter-spacing:.3px;
+    text-transform:none; }
   th.l,td.l{ text-align:left; }
   th.r,td.r{ text-align:right; white-space:nowrap; }
-  td.num{ font-variant-numeric:tabular-nums; }
+  td.num{ font-family:var(--mono); font-variant-numeric:tabular-nums; letter-spacing:.2px; }
   tbody tr:nth-child(even){ background:var(--zebra); }
-  td.lots{ color:var(--accent); font-weight:600; }
-  td.lots.zero{ color:var(--warn); font-weight:600; }
+  tbody tr.mrow{ transition:background .12s; }
+  tbody tr.mrow:hover{ background:rgba(78,161,255,.07); }
+  td.lots{ color:var(--accent); font-weight:700; text-shadow:0 0 12px rgba(53,224,214,.28); }
+  td.lots.zero{ color:var(--warn); text-shadow:none; }
   .cur{ display:inline-block; margin-left:6px; padding:1px 6px; border-radius:6px;
-    background:rgba(224,136,58,.16); color:var(--warn); font-size:0.7rem; font-weight:600; }
+    background:rgba(255,180,84,.16); color:var(--warn); font-size:0.7rem; font-weight:700;
+    font-family:var(--mono); }
   .kind{ display:inline-block; margin-left:6px; padding:0 6px; border-radius:6px;
-    background:rgba(78,161,255,.16); color:var(--accent); font-size:0.7rem; font-weight:600; }
-  .ucode{ display:block; color:var(--muted); font-size:0.74rem; margin-top:2px; }
+    background:rgba(167,139,250,.18); color:var(--accent-v); font-size:0.68rem; font-weight:700; }
+  .ucode{ display:block; color:var(--muted); font-size:0.73rem; margin-top:2px; font-family:var(--mono); }
 
-  footer{ color:var(--muted); font-size:0.78rem; text-align:center; padding:18px 8px 0; line-height:1.7; }
-  footer a{ color:var(--accent); }
-  /* 股票表第一欄較寬、數字欄緊湊 */
-  table.stock td.l{ min-width:128px; }
+  footer{ color:var(--muted); font-size:0.76rem; text-align:center; padding:20px 8px 0; line-height:1.75; }
+  footer a{ color:var(--accent-b); }
+  table.stock td.l{ min-width:132px; }
   table.stock th.r, table.stock td.r{ padding-left:6px; padding-right:8px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="bar">
-    <h1><span class="dot"></span>期貨商保證金一覽表</h1>
+    <h1>
+      <svg class="logo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#35e0d6"/><stop offset="0.55" stop-color="#4ea1ff"/>
+          <stop offset="1" stop-color="#a78bfa"/></linearGradient></defs>
+        <rect x="2.5" y="2.5" width="19" height="19" rx="5" stroke="url(#lg)" stroke-width="1.7"/>
+        <path d="M6 15l3.5-4 3 2.4L18 8" stroke="url(#lg)" stroke-width="1.9"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="ttl">期貨商保證金一覽表</span>
+    </h1>
     <div class="controls">
       <div class="fsgroup" role="group" aria-label="字級調整">
         <button class="fsbtn" id="fsDown" aria-label="縮小字級">A−</button>
@@ -610,8 +733,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       </div>
       <div class="calc">
         <label for="avail">可用保證金</label>
-        <input id="avail" inputmode="numeric" autocomplete="off"
-               placeholder="輸入金額" />
+        <input id="avail" inputmode="numeric" autocomplete="off" placeholder="輸入金額" />
         <span class="ccy">NT$</span>
       </div>
     </div>
@@ -629,10 +751,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
 <script>
 (function(){
-  // ---- 字級調整（記憶於 localStorage 之外，採 inline，避免儲存限制）----
   var root = document.documentElement;
+
+  // ---- 字級調整 ----
   var sizes = [13,14,15,16,17,18,20,22];
-  var idx = 3; // 預設 16px
+  var idx = 3;
   function applyFs(){ root.style.setProperty('--fs', sizes[idx] + 'px'); }
   document.getElementById('fsUp').addEventListener('click', function(){
     if(idx < sizes.length-1){ idx++; applyFs(); }
@@ -640,14 +763,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   document.getElementById('fsDown').addEventListener('click', function(){
     if(idx > 0){ idx--; applyFs(); }
   });
-  document.getElementById('fsReset').addEventListener('click', function(){
-    idx = 3; applyFs();
-  });
+  document.getElementById('fsReset').addEventListener('click', function(){ idx = 3; applyFs(); });
 
   // ---- 可下單口數即時換算 ----
   var input = document.getElementById('avail');
   var rows = Array.prototype.slice.call(document.querySelectorAll('tr.mrow'));
-
   function parseAmount(v){
     if(!v) return null;
     v = String(v).replace(/[^0-9.]/g,'');
@@ -665,7 +785,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       var m = tr.getAttribute('data-margin');
       cell.classList.remove('zero');
       if(avail === null){ cell.textContent = '—'; continue; }
-      if(ccy !== 'TWD'){ cell.textContent = '—'; continue; } // 外幣不換算
+      if(ccy !== 'TWD'){ cell.textContent = '—'; continue; }
       if(m === '' || m === null){ cell.textContent = '—'; continue; }
       var margin = parseFloat(m);
       if(!(margin > 0)){ cell.textContent = '—'; continue; }
@@ -674,17 +794,41 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       if(lots === 0){ cell.classList.add('zero'); }
     }
   }
-  // 千分位顯示輸入值
   input.addEventListener('input', function(){
-    var caretEnd = (input.selectionStart === input.value.length);
     var n = parseAmount(input.value);
-    if(n !== null){
-      var s = n.toLocaleString('en-US');
-      input.value = s;
-    }
+    if(n !== null){ input.value = n.toLocaleString('en-US'); }
     update();
   });
   update();
+
+  // ---- 股票期貨搜尋（中文名稱 / 股票代號）----
+  var search = document.getElementById('stockSearch');
+  if(search){
+    var clearBtn = document.getElementById('stockClear');
+    var bar = search.closest('.searchbar');
+    var noResult = document.getElementById('stockNoResult');
+    var stockDetails = search.closest('details.cat');
+    var srows = Array.prototype.slice.call(document.querySelectorAll('tr.srow'));
+
+    function norm(s){ return (s||'').toLowerCase().trim(); }
+    function runFilter(){
+      var q = norm(search.value);
+      bar.classList.toggle('has-q', q.length > 0);
+      if(stockDetails && q.length > 0 && !stockDetails.open){ stockDetails.open = true; }
+      var shown = 0;
+      for(var i=0;i<srows.length;i++){
+        var key = srows[i].getAttribute('data-search') || '';
+        var hit = (q === '' || key.indexOf(q) !== -1);
+        srows[i].style.display = hit ? '' : 'none';
+        if(hit) shown++;
+      }
+      if(noResult){ noResult.hidden = !(q !== '' && shown === 0); }
+    }
+    search.addEventListener('input', runFilter);
+    clearBtn.addEventListener('click', function(){
+      search.value=''; runFilter(); search.focus();
+    });
+  }
 })();
 </script>
 </body>
