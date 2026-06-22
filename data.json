@@ -26,21 +26,6 @@
      "currency": "TWD"
     },
     {
-     "name": "臺指選擇權風險保證金(A)值",
-     "margin": 169000.0,
-     "currency": "TWD"
-    },
-    {
-     "name": "臺指選擇權風險保證金(B)值",
-     "margin": 85000.0,
-     "currency": "TWD"
-    },
-    {
-     "name": "臺指選擇權風險保證金(C)值",
-     "margin": 17000.0,
-     "currency": "TWD"
-    },
-    {
      "name": "臺灣中型100期貨",
      "margin": 29000.0,
      "currency": "TWD"
@@ -56,16 +41,6 @@
      "currency": "TWD"
     },
     {
-     "name": "電子選擇權風險保證金(A)值",
-     "margin": 64000.0,
-     "currency": "TWD"
-    },
-    {
-     "name": "電子選擇權風險保證金(B)值",
-     "margin": 32000.0,
-     "currency": "TWD"
-    },
-    {
      "name": "金融期貨",
      "margin": 144000.0,
      "currency": "TWD"
@@ -73,16 +48,6 @@
     {
      "name": "小型金融期貨",
      "margin": 36000.0,
-     "currency": "TWD"
-    },
-    {
-     "name": "金融選擇權風險保證金(A)值",
-     "margin": 41000.0,
-     "currency": "TWD"
-    },
-    {
-     "name": "金融選擇權風險保證金(B)值",
-     "margin": 21000.0,
      "currency": "TWD"
     },
     {
@@ -161,16 +126,6 @@
     {
      "name": "黃金期貨",
      "margin": 5500.0,
-     "currency": "USD"
-    },
-    {
-     "name": "黃金選擇權風險保證金(A)值",
-     "margin": 84000.0,
-     "currency": "USD"
-    },
-    {
-     "name": "黃金選擇權風險保證金(B)值",
-     "margin": 42000.0,
      "currency": "USD"
     },
     {
@@ -3743,6 +3698,6 @@
    "matched": 291
   }
  ],
- "generated_at": "2026-06-22 07:39 UTC",
- "generated_tw": "2026-06-22 15:39"
+ "generated_at": "2026-06-22 08:07 UTC",
+ "generated_tw": "2026-06-22 16:07"
 }
