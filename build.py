@@ -522,9 +522,9 @@ def render_stock_section(sec):
     for r in sec["rows"]:
         tag = kind_label.get(r["kind"], "")
         tagspan = f'<span class="kind">{esc(tag)}</span>' if tag else ""
-        # 收盤價做成灰色備註，跟代號放同一行
-        price_note = f'・收盤 {esc(fmt_price(r["price"]))}' if r["price"] is not None else ""
-        sub = f'<span class="ucode">{esc(r["ucode"])}・×{r["mult"]:,}{price_note}</span>'
+        # 收盤價獨立成第 2 行灰色備註，避免手機被截斷
+        price_note = f'<span class="ucode">收盤 {esc(fmt_price(r["price"]))}</span>' if r["price"] is not None else ""
+        sub = f'<span class="ucode">{esc(r["ucode"])}・×{r["mult"]:,}</span>{price_note}'
         search_key = f'{r["name"]} {r["ucode"]} {r["code"]}'.lower()
         vol_str = f'{r["volume"]:,}' if r.get("volume") else "—"
         parts.append(
@@ -622,6 +622,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     letter-spacing:.4px; font-weight:700; flex:1; }
   .bar h1 .logo{ width:20px;height:20px;flex:0 0 20px; }
   .bar h1 .ttl{
+    font-size: calc(var(--fs) + 4px); /* 比本文大 2 個級距約值 */
     background:linear-gradient(92deg, var(--accent), var(--accent-b) 55%, var(--accent-v));
     -webkit-background-clip:text; background-clip:text; color:transparent;
   }
@@ -650,6 +651,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     font-size:1rem; font-family:var(--mono); font-variant-numeric:tabular-nums;
     outline:none; text-align:right; letter-spacing:.5px; }
   .calc .ccy{ color:var(--accent); font-size:0.78rem; font-weight:700; }
+  /* ± 步進按鈕 */
+  .stepper{ border:0; background:rgba(78,161,255,.15); color:var(--accent-b);
+    border-radius:6px; width:26px; height:26px; font-size:1rem; font-weight:700;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+    flex:0 0 26px; transition:background .15s, transform .1s; line-height:1; }
+  .stepper:hover{ background:rgba(78,161,255,.28); }
+  .stepper:active{ transform:scale(.9); }
   .hint{ color:var(--muted); font-size:0.73rem; margin:6px 2px 0; line-height:1.45; }
 
   /* ---- 分類（可摺疊） ---- */
@@ -719,13 +727,27 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     background:rgba(167,139,250,.18); color:var(--accent-v); font-size:0.63rem; font-weight:700; }
   .ucode{ display:block; color:var(--muted); font-size:0.68rem; margin-top:1px; font-family:var(--mono); }
 
-  /* 股票表：緊湊欄位 */
-  table.stock th, table.stock td{ padding:6px 6px; }
-  table.stock td.l{ min-width:110px; max-width:160px; }
-  table.stock th.r, table.stock td.r{ padding-left:4px; padding-right:6px; }
+  /* 股票表：緊湊欄位；手機上比例/保證金欄縮到 1 字寬 padding */
+  table.stock th, table.stock td{ padding:6px 5px; }
+  table.stock td.l{ min-width:100px; max-width:155px; }
+  table.stock th.r, table.stock td.r{ padding-left:2px; padding-right:4px; }
+  @media (max-width: 520px){
+    table.stock th, table.stock td{ padding:5px 2px; }
+    table.stock th.r, table.stock td.r{ padding-left:1px; padding-right:2px; }
+  }
 
   footer{ color:var(--muted); font-size:0.7rem; text-align:center; padding:16px 8px 0; line-height:1.75; }
   footer a{ color:var(--accent-b); }
+
+  /* ---- 社群 icon 特效 ---- */
+  @keyframes social-pulse{
+    0%,100%{ box-shadow:0 0 0 0 rgba(53,224,214,.0); }
+    50%{ box-shadow:0 0 0 5px rgba(53,224,214,.18); }
+  }
+  .social a{ animation: social-pulse 2.8s ease-in-out infinite; }
+  .social a:nth-child(2){ animation-delay:1.4s; }
+  .social a:hover{ animation:none; color:var(--fg); background:rgba(255,255,255,.1);
+    box-shadow:0 0 0 2px var(--accent); }
 </style>
 </head>
 <body>
@@ -745,15 +767,17 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       </h1>
       <nav class="social" aria-label="社群">
         <a href="https://www.instagram.com/f1_futures/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5"/>
-            <circle cx="12" cy="12" r="4.5"/>
-            <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+          <!-- Instagram 官方圓角方框造型 -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5.5"/>
+            <circle cx="12" cy="12" r="4.3"/>
+            <circle cx="17.6" cy="6.4" r="0.9" fill="currentColor" stroke="none"/>
           </svg>
         </a>
         <a href="https://www.threads.com/@f1_futures" target="_blank" rel="noopener noreferrer" aria-label="Threads">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M19.59 13.57c-.16-1.01-.61-1.87-1.35-2.55-.78-.72-1.78-1.13-2.99-1.24-.07-.01-.14-.01-.21-.01-1.16 0-2.13.38-2.88 1.13-.74.74-1.12 1.72-1.12 2.9 0 1.15.36 2.1 1.07 2.81.72.72 1.68 1.08 2.86 1.08.86 0 1.61-.22 2.22-.65.6-.43 1.03-1.05 1.27-1.84l-1.62-.45c-.31.93-.96 1.39-1.87 1.39-.66 0-1.2-.19-1.62-.58-.41-.39-.62-.92-.62-1.59h5.93c.01-.12.02-.26.02-.4.01-.01.01-.01-.09 0zm-5.93-.47c.1-.56.34-1 .71-1.31.36-.31.83-.47 1.39-.47.57 0 1.04.16 1.4.47.36.31.57.75.63 1.31h-4.13zM12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/>
+          <!-- Threads 官方 @ 螺旋造型 -->
+          <svg viewBox="0 0 192 192" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.05-14.127 5.177-6.6 8.452-15.153 9.898-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.35-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 10.646 125.202 1.205 97.07 1 68.954 1.205 47.39 10.68 32.864 28.062 19.772 43.812 13.04 66.05 12.807 96c.233 29.95 6.965 52.19 20.057 67.94C47.39 181.32 68.954 190.795 97.07 191c25.317-.176 43.035-6.803 57.708-21.466 19.198-19.187 18.616-43.27 12.285-58.052-4.557-10.622-13.183-19.283-25.526-24.494ZM96.597 144.024c-10.426.58-21.24-4.1-26.896-11.768-3.612-4.83-3.744-10.68-.37-14.751 4.36-5.24 13.491-8.066 26.12-8.794 2.28-.132 4.512-.193 6.694-.193 6.048 0 11.72.558 16.894 1.628-1.917 23.658-11.386 32.503-22.442 33.878Z"/>
           </svg>
         </a>
       </nav>
@@ -766,7 +790,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       </div>
       <div class="calc">
         <label for="avail">可用保證金</label>
+        <button class="stepper" id="stepDown" aria-label="減少一萬">−</button>
         <input id="avail" inputmode="numeric" autocomplete="off" placeholder="輸入金額" value="3,000,000" />
+        <button class="stepper" id="stepUp" aria-label="增加一萬">＋</button>
         <span class="ccy">NT$</span>
       </div>
     </div>
@@ -798,7 +824,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
   // ---- 字級調整 ----
   var sizes = [11,12,13,14,15,16,18,20];
-  var idx = 3; // 預設 14px
+  var idx = 3;
   function applyFs(){ root.style.setProperty('--fs', sizes[idx] + 'px'); }
   document.getElementById('fsUp').addEventListener('click', function(){
     if(idx < sizes.length-1){ idx++; applyFs(); }
@@ -817,6 +843,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     if(v === '') return null;
     var n = parseFloat(v);
     return (isFinite(n) && n > 0) ? n : null;
+  }
+  function setAmount(n){
+    if(n < 0) n = 0;
+    input.value = n.toLocaleString('en-US');
+    update();
   }
   function update(){
     var avail = parseAmount(input.value);
@@ -841,6 +872,14 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     var n = parseAmount(input.value);
     if(n !== null){ input.value = n.toLocaleString('en-US'); }
     update();
+  });
+  // ± 1 萬步進按鈕
+  document.getElementById('stepUp').addEventListener('click', function(){
+    setAmount((parseAmount(input.value) || 0) + 10000);
+  });
+  document.getElementById('stepDown').addEventListener('click', function(){
+    var cur = parseAmount(input.value) || 0;
+    setAmount(Math.max(0, cur - 10000));
   });
   update();
 
