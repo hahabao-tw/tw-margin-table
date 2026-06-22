@@ -237,6 +237,7 @@ KEY_LAST = ["Last", "最後成交價", "ClosePrice", "Close"]
 KEY_SETTLE = ["SettlementPrice", "結算價", "Settlement"]
 KEY_SESSION = ["TradingSession", "交易時段", "Session"]
 KEY_NAME = ["ProductName", "中文簡稱", "商品名稱", "Name"]
+KEY_VOLUME = ["Volume", "成交量", "TradingVolume", "TradeVolume"]
 
 
 def _get(rec, keys):
@@ -248,8 +249,8 @@ def _get(rec, keys):
 
 def get_close_prices():
     """
-    回傳 {contract_code: price, product_name: price}。
-    取一般交易時段、各商品近月（最早到期月份）有效成交價，
+    回傳 ({code: price}, {code: volume})。
+    取一般交易時段、各商品近月（最早到期月份）有效成交價與成交量。
     無最後成交價時退而求其次用結算價。
     """
     try:
@@ -258,23 +259,21 @@ def get_close_prices():
         data = json.loads(decode_text(raw))
     except Exception as e:  # noqa: BLE001
         print(f"  [warn] 每日行情抓取/解析失敗：{e}", file=sys.stderr)
-        return {}
+        return {}, {}
 
     if not isinstance(data, list) or not data:
         print("  [warn] 每日行情回傳格式非預期（非陣列或空）", file=sys.stderr)
-        return {}
+        return {}, {}
 
-    # 偵錯：列出第一筆的欄位，方便日後若欄位改名時對照
     print(f"  每日行情筆數：{len(data)}；首筆欄位：{list(data[0].keys())}",
           file=sys.stderr)
 
-    # 蒐集每個契約的（到期月份, 價格, 名稱）
-    best = {}  # code -> (month_str, price)
-    name_best = {}  # name -> (month_str, price)
+    # best[code] = (month_str, price, volume)
+    best = {}
+    name_best = {}
     kept = 0
     for rec in data:
         session = _get(rec, KEY_SESSION)
-        # 僅取一般交易時段；若無此欄位則全收（多數 OpenAPI 即為一般時段）
         if session is not None:
             s = str(session)
             if not ("一般" in s or s in ("0", "Position", "REGULAR", "Regular", "position")):
@@ -289,21 +288,23 @@ def get_close_prices():
             price = _clean_num(str(_get(rec, KEY_SETTLE) or ""))
         if price is None or price <= 0:
             continue
+        vol = _clean_num(str(_get(rec, KEY_VOLUME) or "")) or 0
         kept += 1
-        # 近月 = 到期月份字串最小者
         if code not in best or month < best[code][0]:
-            best[code] = (month, price)
+            best[code] = (month, price, int(vol))
         name = _get(rec, KEY_NAME)
         if name:
             name = str(name).strip()
             if name not in name_best or month < name_best[name][0]:
-                name_best[name] = (month, price)
+                name_best[name] = (month, price, int(vol))
 
     price_map = {c: v[1] for c, v in best.items()}
+    vol_map   = {c: v[2] for c, v in best.items()}
     for n, v in name_best.items():
         price_map.setdefault(n, v[1])
+        vol_map.setdefault(n, v[2])
     print(f"  收盤價可用商品數：{len(best)}（有效列 {kept}）", file=sys.stderr)
-    return price_map
+    return price_map, vol_map
 
 
 # ---------------------------------------------------------------------------
@@ -332,13 +333,11 @@ def currency_for_simple(category_key, name):
 # ---------------------------------------------------------------------------
 
 def build_dataset():
-    sections = []   # 每個交易所分類一段
+    sections = []
     update_dates = {}
 
-    price_map = {}
-    # 先抓收盤價（股票期貨需要）
-    print("抓取每日行情（收盤價）…", file=sys.stderr)
-    price_map = get_close_prices()
+    print("抓取每日行情（收盤價＋成交量）…", file=sys.stderr)
+    price_map, vol_map = get_close_prices()
 
     for src in MARGIN_SOURCES:
         print(f"抓取 {src['title']} …", file=sys.stderr)
@@ -376,10 +375,10 @@ def build_dataset():
             for r in parsed:
                 mult = {"stock": MULT_STOCK, "mini": MULT_MINI,
                         "etf": MULT_ETF}[r["kind"]]
-                # 以英文代碼對接收盤價；退而求其次用中文簡稱
                 price = price_map.get(r["code"])
                 if price is None:
                     price = price_map.get(r["name"])
+                vol = vol_map.get(r["code"]) or vol_map.get(r["name"]) or 0
                 if price is not None:
                     matched += 1
                     margin = round(price * mult * r["ratio"])
@@ -393,9 +392,12 @@ def build_dataset():
                     "kind": r["kind"],
                     "mult": mult,
                     "price": price,
+                    "volume": vol,
                     "margin": margin,
                     "currency": "TWD",
                 })
+            # 排序：成交量降冪，次之股票代號升冪
+            rows.sort(key=lambda x: (-x["volume"], x["ucode"]))
             print(f"  股票期貨 {len(rows)} 檔，成功對到收盤價 {matched} 檔",
                   file=sys.stderr)
             sections.append({"key": src["key"], "title": src["title"],
@@ -442,7 +444,7 @@ CURRENCY_LABEL = {"TWD": "NT$", "USD": "US$", "JPY": "¥", "CNY": "¥CN", "EUR":
 
 
 # 預設展開的分類（其餘預設摺疊）
-OPEN_BY_DEFAULT = {"index", "stock"}
+OPEN_BY_DEFAULT = {"index"}
 
 
 def render_simple_section(sec):
@@ -493,35 +495,38 @@ def render_stock_section(sec):
                  f'<span class="chev" aria-hidden="true"></span></summary>')
     parts.append('<div class="catbody">')
     if sec.get("error"):
-        parts.append(f'<p class="err">資料暫時無法取得：{esc(sec["error"])}</p></div></details>')
+        parts.append('<p class="err">資料暫時無法取得：' + esc(sec["error"]) + '</p></div></details>')
         return "".join(parts)
-    # 股票期貨專屬搜尋列（可用中文簡稱或股票代號）
+    # 股票期貨專屬搜尋列
     parts.append('<div class="searchbar">'
                  '<svg class="sicon" viewBox="0 0 24 24" aria-hidden="true">'
                  '<circle cx="11" cy="11" r="7"></circle>'
                  '<line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>'
                  '<input id="stockSearch" type="search" inputmode="search" '
-                 'autocomplete="off" placeholder="搜尋股票期貨：中文名稱或股票代號（例：台積電、2330）" />'
+                 'autocomplete="off" placeholder="搜尋：名稱或代號（例：台積電、2330）" />'
                  '<button type="button" id="stockClear" class="sclear" '
                  'aria-label="清除搜尋">×</button></div>')
-    parts.append('<p class="curnote">單位：NT$（TWD）；'
+    parts.append('<p class="curnote">單位：NT$（TWD）。'
                  '原始保證金 = 收盤價 × 契約乘數 × 原始保證金適用比例。'
-                 f'<br>已對到收盤價 {matched}/{total} 檔（無收盤價者以「—」表示）。</p>')
+                 f'已對到收盤價 {matched}/{total} 檔。'
+                 '成交量為近月一般時段，降冪排序。</p>')
     parts.append('<div class="tw"><table class="stock">')
     parts.append('<thead><tr>'
                  '<th class="l">商品（標的）</th>'
-                 '<th class="r">適用比例</th>'
-                 '<th class="r">收盤價</th>'
+                 '<th class="r">比例</th>'
                  '<th class="r">原始保證金</th>'
                  '<th class="r">可下單口數</th>'
+                 '<th class="r">成交量</th>'
                  '</tr></thead><tbody>')
     kind_label = {"stock": "", "mini": "小", "etf": "ETF"}
     for r in sec["rows"]:
         tag = kind_label.get(r["kind"], "")
         tagspan = f'<span class="kind">{esc(tag)}</span>' if tag else ""
-        sub = f'<span class="ucode">{esc(r["ucode"])}・×{r["mult"]:,}</span>'
-        # 搜尋鍵：中文簡稱 + 標的證券代號 + 英文代碼（小寫）
+        # 收盤價做成灰色備註，跟代號放同一行
+        price_note = f'・收盤 {esc(fmt_price(r["price"]))}' if r["price"] is not None else ""
+        sub = f'<span class="ucode">{esc(r["ucode"])}・×{r["mult"]:,}{price_note}</span>'
         search_key = f'{r["name"]} {r["ucode"]} {r["code"]}'.lower()
+        vol_str = f'{r["volume"]:,}' if r.get("volume") else "—"
         parts.append(
             '<tr class="mrow srow" '
             f'data-margin="{r["margin"] if r["margin"] is not None else ""}" '
@@ -529,9 +534,9 @@ def render_stock_section(sec):
             'data-currency="TWD">'
             f'<td class="l">{esc(r["name"])}{tagspan}<br>{sub}</td>'
             f'<td class="r num">{fmt_pct(r["ratio"])}</td>'
-            f'<td class="r num">{fmt_price(r["price"])}</td>'
             f'<td class="r num">{fmt_int(r["margin"])}</td>'
             f'<td class="r num lots">—</td>'
+            f'<td class="r num vol">{vol_str}</td>'
             '</tr>')
     parts.append('</tbody></table>')
     parts.append('<p class="noresult" id="stockNoResult" hidden>找不到符合的股票期貨。</p>')
@@ -559,21 +564,21 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
 <title>華南期貨商品保證金一覽</title>
 <style>
   :root{
-    --fs: 16px;
+    --fs: 14px;
     --bg:#0a0e17; --bg2:#0e1422;
     --card:#121a2b; --card2:#0f1626;
     --line:#23304a; --line2:#2e3e5e;
     --fg:#e8eef9; --muted:#8593ab;
-    --accent:#35e0d6;      /* 青綠霓虹 */
-    --accent-b:#4ea1ff;    /* 藍 */
-    --accent-v:#a78bfa;    /* 紫 */
+    --accent:#35e0d6;
+    --accent-b:#4ea1ff;
+    --accent-v:#a78bfa;
     --warn:#ffb454;
     --pos:#35e0d6;
     --th:#0e1626; --zebra:#0d1320;
-    --glow: 0 0 0 1px rgba(53,224,214,.0);
     --mono: "SF Mono","JetBrains Mono",ui-monospace,"Roboto Mono","Cascadia Code",Menlo,Consolas,monospace;
   }
   @media (prefers-color-scheme: light){
@@ -606,60 +611,66 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   header.bar{ position:sticky; top:0; z-index:30;
     background:linear-gradient(180deg, rgba(12,18,32,.94), rgba(12,18,32,.80));
     border-bottom:1px solid var(--line);
-    padding:11px 12px 12px; margin:0 -12px 16px;
+    padding:9px 12px 10px; margin:0 -12px 14px;
     backdrop-filter:saturate(1.3) blur(10px); -webkit-backdrop-filter:saturate(1.3) blur(10px);
   }
   @media (prefers-color-scheme: light){
     header.bar{ background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.82)); }
   }
-  .bar h1{ font-size:1.12rem; margin:0 0 9px; display:flex; align-items:center; gap:9px;
-    letter-spacing:.5px; font-weight:700; }
-  .bar h1 .logo{ width:22px;height:22px;flex:0 0 22px; }
+  .bar-top{ display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .bar h1{ font-size:1.05rem; margin:0; display:flex; align-items:center; gap:8px;
+    letter-spacing:.4px; font-weight:700; flex:1; }
+  .bar h1 .logo{ width:20px;height:20px;flex:0 0 20px; }
   .bar h1 .ttl{
     background:linear-gradient(92deg, var(--accent), var(--accent-b) 55%, var(--accent-v));
     -webkit-background-clip:text; background-clip:text; color:transparent;
   }
+  /* 社群 icon */
+  .social{ display:flex; gap:10px; align-items:center; }
+  .social a{ display:flex; align-items:center; justify-content:center;
+    width:30px; height:30px; border-radius:8px; color:var(--muted);
+    transition:color .15s, background .15s; text-decoration:none; }
+  .social a:hover{ color:var(--fg); background:rgba(255,255,255,.08); }
+  .social svg{ width:20px; height:20px; display:block; }
+
   .controls{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
   .fsgroup{ display:flex; gap:0; border:1px solid var(--line2); border-radius:10px; overflow:hidden; }
   .fsbtn{ border:0; border-right:1px solid var(--line2); background:transparent; color:var(--fg);
-    padding:7px 11px; font-size:0.95rem; cursor:pointer; min-width:40px; transition:background .15s,color .15s; }
+    padding:6px 10px; font-size:0.9rem; cursor:pointer; min-width:38px; transition:background .15s; }
   .fsbtn:last-child{ border-right:0; }
   .fsbtn:hover{ background:rgba(78,161,255,.12); }
   .fsbtn:active{ transform:scale(.95); }
   .fsbtn.mid{ font-weight:700; }
-  .calc{ flex:1 1 210px; display:flex; align-items:center; gap:7px;
-    border:1px solid var(--line2); border-radius:12px; padding:5px 11px;
-    background:var(--card2);
-    box-shadow:inset 0 0 0 1px rgba(53,224,214,.04);
-    transition:border-color .18s, box-shadow .18s; }
+  .calc{ flex:1 1 200px; display:flex; align-items:center; gap:7px;
+    border:1px solid var(--line2); border-radius:12px; padding:5px 10px;
+    background:var(--card2); transition:border-color .18s, box-shadow .18s; }
   .calc:focus-within{ border-color:var(--accent); box-shadow:0 0 0 3px rgba(53,224,214,.16); }
-  .calc label{ color:var(--muted); font-size:0.82rem; white-space:nowrap; }
+  .calc label{ color:var(--muted); font-size:0.78rem; white-space:nowrap; }
   .calc input{ flex:1; min-width:0; border:0; background:transparent; color:var(--fg);
-    font-size:1.08rem; font-family:var(--mono); font-variant-numeric:tabular-nums;
+    font-size:1rem; font-family:var(--mono); font-variant-numeric:tabular-nums;
     outline:none; text-align:right; letter-spacing:.5px; }
-  .calc .ccy{ color:var(--accent); font-size:0.82rem; font-weight:700; }
-  .hint{ color:var(--muted); font-size:0.77rem; margin:8px 2px 0; line-height:1.45; }
+  .calc .ccy{ color:var(--accent); font-size:0.78rem; font-weight:700; }
+  .hint{ color:var(--muted); font-size:0.73rem; margin:6px 2px 0; line-height:1.45; }
 
   /* ---- 分類（可摺疊） ---- */
   details.cat{ background:linear-gradient(180deg, var(--card), var(--card2));
-    border:1px solid var(--line); border-radius:16px; margin:0 0 15px; overflow:hidden;
-    box-shadow:0 1px 0 rgba(255,255,255,.02) inset, 0 8px 24px -18px rgba(0,0,0,.6); }
+    border:1px solid var(--line); border-radius:14px; margin:0 0 12px; overflow:hidden;
+    box-shadow:0 8px 24px -18px rgba(0,0,0,.6); }
   details.cat[open]{ border-color:var(--line2); }
   details.cat > summary{
     list-style:none; cursor:pointer; user-select:none;
     display:flex; align-items:center; gap:10px;
-    padding:14px 15px; font-size:1.02rem; font-weight:700; letter-spacing:.4px;
-    position:relative;
+    padding:12px 14px; font-size:.95rem; font-weight:700; letter-spacing:.3px;
   }
   details.cat > summary::-webkit-details-marker{ display:none; }
-  summary .cat-name{ position:relative; padding-left:13px; }
+  summary .cat-name{ position:relative; padding-left:12px; }
   summary .cat-name::before{ content:""; position:absolute; left:0; top:50%; transform:translateY(-50%);
-    width:4px; height:1.05em; border-radius:3px;
+    width:3px; height:1em; border-radius:3px;
     background:linear-gradient(180deg, var(--accent), var(--accent-b));
-    box-shadow:0 0 10px rgba(53,224,214,.6); }
-  summary .upd{ margin-left:auto; color:var(--muted); font-size:0.72rem; font-weight:400; white-space:nowrap; }
-  summary .chev{ width:16px; height:16px; flex:0 0 16px; position:relative; }
-  summary .chev::before, summary .chev::after{ content:""; position:absolute; top:7px; width:9px; height:2px;
+    box-shadow:0 0 8px rgba(53,224,214,.5); }
+  summary .upd{ margin-left:auto; color:var(--muted); font-size:0.68rem; font-weight:400; white-space:nowrap; }
+  summary .chev{ width:14px; height:14px; flex:0 0 14px; position:relative; }
+  summary .chev::before, summary .chev::after{ content:""; position:absolute; top:6px; width:8px; height:2px;
     border-radius:2px; background:var(--muted); transition:transform .2s ease; }
   summary .chev::before{ left:0; transform:rotate(45deg); }
   summary .chev::after{ right:0; transform:rotate(-45deg); }
@@ -668,66 +679,85 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   summary:hover .cat-name{ color:var(--accent); }
   .catbody{ border-top:1px solid var(--line); }
 
-  .curnote{ color:var(--muted); font-size:0.79rem; margin:10px 14px; line-height:1.5; }
-  .err{ color:var(--warn); font-size:0.86rem; margin:12px 14px; }
-  .noresult{ color:var(--muted); font-size:0.86rem; margin:14px; text-align:center; }
+  .curnote{ color:var(--muted); font-size:0.73rem; margin:8px 12px; line-height:1.5; }
+  .err{ color:var(--warn); font-size:0.82rem; margin:10px 12px; }
+  .noresult{ color:var(--muted); font-size:0.82rem; margin:12px; text-align:center; }
 
-  /* ---- 搜尋列（股票期貨） ---- */
-  .searchbar{ display:flex; align-items:center; gap:8px; margin:12px 14px 4px;
-    border:1px solid var(--line2); border-radius:12px; padding:8px 11px; background:var(--card2);
+  /* ---- 搜尋列 ---- */
+  .searchbar{ display:flex; align-items:center; gap:7px; margin:10px 12px 4px;
+    border:1px solid var(--line2); border-radius:10px; padding:6px 10px; background:var(--card2);
     transition:border-color .18s, box-shadow .18s; }
   .searchbar:focus-within{ border-color:var(--accent-b); box-shadow:0 0 0 3px rgba(78,161,255,.16); }
-  .searchbar .sicon{ width:17px;height:17px;flex:0 0 17px; fill:none; stroke:var(--muted);
+  .searchbar .sicon{ width:15px;height:15px;flex:0 0 15px; fill:none; stroke:var(--muted);
     stroke-width:2; stroke-linecap:round; }
   .searchbar input{ flex:1; min-width:0; border:0; background:transparent; color:var(--fg);
-    font-size:0.95rem; outline:none; }
+    font-size:0.88rem; outline:none; }
   .searchbar input::placeholder{ color:var(--muted); }
-  .sclear{ border:0; background:transparent; color:var(--muted); font-size:1.2rem; line-height:1;
-    cursor:pointer; padding:0 4px; visibility:hidden; }
+  .sclear{ border:0; background:transparent; color:var(--muted); font-size:1.1rem; line-height:1;
+    cursor:pointer; padding:0 3px; visibility:hidden; }
   .searchbar.has-q .sclear{ visibility:visible; }
 
   /* ---- 表格 ---- */
   .tw{ width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
   table{ width:100%; border-collapse:collapse; }
-  th,td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top; }
-  thead th{ position:sticky; top:0; background:var(--th); font-size:0.76rem;
-    color:var(--muted); font-weight:600; white-space:nowrap; z-index:1; letter-spacing:.3px;
-    text-transform:none; }
+  th,td{ padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  thead th{ position:sticky; top:0; background:var(--th); font-size:0.7rem;
+    color:var(--muted); font-weight:600; white-space:nowrap; z-index:1; letter-spacing:.2px; }
   th.l,td.l{ text-align:left; }
   th.r,td.r{ text-align:right; white-space:nowrap; }
-  td.num{ font-family:var(--mono); font-variant-numeric:tabular-nums; letter-spacing:.2px; }
+  td.num{ font-family:var(--mono); font-variant-numeric:tabular-nums; }
   tbody tr:nth-child(even){ background:var(--zebra); }
   tbody tr.mrow{ transition:background .12s; }
   tbody tr.mrow:hover{ background:rgba(78,161,255,.07); }
-  td.lots{ color:var(--accent); font-weight:700; text-shadow:0 0 12px rgba(53,224,214,.28); }
+  td.lots{ color:var(--accent); font-weight:700; text-shadow:0 0 10px rgba(53,224,214,.25); }
   td.lots.zero{ color:var(--warn); text-shadow:none; }
-  .cur{ display:inline-block; margin-left:6px; padding:1px 6px; border-radius:6px;
-    background:rgba(255,180,84,.16); color:var(--warn); font-size:0.7rem; font-weight:700;
+  td.vol{ color:var(--muted); }
+  .cur{ display:inline-block; margin-left:5px; padding:0px 5px; border-radius:5px;
+    background:rgba(255,180,84,.16); color:var(--warn); font-size:0.65rem; font-weight:700;
     font-family:var(--mono); }
-  .kind{ display:inline-block; margin-left:6px; padding:0 6px; border-radius:6px;
-    background:rgba(167,139,250,.18); color:var(--accent-v); font-size:0.68rem; font-weight:700; }
-  .ucode{ display:block; color:var(--muted); font-size:0.73rem; margin-top:2px; font-family:var(--mono); }
+  .kind{ display:inline-block; margin-left:5px; padding:0 5px; border-radius:5px;
+    background:rgba(167,139,250,.18); color:var(--accent-v); font-size:0.63rem; font-weight:700; }
+  .ucode{ display:block; color:var(--muted); font-size:0.68rem; margin-top:1px; font-family:var(--mono); }
 
-  footer{ color:var(--muted); font-size:0.76rem; text-align:center; padding:20px 8px 0; line-height:1.75; }
+  /* 股票表：緊湊欄位 */
+  table.stock th, table.stock td{ padding:6px 6px; }
+  table.stock td.l{ min-width:110px; max-width:160px; }
+  table.stock th.r, table.stock td.r{ padding-left:4px; padding-right:6px; }
+
+  footer{ color:var(--muted); font-size:0.7rem; text-align:center; padding:16px 8px 0; line-height:1.75; }
   footer a{ color:var(--accent-b); }
-  table.stock td.l{ min-width:132px; }
-  table.stock th.r, table.stock td.r{ padding-left:6px; padding-right:8px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="bar">
-    <h1>
-      <svg class="logo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#35e0d6"/><stop offset="0.55" stop-color="#4ea1ff"/>
-          <stop offset="1" stop-color="#a78bfa"/></linearGradient></defs>
-        <rect x="2.5" y="2.5" width="19" height="19" rx="5" stroke="url(#lg)" stroke-width="1.7"/>
-        <path d="M6 15l3.5-4 3 2.4L18 8" stroke="url(#lg)" stroke-width="1.9"
-              stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span class="ttl">華南期貨商品保證金一覽</span>
-    </h1>
+    <div class="bar-top">
+      <h1>
+        <svg class="logo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#35e0d6"/><stop offset="0.55" stop-color="#4ea1ff"/>
+            <stop offset="1" stop-color="#a78bfa"/></linearGradient></defs>
+          <rect x="2.5" y="2.5" width="19" height="19" rx="5" stroke="url(#lg)" stroke-width="1.7"/>
+          <path d="M6 15l3.5-4 3 2.4L18 8" stroke="url(#lg)" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="ttl">華南期貨商品保證金一覽</span>
+      </h1>
+      <nav class="social" aria-label="社群">
+        <a href="https://www.instagram.com/f1_futures/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4.5"/>
+            <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://www.threads.com/@f1_futures" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.59 13.57c-.16-1.01-.61-1.87-1.35-2.55-.78-.72-1.78-1.13-2.99-1.24-.07-.01-.14-.01-.21-.01-1.16 0-2.13.38-2.88 1.13-.74.74-1.12 1.72-1.12 2.9 0 1.15.36 2.1 1.07 2.81.72.72 1.68 1.08 2.86 1.08.86 0 1.61-.22 2.22-.65.6-.43 1.03-1.05 1.27-1.84l-1.62-.45c-.31.93-.96 1.39-1.87 1.39-.66 0-1.2-.19-1.62-.58-.41-.39-.62-.92-.62-1.59h5.93c.01-.12.02-.26.02-.4.01-.01.01-.01-.09 0zm-5.93-.47c.1-.56.34-1 .71-1.31.36-.31.83-.47 1.39-.47.57 0 1.04.16 1.4.47.36.31.57.75.63 1.31h-4.13zM12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/>
+          </svg>
+        </a>
+      </nav>
+    </div>
     <div class="controls">
       <div class="fsgroup" role="group" aria-label="字級調整">
         <button class="fsbtn" id="fsDown" aria-label="縮小字級">A−</button>
@@ -746,19 +776,29 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   {{SECTIONS}}
 
   <footer>
-    資料來源：臺灣期貨交易所（TAIFEX）原始保證金一覽表與每日交易行情（一般交易時段）。<br>
-    本頁每日自動更新；資料僅供參考，實際保證金以期交所及各期貨商公告為準。<br>
+    資料來源：臺灣期貨交易所（TAIFEX）保證金一覽表與每日交易行情（一般交易時段）。<br>
+    資料每日自動更新；僅供參考，實際保證金以期交所及各期貨商公告為準。<br>
     產生時間：{{GEN_TW}}（台北）／{{GEN_UTC}}
   </footer>
 </div>
 
 <script>
 (function(){
+  // ---- 反爬：禁止右鍵選取與開發者工具快捷鍵 ----
+  document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='J'||e.key==='C'))||
+       (e.ctrlKey&&e.key==='U')){ e.preventDefault(); }
+  });
+  document.addEventListener('selectstart', function(e){
+    if(e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA'){ e.preventDefault(); }
+  });
+
   var root = document.documentElement;
 
   // ---- 字級調整 ----
-  var sizes = [13,14,15,16,17,18,20,22];
-  var idx = 3;
+  var sizes = [11,12,13,14,15,16,18,20];
+  var idx = 3; // 預設 14px
   function applyFs(){ root.style.setProperty('--fs', sizes[idx] + 'px'); }
   document.getElementById('fsUp').addEventListener('click', function(){
     if(idx < sizes.length-1){ idx++; applyFs(); }
@@ -804,7 +844,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   });
   update();
 
-  // ---- 股票期貨搜尋（中文名稱 / 股票代號）----
+  // ---- 股票期貨搜尋 ----
   var search = document.getElementById('stockSearch');
   if(search){
     var clearBtn = document.getElementById('stockClear');
@@ -812,7 +852,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     var noResult = document.getElementById('stockNoResult');
     var stockDetails = search.closest('details.cat');
     var srows = Array.prototype.slice.call(document.querySelectorAll('tr.srow'));
-
     function norm(s){ return (s||'').toLowerCase().trim(); }
     function runFilter(){
       var q = norm(search.value);
@@ -828,18 +867,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       if(noResult){ noResult.hidden = !(q !== '' && shown === 0); }
     }
     search.addEventListener('input', runFilter);
-    clearBtn.addEventListener('click', function(){
-      search.value=''; runFilter(); search.focus();
-    });
+    clearBtn.addEventListener('click', function(){ search.value=''; runFilter(); search.focus(); });
   }
 })();
 </script>
 </body>
 </html>
 """
-
-
-# ---------------------------------------------------------------------------
 def main():
     ds = build_dataset()
     html = render_html(ds)
