@@ -178,7 +178,8 @@ def parse_simple_margin(text):
 
 def parse_stock_margin(text):
     """
-    解析『股票類』CSV（含 (一)股票 / (二)ETF 兩段）。
+    解析『股票類』CSV（含 (一)股票期貨 / (二)ETF期貨 兩段）。
+    遇到「選擇權契約」段落即停止（個股選擇權不列入本表）。
     回傳 [{code, ucode, name, ratio, kind}]
       kind: 'stock' | 'mini' | 'etf'
       ratio: 原始保證金適用比例 (0~1)
@@ -188,13 +189,15 @@ def parse_stock_margin(text):
     for line in text.splitlines():
         if not line.strip():
             continue
-        # 區段標題判斷
+        # 碰到選擇權契約區塊就停止讀取
+        if "選擇權契約" in line:
+            break
+        # 區段標題判斷（期貨）
         if "標的證券為" in line or "ＥＴＦ" in line or "ETF" in line:
             if "ETF" in line or "ＥＴＦ" in line:
                 section = "etf"
             elif "股票" in line:
                 section = "stock"
-            # 其他（如受益憑證）也歸 ETF 類處理（乘數 10000）
             elif "受益" in line:
                 section = "etf"
             continue
@@ -556,7 +559,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>期貨商保證金一覽表</title>
+<title>華南期貨商品保證金一覽</title>
 <style>
   :root{
     --fs: 16px;
@@ -723,7 +726,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         <path d="M6 15l3.5-4 3 2.4L18 8" stroke="url(#lg)" stroke-width="1.9"
               stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span class="ttl">期貨商保證金一覽表</span>
+      <span class="ttl">華南期貨商品保證金一覽</span>
     </h1>
     <div class="controls">
       <div class="fsgroup" role="group" aria-label="字級調整">
@@ -733,7 +736,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       </div>
       <div class="calc">
         <label for="avail">可用保證金</label>
-        <input id="avail" inputmode="numeric" autocomplete="off" placeholder="輸入金額" />
+        <input id="avail" inputmode="numeric" autocomplete="off" placeholder="輸入金額" value="3,000,000" />
         <span class="ccy">NT$</span>
       </div>
     </div>
