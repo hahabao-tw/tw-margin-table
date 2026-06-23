@@ -860,7 +860,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <title>華南期貨商品保證金一覽</title>
 <style>
   :root{
-    --fs:14px;
+    --fs:16px;
     --bg:#0a0e17; --bg2:#0e1422;
     --card:#121a2b; --card2:#0f1626;
     --line:#23304a; --line2:#2e3e5e;
@@ -952,6 +952,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     flex:0 0 26px;transition:background .15s,transform .1s;line-height:1;}
   .stepper:hover{background:rgba(78,161,255,.28);}
   .stepper:active{transform:scale(.9);}
+  .vcounter{margin-left:auto;font-size:.72rem;color:var(--muted);white-space:nowrap;padding:0 4px;}
   .hint{color:var(--muted);font-size:.73rem;margin:6px 2px 0;line-height:1.45;}
 
   /* 分頁內容 */
@@ -1044,13 +1045,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   .fab-menu{display:none;flex-direction:column;align-items:flex-end;gap:6px;margin-bottom:4px;
     max-height:70vh;overflow-y:auto;padding:2px;}
   .fab-menu.open{display:flex;}
-  .fab-section-label{font-size:.65rem;color:var(--muted);text-align:right;padding:2px 4px 2px;letter-spacing:.3px;width:100%;}
-  .fab-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;}
-  .fab-item{border:1px solid var(--line2);background:var(--card);color:var(--fg);
-    border-radius:10px;padding:6px 10px;font-size:.74rem;font-weight:600;cursor:pointer;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .15s,border-color .15s;
-    box-shadow:0 4px 16px rgba(0,0,0,.3);text-align:center;}
-  .fab-item:hover{background:rgba(78,161,255,.12);border-color:var(--accent-b);}
+  .fab-section-label{font-size:.65rem;color:var(--accent);text-align:right;padding:2px 4px 2px;
+    letter-spacing:.4px;width:100%;font-weight:700;text-transform:uppercase;}
+  .fab-grid{display:flex;flex-direction:column;gap:5px;width:100%;}
+  .fab-item{border:1px solid var(--accent-b);background:rgba(14,22,38,.92);color:var(--fg);
+    border-radius:10px;padding:7px 14px;font-size:.8rem;font-weight:600;cursor:pointer;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .15s,border-color .15s,color .15s;
+    box-shadow:0 4px 16px rgba(0,0,0,.45);text-align:left;backdrop-filter:blur(8px);}
+  .fab-item:hover{background:rgba(78,161,255,.25);border-color:var(--accent);color:var(--accent);}
+  @media(prefers-color-scheme:light){
+    .fab-item{background:rgba(255,255,255,.96);color:var(--fg);border-color:var(--accent-b);}
+    .fab-item:hover{background:rgba(47,127,240,.12);}
+  }
   @keyframes fab-pulse{
     0%,100%{box-shadow:0 4px 20px rgba(53,224,214,.35),0 0 0 0 rgba(53,224,214,0);}
     50%{box-shadow:0 4px 20px rgba(53,224,214,.5),0 0 0 8px rgba(53,224,214,.12);}
@@ -1083,6 +1089,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         </svg>
         <span class="ttl">華南期貨商品保證金一覽</span>
       </h1>
+      <!-- 字級按鈕：固定在 header 右側，兩個 tab 都可用 -->
+      <div class="fsgroup" role="group" aria-label="字級調整" style="margin-left:auto;">
+        <button class="fsbtn" id="fsDown" aria-label="縮小字級">A−</button>
+        <button class="fsbtn mid" id="fsReset" aria-label="預設字級">A</button>
+        <button class="fsbtn" id="fsUp" aria-label="放大字級">A＋</button>
+      </div>
       <nav class="social" aria-label="社群">
         <a href="https://www.instagram.com/f1_futures/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1101,13 +1113,10 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <div class="tabs" role="tablist">
       <button class="tab-btn active" role="tab" aria-selected="true"  data-tab="domestic">🇹🇼 國內期貨</button>
       <button class="tab-btn"        role="tab" aria-selected="false" data-tab="foreign" >🌐 國外期貨</button>
+      <!-- 計數器 -->
+      <span class="vcounter" id="vcounter" title="累計瀏覽次數">👁 ...</span>
     </div>
     <div id="domestic-controls" class="controls">
-      <div class="fsgroup" role="group" aria-label="字級調整">
-        <button class="fsbtn" id="fsDown" aria-label="縮小字級">A−</button>
-        <button class="fsbtn mid" id="fsReset" aria-label="預設字級">A</button>
-        <button class="fsbtn" id="fsUp" aria-label="放大字級">A＋</button>
-      </div>
       <div class="calc">
         <label for="avail">可用保證金</label>
         <button class="stepper" id="stepDown" aria-label="減少十萬">−</button>
@@ -1175,11 +1184,21 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   var root=document.documentElement;
 
   /* ---- 字級 ---- */
-  var sizes=[11,12,13,14,15,16,18,20],idx=3;
+  var sizes=[11,12,13,14,15,16,18,20],idx=5; // 預設 16px
   function applyFs(){root.style.setProperty('--fs',sizes[idx]+'px');}
   document.getElementById('fsUp').addEventListener('click',function(){if(idx<sizes.length-1){idx++;applyFs();}});
   document.getElementById('fsDown').addEventListener('click',function(){if(idx>0){idx--;applyFs();}});
-  document.getElementById('fsReset').addEventListener('click',function(){idx=3;applyFs();});
+  document.getElementById('fsReset').addEventListener('click',function(){idx=5;applyFs();});
+
+  /* ---- 訪客計數器（countapi.xyz） ---- */
+  (function(){
+    var el=document.getElementById('vcounter');
+    if(!el)return;
+    fetch('https://api.countapi.xyz/hit/hahabao-tw.github.io/tw-margin-table')
+      .then(function(r){return r.json();})
+      .then(function(d){if(d&&d.value)el.textContent='👁 '+d.value.toLocaleString();})
+      .catch(function(){el.style.display='none';});
+  })();
 
   /* ---- 分頁切換 ---- */
   var tabs=Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
