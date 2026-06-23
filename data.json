@@ -512,12 +512,12 @@
      "code": "PBF",
      "ucode": "6488",
      "name": "小型環球晶期貨",
-     "ratio": 0.162,
+     "ratio": 0.324,
      "kind": "mini",
      "mult": 100,
      "price": 1140.0,
      "volume": 4512,
-     "margin": 18468,
+     "margin": 36936,
      "currency": "TWD"
     },
     {
@@ -704,12 +704,12 @@
      "code": "GUF",
      "ucode": "2455",
      "name": "全新期貨",
-     "ratio": 0.2025,
+     "ratio": 0.405,
      "kind": "stock",
      "mult": 2000,
      "price": 417.5,
      "volume": 2328,
-     "margin": 169088,
+     "margin": 338175,
      "currency": "TWD"
     },
     {
@@ -1268,12 +1268,12 @@
      "code": "OWF",
      "ucode": "6488",
      "name": "環球晶期貨",
-     "ratio": 0.162,
+     "ratio": 0.324,
      "kind": "stock",
      "mult": 2000,
      "price": 1140.0,
      "volume": 997,
-     "margin": 369360,
+     "margin": 738720,
      "currency": "TWD"
     },
     {
@@ -1748,12 +1748,12 @@
      "code": "QDF",
      "ucode": "3532",
      "name": "台勝科期貨",
-     "ratio": 0.162,
+     "ratio": 0.324,
      "kind": "stock",
      "mult": 2000,
      "price": 385.0,
      "volume": 454,
-     "margin": 124740,
+     "margin": 249480,
      "currency": "TWD"
     },
     {
@@ -3677,7 +3677,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/06/22",
+   "update": "2026/06/23",
    "matched": 291
   },
   {
@@ -3974,7 +3974,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/06/22",
+   "update": "2026/06/23",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -5978,6 +5978,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-06-23 05:54 UTC",
- "generated_tw": "2026-06-23 13:54"
+ "generated_at": "2026-06-23 11:11 UTC",
+ "generated_tw": "2026-06-23 19:11"
 }
