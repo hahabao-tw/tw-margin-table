@@ -833,8 +833,11 @@ def render_foreign_section(sec):
                      '</tr></thead><tbody>')
         for r in grp["rows"]:
             cur_label = r["currency"]  # 只顯示代碼，如 USD、JPY
+            search_key = f'{r["name"]} {r["code"]}'.lower()
             parts.append(
-                f'<tr class="mrow">'
+                f'<tr class="mrow frow" '
+                f'data-search="{esc(search_key)}" '
+                f'data-margin="{r["margin"]}">'
                 f'<td class="l">{esc(r["name"])}'
                 f'<span class="ucode">{esc(r["code"])}</span></td>'
                 f'<td class="r num">{r["margin"]:,}</td>'
@@ -995,6 +998,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   .searchbar input::placeholder{color:var(--muted);}
   .sclear{border:0;background:transparent;color:var(--muted);font-size:1.1rem;line-height:1;cursor:pointer;padding:0 3px;visibility:hidden;}
   .searchbar.has-q .sclear{visibility:visible;}
+  /* 國外全域搜尋列：分頁頂端 */
+  .fsearch{margin:0 0 12px;position:sticky;top:0;z-index:5;}
+  .fsearch-hint{color:var(--accent-b);font-size:.75rem;margin:0 2px 12px;font-weight:600;}
 
   /* 表格 */
   .tw{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
@@ -1120,6 +1126,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
   <!-- 國外期貨 -->
   <div class="tab-panel" id="panel-foreign">
+    <div class="searchbar fsearch">
+      <svg class="sicon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+      <input id="foreignSearch" type="search" inputmode="search" autocomplete="off"
+             placeholder="搜尋商品名稱／代號，或輸入數字篩選保證金上限（例：黃金、JAU、50000）" />
+      <button type="button" id="foreignClear" class="sclear" aria-label="清除搜尋">×</button>
+    </div>
+    <p class="fsearch-hint" id="foreignSearchHint" hidden></p>
     {{FOREIGN_SECTIONS}}
   </div>
 
@@ -1264,6 +1279,74 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   }
   initSearch('stockSearch','stockClear','stockNoResult','#cat-stock tr.srow');
   initSearch('etfSearch','etfClear','etfNoResult','#cat-etf tr.srow');
+
+  /* ---- 國外全域搜尋（文字搜商品 / 數字搜保證金上限）---- */
+  (function(){
+    var fs=document.getElementById('foreignSearch');
+    if(!fs)return;
+    var clr=document.getElementById('foreignClear');
+    var bar=fs.closest('.searchbar');
+    var hint=document.getElementById('foreignSearchHint');
+    var frows=Array.prototype.slice.call(document.querySelectorAll('tr.frow'));
+    var fdetails=Array.prototype.slice.call(document.querySelectorAll('#panel-foreign details.cat'));
+    function run(){
+      var q=(fs.value||'').trim();
+      bar.classList.toggle('has-q',q.length>0);
+      // 判斷是否為純數字（可含逗號）
+      var numQ=q.replace(/,/g,'');
+      var isNum=q!==''&&/^[0-9]+$/.test(numQ);
+      var threshold=isNum?parseInt(numQ,10):null;
+      var lq=q.toLowerCase();
+      var shown=0;
+      for(var i=0;i<frows.length;i++){
+        var tr=frows[i];
+        var hit;
+        if(q===''){
+          hit=true;
+        }else if(isNum){
+          var m=parseFloat(tr.getAttribute('data-margin'));
+          hit=(m<=threshold);   // 列出比輸入數字「少」的保證金
+        }else{
+          var key=tr.getAttribute('data-search')||'';
+          hit=key.indexOf(lq)!==-1;
+        }
+        tr.style.display=hit?'':'none';
+        if(hit)shown++;
+      }
+      // 有搜尋時自動展開所有國外交易所，方便看到結果
+      if(q!==''){fdetails.forEach(function(d){if(!d.open)d.open=true;});}
+      // 隱藏沒有可見列的「分類表格 + 其標題」
+      var tables=document.querySelectorAll('#panel-foreign table');
+      for(var t=0;t<tables.length;t++){
+        var tbl=tables[t];
+        var vis=tbl.querySelectorAll('tr.frow:not([style*="display: none"])').length;
+        var wrap=tbl.closest('.tw');
+        var label=wrap?wrap.previousElementSibling:null;
+        var hideGrp=(q!==''&&vis===0);
+        if(wrap)wrap.style.display=hideGrp?'none':'';
+        if(label&&label.classList.contains('grp-label'))label.style.display=hideGrp?'none':'';
+      }
+      // 隱藏完全沒有結果的交易所區塊
+      fdetails.forEach(function(d){
+        var visible=d.querySelectorAll('tr.frow:not([style*="display: none"])').length;
+        d.style.display=(q!==''&&visible===0)?'none':'';
+      });
+      // 提示文字
+      if(hint){
+        if(isNum){
+          hint.hidden=false;
+          hint.textContent='顯示原始保證金 ≤ '+threshold.toLocaleString()+' 的商品，共 '+shown+' 項';
+        }else if(q!==''){
+          hint.hidden=false;
+          hint.textContent='找到 '+shown+' 項商品';
+        }else{
+          hint.hidden=true;
+        }
+      }
+    }
+    fs.addEventListener('input',run);
+    if(clr){clr.addEventListener('click',function(){fs.value='';run();fs.focus();});}
+  })();
   /* ---- 浮動快捷按鈕 ---- */
   var fabBtn=document.getElementById('fabBtn');
   var fabMenu=document.getElementById('fabMenu');
