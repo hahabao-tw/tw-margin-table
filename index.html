@@ -99,7 +99,9 @@
     flex:0 0 26px;transition:background .15s,transform .1s;line-height:1;}
   .stepper:hover{background:rgba(78,161,255,.28);}
   .stepper:active{transform:scale(.9);}
-  .vcounter{margin-left:auto;font-size:.72rem;color:var(--muted);white-space:nowrap;padding:0 4px;}
+  .vcounter{display:inline-block;margin-top:8px;font-size:.7rem;color:var(--muted);
+    padding:3px 10px;border:1px solid var(--line);border-radius:12px;background:var(--card2);
+    font-family:var(--mono);letter-spacing:.3px;}
   .hint{color:var(--muted);font-size:.73rem;margin:6px 2px 0;line-height:1.45;}
 
   /* 分頁內容 */
@@ -260,8 +262,6 @@
     <div class="tabs" role="tablist">
       <button class="tab-btn active" role="tab" aria-selected="true"  data-tab="domestic">🇹🇼 國內期貨</button>
       <button class="tab-btn"        role="tab" aria-selected="false" data-tab="foreign" >🌐 國外期貨</button>
-      <!-- 計數器 -->
-      <span class="vcounter" id="vcounter" title="累計瀏覽次數">👁 ...</span>
     </div>
     <div id="domestic-controls" class="controls">
       <div class="calc">
@@ -312,8 +312,9 @@
 
   <footer>
     資料來源：台灣期貨交易所與華南期貨官方網站。<br>
-    資料早上 8 點與晚上 8 點自動更新。更新時間：2026-06-23 23:03（GMT+8）<br>
-    本資料僅供參考，實際保證金以各交易所及期貨商公告為準。
+    本網頁於每日早上與晚上各更新 1 次。<br>
+    本資料僅供參考，實際保證金以各交易所及期貨商公告為準。<br>
+    <span class="vcounter" id="vcounter" title="累計瀏覽次數">👁 ...</span>
   </footer>
 </div>
 
