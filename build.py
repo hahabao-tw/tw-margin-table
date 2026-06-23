@@ -47,6 +47,12 @@ FOREIGN_SOURCES = [
      "url": "https://ft.entrust.com.tw/entrustFutures/productMargin/margin.do?area_id=604f45b55f0000001d713878698680a8"},
 ]
 
+# 國外期貨商品名稱覆寫（key = 原始名稱, value = 顯示名稱）
+FOREIGN_NAME_OVERRIDE = {
+    "(USD)日經225": "日經225",
+}
+
+
 # 幣別中文 → 代碼
 FOREIGN_CURRENCY_MAP = {
     "美金": "USD", "日圓": "JPY", "港幣": "HKD",
@@ -197,50 +203,64 @@ def parse_simple_margin(text):
 
 def parse_stock_margin(text):
     """
-    解析『股票類』CSV（含 (一)股票期貨 / (二)ETF期貨 兩段）。
+    解析『股票類』CSV。
     遇到「選擇權契約」段落即停止（個股選擇權不列入本表）。
-    回傳 [{code, ucode, name, ratio, kind}]
+
+    個股期貨欄位（9欄）：
+      序號, 英文代碼, 證券代號, 中文簡稱, 標的證券, 保證金所屬級距,
+      結算比例, 維持比例, 原始保證金適用比例
+    ETF 期貨欄位（8欄）：
+      序號, 英文代碼, 證券代號, 中文簡稱, 標的證券,
+      結算保證金, 維持保證金, 原始保證金（直接是整數）
+
+    回傳 [{code, ucode, name, ratio, fixed_margin, kind}]
       kind: 'stock' | 'mini' | 'etf'
-      ratio: 原始保證金適用比例 (0~1)
+      ratio: 僅 stock/mini 有效（0~1），etf 為 None
+      fixed_margin: 僅 etf 有效（整數），stock/mini 為 None
     """
     rows = []
-    section = "stock"  # 預設標的為股票
+    section = "stock"
     for line in text.splitlines():
         if not line.strip():
             continue
-        # 碰到選擇權契約區塊就停止讀取
         if "選擇權契約" in line:
             break
-        # 區段標題判斷（期貨）
-        if "標的證券為" in line or "ＥＴＦ" in line or "ETF" in line:
-            if "ETF" in line or "ＥＴＦ" in line:
+        # 區段標題判斷（只有含「標的證券為」的說明行才切換，避免資料列名稱含 ETF 被誤判）
+        if "標的證券為" in line:
+            if "受益" in line or "ＥＴＦ" in line or "ETF" in line:
                 section = "etf"
             elif "股票" in line:
                 section = "stock"
-            elif "受益" in line:
-                section = "etf"
             continue
         fields = _split_csv_line(line)
-        if len(fields) < 9:
-            continue
-        # 第一欄需為序號（整數）
-        seq = fields[0].strip()
+        seq = fields[0].strip() if fields else ""
         if not seq.isdigit():
             continue
-        code = fields[1].strip()
-        ucode = fields[2].strip()
-        name = fields[3].strip()
-        ratio = _clean_num(fields[8])  # 原始保證金適用比例
-        if ratio is None or not code:
+        code  = fields[1].strip() if len(fields) > 1 else ""
+        ucode = fields[2].strip() if len(fields) > 2 else ""
+        name  = fields[3].strip() if len(fields) > 3 else ""
+        if not code:
             continue
+
         if section == "etf":
-            kind = "etf"
-        elif name.startswith("小型"):
-            kind = "mini"
+            # ETF：8欄，第8欄（index 7）= 原始保證金（整數）
+            if len(fields) < 8:
+                continue
+            fixed = _clean_num(fields[7])
+            if fixed is None:
+                continue
+            rows.append({"code": code, "ucode": ucode, "name": name,
+                         "ratio": None, "fixed_margin": int(fixed), "kind": "etf"})
         else:
-            kind = "stock"
-        rows.append({"code": code, "ucode": ucode, "name": name,
-                     "ratio": ratio, "kind": kind})
+            # 個股：9欄，第9欄（index 8）= 原始保證金適用比例
+            if len(fields) < 9:
+                continue
+            ratio = _clean_num(fields[8])
+            if ratio is None:
+                continue
+            kind = "mini" if name.startswith("小型") else "stock"
+            rows.append({"code": code, "ucode": ucode, "name": name,
+                         "ratio": ratio, "fixed_margin": None, "kind": kind})
     return rows
 
 
@@ -392,48 +412,57 @@ def build_dataset():
             stock_rows, etf_rows = [], []
             matched = 0
             for r in parsed:
-                mult = {"stock": MULT_STOCK, "mini": MULT_MINI,
-                        "etf": MULT_ETF}[r["kind"]]
-                price = price_map.get(r["code"])
-                if price is None:
-                    price = price_map.get(r["name"])
-                vol = vol_map.get(r["code"]) or vol_map.get(r["name"]) or 0
-                if price is not None:
-                    matched += 1
-                    margin = round(price * mult * r["ratio"])
-                else:
-                    margin = None
-                row = {
-                    "code": r["code"],
-                    "ucode": r["ucode"],
-                    "name": r["name"],
-                    "ratio": r["ratio"],
-                    "kind": r["kind"],
-                    "mult": mult,
-                    "price": price,
-                    "volume": vol,
-                    "margin": margin,
-                    "currency": "TWD",
-                }
                 if r["kind"] == "etf":
-                    etf_rows.append(row)
+                    # ETF：直接用固定保證金，不需要收盤價，保持原始順序
+                    etf_rows.append({
+                        "code": r["code"],
+                        "ucode": r["ucode"],
+                        "name": r["name"],
+                        "ratio": None,
+                        "kind": "etf",
+                        "mult": MULT_ETF,
+                        "price": None,
+                        "volume": 0,
+                        "margin": r["fixed_margin"],
+                        "currency": "TWD",
+                    })
                 else:
-                    stock_rows.append(row)
-            # 排序：成交量降冪，次之股票代號升冪
+                    # 個股/小型：收盤價 × 乘數 × 比例
+                    mult = MULT_MINI if r["kind"] == "mini" else MULT_STOCK
+                    price = price_map.get(r["code"]) or price_map.get(r["name"])
+                    vol   = vol_map.get(r["code"])   or vol_map.get(r["name"]) or 0
+                    if price is not None:
+                        matched += 1
+                        margin = round(price * mult * r["ratio"])
+                    else:
+                        margin = None
+                    stock_rows.append({
+                        "code": r["code"],
+                        "ucode": r["ucode"],
+                        "name": r["name"],
+                        "ratio": r["ratio"],
+                        "kind": r["kind"],
+                        "mult": mult,
+                        "price": price,
+                        "volume": vol,
+                        "margin": margin,
+                        "currency": "TWD",
+                    })
+            # 個股：成交量降冪，次之代號升冪
             stock_rows.sort(key=lambda x: (-x["volume"], x["ucode"]))
-            etf_rows.sort(key=lambda x: (-x["volume"], x["ucode"]))
-            total_matched = matched
-            print(f"  股票期貨 {len(stock_rows)} 檔，ETF {len(etf_rows)} 檔，"
-                  f"成功對到收盤價 {total_matched} 檔", file=sys.stderr)
+            # ETF：保持 CSV 原始順序（不排序）
+            print(f"  個股期貨 {len(stock_rows)} 檔（對到收盤價 {matched} 檔），"
+                  f"ETF {len(etf_rows)} 檔", file=sys.stderr)
             sections.append({"key": "stock", "title": "股票期貨",
                              "kind": "stock", "rows": stock_rows,
                              "update": update_dates[src["key"]],
-                             "matched": len([r for r in stock_rows if r["margin"] is not None])})
+                             "matched": matched})
             sections.append({"key": "etf", "title": "ETF股票期貨",
-                             "kind": "stock", "rows": etf_rows,
+                             "kind": "etf_fixed", "rows": etf_rows,
                              "update": update_dates[src["key"]],
-                             "matched": len([r for r in etf_rows if r["margin"] is not None]),
-                             "search_id": "etfSearch", "noresult_id": "etfNoResult"})
+                             "search_id": "etfSearch",
+                             "clear_id":  "etfClear",
+                             "noresult_id": "etfNoResult"})
 
     # 國外期貨資料
     foreign_sections = build_foreign_dataset()
@@ -472,12 +501,15 @@ def build_foreign_dataset():
         # 表格欄位：商品分類 | 商品名稱 | 商品代碼 | 原始保證金 | 維持保證金 | 幣別
         rows = []
         tr_blocks = re.findall(r'<tr[^>]*>(.*?)</tr>', text, re.S | re.I)
+        def strip_tags(s):
+            s = re.sub(r'<[^>]+>', '', s).strip()
+            s = s.replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>') \
+                 .replace('&nbsp;', ' ').replace('&#39;', "'").replace('&quot;', '"')
+            return s
         for tr in tr_blocks:
             cells = re.findall(r'<td[^>]*>(.*?)</td>', tr, re.S | re.I)
             if len(cells) < 6:
                 continue
-            def strip_tags(s):
-                return re.sub(r'<[^>]+>', '', s).strip()
             cat    = strip_tags(cells[0])
             name   = strip_tags(cells[1])
             code   = strip_tags(cells[2])
@@ -486,6 +518,7 @@ def build_foreign_dataset():
             if not name or not code or not orig.isdigit():
                 continue
             cur = FOREIGN_CURRENCY_MAP.get(cur_zh, cur_zh)
+            name = FOREIGN_NAME_OVERRIDE.get(name, name)
             rows.append({"cat": cat, "name": name, "code": code,
                          "margin": int(orig), "currency": cur})
 
@@ -579,6 +612,52 @@ def render_simple_section(sec):
     return "".join(parts)
 
 
+def render_etf_section(sec, search_id="etfSearch", clear_id="etfClear", noresult_id="etfNoResult"):
+    """ETF 股票期貨：直接顯示固定原始保證金，不需要收盤價，保持原始排序。"""
+    is_open = " open" if "etf" in OPEN_BY_DEFAULT else ""
+    sid = f'cat-{sec["key"]}'
+    parts = [f'<details class="cat" id="{sid}" data-cat="{esc(sec["key"])}"{is_open}>']
+    parts.append(f'<summary><span class="cat-name">{esc(sec["title"])}</span>'
+                 f'<span class="upd">更新：{esc(sec.get("update") or "—")}</span>'
+                 f'<span class="chev" aria-hidden="true"></span></summary>')
+    parts.append('<div class="catbody">')
+    if not sec.get("rows"):
+        parts.append('<p class="curnote">目前無資料。</p></div></details>')
+        return "".join(parts)
+    # 搜尋列
+    parts.append(f'<div class="searchbar">'
+                 f'<svg class="sicon" viewBox="0 0 24 24" aria-hidden="true">'
+                 f'<circle cx="11" cy="11" r="7"></circle>'
+                 f'<line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>'
+                 f'<input id="{search_id}" type="search" inputmode="search" '
+                 f'autocomplete="off" placeholder="搜尋：名稱或代號（例：元大、0050）" />'
+                 f'<button type="button" id="{clear_id}" class="sclear" '
+                 f'aria-label="清除搜尋">×</button></div>')
+    parts.append(f'<p class="curnote">單位：NT$（TWD）。共 {len(sec["rows"])} 檔，依交易所原始順序排列。</p>')
+    parts.append('<div class="tw"><table class="stock">')
+    parts.append('<thead><tr>'
+                 '<th class="l">商品（標的）</th>'
+                 '<th class="r">原始保證金</th>'
+                 '<th class="r">可下單口數</th>'
+                 '</tr></thead><tbody>')
+    for r in sec["rows"]:
+        search_key = f'{r["name"]} {r["ucode"]} {r["code"]}'.lower()
+        parts.append(
+            '<tr class="mrow srow" '
+            f'data-margin="{r["margin"] if r["margin"] is not None else ""}" '
+            f'data-search="{esc(search_key)}" '
+            'data-currency="TWD">'
+            f'<td class="l">{esc(r["name"])}'
+            f'<span class="ucode">{esc(r["ucode"])}・{esc(r["code"])}</span></td>'
+            f'<td class="r num">{fmt_int(r["margin"])}</td>'
+            f'<td class="r num lots">—</td>'
+            '</tr>')
+    parts.append('</tbody></table>')
+    parts.append(f'<p class="noresult" id="{noresult_id}" hidden>找不到符合的 ETF 期貨。</p>')
+    parts.append('</div></div></details>')
+    return "".join(parts)
+
+
 def render_stock_section(sec, search_id="stockSearch", clear_id="stockClear", noresult_id="stockNoResult"):
     is_open = " open" if "stock" in OPEN_BY_DEFAULT else ""
     sid = f'cat-{sec["key"]}'
@@ -643,7 +722,12 @@ def render_html(ds):
     # 國內區塊
     body = []
     for sec in ds["sections"]:
-        if sec["kind"] == "stock":
+        if sec["kind"] == "etf_fixed":
+            search_id   = sec.get("search_id",   "etfSearch")
+            clear_id    = sec.get("clear_id",    "etfClear")
+            noresult_id = sec.get("noresult_id", "etfNoResult")
+            body.append(render_etf_section(sec, search_id, clear_id, noresult_id))
+        elif sec["kind"] == "stock":
             search_id    = sec.get("search_id", "stockSearch")
             clear_id     = search_id.replace("Search", "Clear")
             noresult_id  = sec.get("noresult_id", "stockNoResult")
@@ -1127,7 +1211,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   }
   initSearch('stockSearch','stockClear','stockNoResult','#cat-stock tr.srow');
   initSearch('etfSearch','etfClear','etfNoResult','#cat-etf tr.srow');
-
   /* ---- 浮動快捷按鈕 ---- */
   var fabBtn=document.getElementById('fabBtn');
   var fabMenu=document.getElementById('fabMenu');
