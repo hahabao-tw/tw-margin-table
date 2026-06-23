@@ -3683,11 +3683,300 @@
   {
    "key": "etf",
    "title": "ETF股票期貨",
-   "kind": "stock",
-   "rows": [],
+   "kind": "etf_fixed",
+   "rows": [
+    {
+     "code": "NYF",
+     "ucode": "0050",
+     "name": "元大台灣50ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 79000,
+     "currency": "TWD"
+    },
+    {
+     "code": "SRF",
+     "ucode": "0050",
+     "name": "小型元大台灣50ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 7900,
+     "currency": "TWD"
+    },
+    {
+     "code": "VHF",
+     "ucode": "0052",
+     "name": "富邦科技ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 50000,
+     "currency": "TWD"
+    },
+    {
+     "code": "PFF",
+     "ucode": "0056",
+     "name": "元大高股息ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 27000,
+     "currency": "TWD"
+    },
+    {
+     "code": "SSF",
+     "ucode": "0056",
+     "name": "小型元大高股息ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 2700,
+     "currency": "TWD"
+    },
+    {
+     "code": "OAF",
+     "ucode": "006205",
+     "name": "富邦上証ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 29000,
+     "currency": "TWD"
+    },
+    {
+     "code": "OBF",
+     "ucode": "006206",
+     "name": "元大上證50ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 29000,
+     "currency": "TWD"
+    },
+    {
+     "code": "OJF",
+     "ucode": "00636",
+     "name": "國泰中國A50ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 21000,
+     "currency": "TWD"
+    },
+    {
+     "code": "OKF",
+     "ucode": "00639",
+     "name": "富邦深100ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 13000,
+     "currency": "TWD"
+    },
+    {
+     "code": "OOF",
+     "ucode": "00643",
+     "name": "群益深証中小ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 15000,
+     "currency": "TWD"
+    },
+    {
+     "code": "RZF",
+     "ucode": "00679B",
+     "name": "元大美債20年ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 19000,
+     "currency": "TWD"
+    },
+    {
+     "code": "UKF",
+     "ucode": "00687B",
+     "name": "國泰20年美債ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 21000,
+     "currency": "TWD"
+    },
+    {
+     "code": "SIF",
+     "ucode": "00719B",
+     "name": "元大美債1-3ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 15000,
+     "currency": "TWD"
+    },
+    {
+     "code": "URF",
+     "ucode": "00757",
+     "name": "統一FANG+ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 107000,
+     "currency": "TWD"
+    },
+    {
+     "code": "USF",
+     "ucode": "00757",
+     "name": "小型統一FANG+ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 10700,
+     "currency": "TWD"
+    },
+    {
+     "code": "SQF",
+     "ucode": "00772B",
+     "name": "中信高評級公司債ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 22000,
+     "currency": "TWD"
+    },
+    {
+     "code": "RIF",
+     "ucode": "00878",
+     "name": "國泰永續高股息ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 18000,
+     "currency": "TWD"
+    },
+    {
+     "code": "RXF",
+     "ucode": "00885",
+     "name": "富邦越南ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 14000,
+     "currency": "TWD"
+    },
+    {
+     "code": "SGF",
+     "ucode": "00893",
+     "name": "國泰智能電動車ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 32000,
+     "currency": "TWD"
+    },
+    {
+     "code": "SMF",
+     "ucode": "00919",
+     "name": "群益台灣精選高息ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 18000,
+     "currency": "TWD"
+    },
+    {
+     "code": "RYF",
+     "ucode": "00923",
+     "name": "群益台ESG低碳50ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 33000,
+     "currency": "TWD"
+    },
+    {
+     "code": "SNF",
+     "ucode": "00929",
+     "name": "復華台灣科技優息ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 19000,
+     "currency": "TWD"
+    },
+    {
+     "code": "UJF",
+     "ucode": "00937B",
+     "name": "群益ESG投等債20+ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 11000,
+     "currency": "TWD"
+    },
+    {
+     "code": "SUF",
+     "ucode": "00940",
+     "name": "元大台灣價值高息ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 9000,
+     "currency": "TWD"
+    }
+   ],
    "update": "2026/06/22",
-   "matched": 0,
    "search_id": "etfSearch",
+   "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
   }
  ],
@@ -3715,14 +4004,14 @@
       },
       {
        "cat": "股價指數期貨類",
-       "name": "小型S&amp;P 500指數",
+       "name": "小型S&P 500指數",
        "code": "ES",
        "margin": 27529,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
-       "name": "微型S&amp;P 500指數",
+       "name": "微型S&P 500指數",
        "code": "MES",
        "margin": 2754,
        "currency": "USD"
@@ -3743,7 +4032,7 @@
       },
       {
        "cat": "股價指數期貨類",
-       "name": "(USD)日經225",
+       "name": "日經225",
        "code": "CNK",
        "margin": 28492,
        "currency": "USD"
@@ -3883,14 +4172,14 @@
     },
     {
      "cat": "股價指數期貨類",
-     "name": "小型S&amp;P 500指數",
+     "name": "小型S&P 500指數",
      "code": "ES",
      "margin": 27529,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
-     "name": "微型S&amp;P 500指數",
+     "name": "微型S&P 500指數",
      "code": "MES",
      "margin": 2754,
      "currency": "USD"
@@ -3911,7 +4200,7 @@
     },
     {
      "cat": "股價指數期貨類",
-     "name": "(USD)日經225",
+     "name": "日經225",
      "code": "CNK",
      "margin": 28492,
      "currency": "USD"
@@ -4310,6 +4599,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-06-23 03:50 UTC",
- "generated_tw": "2026-06-23 11:50"
+ "generated_at": "2026-06-23 04:26 UTC",
+ "generated_tw": "2026-06-23 12:26"
 }
