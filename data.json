@@ -3982,8 +3982,8 @@
  ],
  "foreign_sections": [
   {
-   "key": "us_eu",
-   "title": "美歐交易所",
+   "key": "us_cme",
+   "title": "芝加哥商品交易所 CME",
    "groups": [
     {
      "cat": "股價指數期貨類",
@@ -4314,6 +4314,1044 @@
    "error": null
   },
   {
+   "key": "us_cbot",
+   "title": "芝加哥期貨交易所 CBOT",
+   "groups": [
+    {
+     "cat": "股價指數期貨類",
+     "rows": [
+      {
+       "cat": "股價指數期貨類",
+       "name": "小道瓊",
+       "code": "YM",
+       "margin": 16487,
+       "currency": "USD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "微型小道瓊",
+       "code": "MYM",
+       "margin": 1649,
+       "currency": "USD"
+      }
+     ]
+    },
+    {
+     "cat": "外匯債券類",
+     "rows": [
+      {
+       "cat": "外匯債券類",
+       "name": "2年美國中期債券",
+       "code": "TU",
+       "margin": 1320,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "5年美國中期債券",
+       "code": "FV",
+       "margin": 1375,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "10年美國中期債券",
+       "code": "TY",
+       "margin": 2063,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "美國長期十年債券",
+       "code": "UN",
+       "margin": 2805,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "30年美國長期公債",
+       "code": "US",
+       "margin": 4070,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "美國超長30年債券",
+       "code": "UB",
+       "margin": 5665,
+       "currency": "USD"
+      }
+     ]
+    },
+    {
+     "cat": "利率期貨類",
+     "rows": [
+      {
+       "cat": "利率期貨類",
+       "name": "10年殖利率期貨",
+       "code": "10Y",
+       "margin": 330,
+       "currency": "USD"
+      }
+     ]
+    },
+    {
+     "cat": "農產品類",
+     "rows": [
+      {
+       "cat": "農產品類",
+       "name": "小麥",
+       "code": "W",
+       "margin": 2145,
+       "currency": "USD"
+      },
+      {
+       "cat": "農產品類",
+       "name": "小型小麥",
+       "code": "YW",
+       "margin": 429,
+       "currency": "USD"
+      },
+      {
+       "cat": "農產品類",
+       "name": "黃豆",
+       "code": "S",
+       "margin": 2420,
+       "currency": "USD"
+      },
+      {
+       "cat": "農產品類",
+       "name": "小型黃豆",
+       "code": "YK",
+       "margin": 484,
+       "currency": "USD"
+      },
+      {
+       "cat": "農產品類",
+       "name": "玉米",
+       "code": "C",
+       "margin": 1210,
+       "currency": "USD"
+      },
+      {
+       "cat": "農產品類",
+       "name": "小型玉米",
+       "code": "YC",
+       "margin": 242,
+       "currency": "USD"
+      },
+      {
+       "cat": "農產品類",
+       "name": "黃豆粉",
+       "code": "SM",
+       "margin": 1705,
+       "currency": "USD"
+      },
+      {
+       "cat": "農產品類",
+       "name": "黃豆油",
+       "code": "BO",
+       "margin": 2310,
+       "currency": "USD"
+      },
+      {
+       "cat": "農產品類",
+       "name": "粗米",
+       "code": "RR",
+       "margin": 1375,
+       "currency": "USD"
+      },
+      {
+       "cat": "農產品類",
+       "name": "燕麥",
+       "code": "O",
+       "margin": 1375,
+       "currency": "USD"
+      }
+     ]
+    }
+   ],
+   "rows": [
+    {
+     "cat": "股價指數期貨類",
+     "name": "小道瓊",
+     "code": "YM",
+     "margin": 16487,
+     "currency": "USD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "微型小道瓊",
+     "code": "MYM",
+     "margin": 1649,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "2年美國中期債券",
+     "code": "TU",
+     "margin": 1320,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "5年美國中期債券",
+     "code": "FV",
+     "margin": 1375,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "10年美國中期債券",
+     "code": "TY",
+     "margin": 2063,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "美國長期十年債券",
+     "code": "UN",
+     "margin": 2805,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "30年美國長期公債",
+     "code": "US",
+     "margin": 4070,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "美國超長30年債券",
+     "code": "UB",
+     "margin": 5665,
+     "currency": "USD"
+    },
+    {
+     "cat": "利率期貨類",
+     "name": "10年殖利率期貨",
+     "code": "10Y",
+     "margin": 330,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "小麥",
+     "code": "W",
+     "margin": 2145,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "小型小麥",
+     "code": "YW",
+     "margin": 429,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "黃豆",
+     "code": "S",
+     "margin": 2420,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "小型黃豆",
+     "code": "YK",
+     "margin": 484,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "玉米",
+     "code": "C",
+     "margin": 1210,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "小型玉米",
+     "code": "YC",
+     "margin": 242,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "黃豆粉",
+     "code": "SM",
+     "margin": 1705,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "黃豆油",
+     "code": "BO",
+     "margin": 2310,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "粗米",
+     "code": "RR",
+     "margin": 1375,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "燕麥",
+     "code": "O",
+     "margin": 1375,
+     "currency": "USD"
+    }
+   ],
+   "error": null
+  },
+  {
+   "key": "us_nybot",
+   "title": "紐約期貨交易所 NYBOT",
+   "groups": [
+    {
+     "cat": "外匯債券類",
+     "rows": [
+      {
+       "cat": "外匯債券類",
+       "name": "美元指數",
+       "code": "DX",
+       "margin": 2172,
+       "currency": "USD"
+      }
+     ]
+    },
+    {
+     "cat": "農產品類",
+     "rows": [
+      {
+       "cat": "農產品類",
+       "name": "咖啡",
+       "code": "KC",
+       "margin": 6254,
+       "currency": "USD"
+      },
+      {
+       "cat": "農產品類",
+       "name": "11號糖",
+       "code": "SB",
+       "margin": 851,
+       "currency": "USD"
+      },
+      {
+       "cat": "農產品類",
+       "name": "可可",
+       "code": "CC",
+       "margin": 5127,
+       "currency": "USD"
+      },
+      {
+       "cat": "農產品類",
+       "name": "凍橘汁",
+       "code": "OJ",
+       "margin": 3926,
+       "currency": "USD"
+      },
+      {
+       "cat": "農產品類",
+       "name": "棉花",
+       "code": "CT",
+       "margin": 2343,
+       "currency": "USD"
+      }
+     ]
+    }
+   ],
+   "rows": [
+    {
+     "cat": "外匯債券類",
+     "name": "美元指數",
+     "code": "DX",
+     "margin": 2172,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "咖啡",
+     "code": "KC",
+     "margin": 6254,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "11號糖",
+     "code": "SB",
+     "margin": 851,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "可可",
+     "code": "CC",
+     "margin": 5127,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "凍橘汁",
+     "code": "OJ",
+     "margin": 3926,
+     "currency": "USD"
+    },
+    {
+     "cat": "農產品類",
+     "name": "棉花",
+     "code": "CT",
+     "margin": 2343,
+     "currency": "USD"
+    }
+   ],
+   "error": null
+  },
+  {
+   "key": "us_nym",
+   "title": "紐約商業交易所 NYM",
+   "groups": [
+    {
+     "cat": "金屬能源類",
+     "rows": [
+      {
+       "cat": "金屬能源類",
+       "name": "黃金",
+       "code": "GC",
+       "margin": 23353,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "小型黃金",
+       "code": "QO",
+       "margin": 11677,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "微型黃金",
+       "code": "MGC",
+       "margin": 2336,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "一盎司黃金",
+       "code": "1OZ",
+       "margin": 235,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "高級銅",
+       "code": "HG",
+       "margin": 13200,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "微型銅",
+       "code": "MHG",
+       "margin": 1320,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "白銀",
+       "code": "SI",
+       "margin": 36476,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "微型白銀",
+       "code": "SIL",
+       "margin": 7296,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "白金",
+       "code": "PL",
+       "margin": 8452,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "鈀金",
+       "code": "PA",
+       "margin": 14181,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "輕原油",
+       "code": "CL",
+       "margin": 11805,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "小輕原油",
+       "code": "QM",
+       "margin": 5007,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "微型輕原油",
+       "code": "MCL",
+       "margin": 1001,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "天然氣",
+       "code": "NG",
+       "margin": 3417,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "小型天然氣",
+       "code": "QG",
+       "margin": 860,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "無鉛汽油",
+       "code": "RB",
+       "margin": 9895,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "熱燃油",
+       "code": "HO",
+       "margin": 15988,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "布蘭特原油",
+       "code": "BZ",
+       "margin": 11776,
+       "currency": "USD"
+      }
+     ]
+    }
+   ],
+   "rows": [
+    {
+     "cat": "金屬能源類",
+     "name": "黃金",
+     "code": "GC",
+     "margin": 23353,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "小型黃金",
+     "code": "QO",
+     "margin": 11677,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "微型黃金",
+     "code": "MGC",
+     "margin": 2336,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "一盎司黃金",
+     "code": "1OZ",
+     "margin": 235,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "高級銅",
+     "code": "HG",
+     "margin": 13200,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "微型銅",
+     "code": "MHG",
+     "margin": 1320,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "白銀",
+     "code": "SI",
+     "margin": 36476,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "微型白銀",
+     "code": "SIL",
+     "margin": 7296,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "白金",
+     "code": "PL",
+     "margin": 8452,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "鈀金",
+     "code": "PA",
+     "margin": 14181,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "輕原油",
+     "code": "CL",
+     "margin": 11805,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "小輕原油",
+     "code": "QM",
+     "margin": 5007,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "微型輕原油",
+     "code": "MCL",
+     "margin": 1001,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "天然氣",
+     "code": "NG",
+     "margin": 3417,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "小型天然氣",
+     "code": "QG",
+     "margin": 860,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "無鉛汽油",
+     "code": "RB",
+     "margin": 9895,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "熱燃油",
+     "code": "HO",
+     "margin": 15988,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "布蘭特原油",
+     "code": "BZ",
+     "margin": 11776,
+     "currency": "USD"
+    }
+   ],
+   "error": null
+  },
+  {
+   "key": "us_cfe",
+   "title": "美國CBOE期貨交易所 CFE",
+   "groups": [
+    {
+     "cat": "股價指數期貨類",
+     "rows": [
+      {
+       "cat": "股價指數期貨類",
+       "name": "波動率(VIX)指數(近月)",
+       "code": "VX",
+       "margin": 8800,
+       "currency": "USD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "小波動率(VIX)指數(近月)",
+       "code": "VXM",
+       "margin": 880,
+       "currency": "USD"
+      }
+     ]
+    }
+   ],
+   "rows": [
+    {
+     "cat": "股價指數期貨類",
+     "name": "波動率(VIX)指數(近月)",
+     "code": "VX",
+     "margin": 8800,
+     "currency": "USD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "小波動率(VIX)指數(近月)",
+     "code": "VXM",
+     "margin": 880,
+     "currency": "USD"
+    }
+   ],
+   "error": null
+  },
+  {
+   "key": "us_lme",
+   "title": "英國倫敦金屬交易所 LME",
+   "groups": [
+    {
+     "cat": "金屬能源類",
+     "rows": [
+      {
+       "cat": "金屬能源類",
+       "name": "鎳",
+       "code": "NI",
+       "margin": 12210,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "鉛",
+       "code": "PB",
+       "margin": 3300,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "鋁合金",
+       "code": "AA",
+       "margin": 6200,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "鋁",
+       "code": "AH",
+       "margin": 6025,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "銅",
+       "code": "CA",
+       "margin": 24425,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "鋅",
+       "code": "ZN",
+       "margin": 7300,
+       "currency": "USD"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "錫",
+       "code": "SN",
+       "margin": 39075,
+       "currency": "USD"
+      }
+     ]
+    }
+   ],
+   "rows": [
+    {
+     "cat": "金屬能源類",
+     "name": "鎳",
+     "code": "NI",
+     "margin": 12210,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "鉛",
+     "code": "PB",
+     "margin": 3300,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "鋁合金",
+     "code": "AA",
+     "margin": 6200,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "鋁",
+     "code": "AH",
+     "margin": 6025,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "銅",
+     "code": "CA",
+     "margin": 24425,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "鋅",
+     "code": "ZN",
+     "margin": 7300,
+     "currency": "USD"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "錫",
+     "code": "SN",
+     "margin": 39075,
+     "currency": "USD"
+    }
+   ],
+   "error": null
+  },
+  {
+   "key": "us_eurex",
+   "title": "歐洲期貨交易所 EUREX",
+   "groups": [
+    {
+     "cat": "股價指數期貨類",
+     "rows": [
+      {
+       "cat": "股價指數期貨類",
+       "name": "德國指數",
+       "code": "DAX",
+       "margin": 45525,
+       "currency": "EUR"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "小型德國指數",
+       "code": "DXM",
+       "margin": 9105,
+       "currency": "EUR"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "微型德國指數",
+       "code": "DXS",
+       "margin": 1821,
+       "currency": "EUR"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "藍籌50指數",
+       "code": "FESX",
+       "margin": 4198,
+       "currency": "EUR"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "微型藍籌50指數",
+       "code": "FSXE",
+       "margin": 420,
+       "currency": "EUR"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "摩根中國NTR指數",
+       "code": "FMCH",
+       "margin": 2826,
+       "currency": "USD"
+      }
+     ]
+    },
+    {
+     "cat": "外匯債券類",
+     "rows": [
+      {
+       "cat": "外匯債券類",
+       "name": "歐元2年債",
+       "code": "FGBS",
+       "margin": 469,
+       "currency": "EUR"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "歐元5年債",
+       "code": "FGBM",
+       "margin": 1354,
+       "currency": "EUR"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "歐元10年債",
+       "code": "FGBL",
+       "margin": 2485,
+       "currency": "EUR"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "歐元30年債",
+       "code": "FGBX",
+       "margin": 4341,
+       "currency": "EUR"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "法國10年債",
+       "code": "FOAT",
+       "margin": 2249,
+       "currency": "EUR"
+      }
+     ]
+    }
+   ],
+   "rows": [
+    {
+     "cat": "股價指數期貨類",
+     "name": "德國指數",
+     "code": "DAX",
+     "margin": 45525,
+     "currency": "EUR"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "小型德國指數",
+     "code": "DXM",
+     "margin": 9105,
+     "currency": "EUR"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "微型德國指數",
+     "code": "DXS",
+     "margin": 1821,
+     "currency": "EUR"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "藍籌50指數",
+     "code": "FESX",
+     "margin": 4198,
+     "currency": "EUR"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "微型藍籌50指數",
+     "code": "FSXE",
+     "margin": 420,
+     "currency": "EUR"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "摩根中國NTR指數",
+     "code": "FMCH",
+     "margin": 2826,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "歐元2年債",
+     "code": "FGBS",
+     "margin": 469,
+     "currency": "EUR"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "歐元5年債",
+     "code": "FGBM",
+     "margin": 1354,
+     "currency": "EUR"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "歐元10年債",
+     "code": "FGBL",
+     "margin": 2485,
+     "currency": "EUR"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "歐元30年債",
+     "code": "FGBX",
+     "margin": 4341,
+     "currency": "EUR"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "法國10年債",
+     "code": "FOAT",
+     "margin": 2249,
+     "currency": "EUR"
+    }
+   ],
+   "error": null
+  },
+  {
+   "key": "us_life",
+   "title": "倫敦國際金融交易所 LIFE",
+   "groups": [
+    {
+     "cat": "股價指數期貨類",
+     "rows": [
+      {
+       "cat": "股價指數期貨類",
+       "name": "倫敦金融時報指數FTSE100",
+       "code": "FFI",
+       "margin": 6358,
+       "currency": "英鎊"
+      }
+     ]
+    },
+    {
+     "cat": "外匯債券類",
+     "rows": [
+      {
+       "cat": "外匯債券類",
+       "name": "英國長債",
+       "code": "FLG",
+       "margin": 3146,
+       "currency": "英鎊"
+      }
+     ]
+    }
+   ],
+   "rows": [
+    {
+     "cat": "股價指數期貨類",
+     "name": "倫敦金融時報指數FTSE100",
+     "code": "FFI",
+     "margin": 6358,
+     "currency": "英鎊"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "英國長債",
+     "code": "FLG",
+     "margin": 3146,
+     "currency": "英鎊"
+    }
+   ],
+   "error": null
+  },
+  {
    "key": "japan",
    "title": "日本交易所",
    "groups": [
@@ -4599,6 +5637,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-06-23 04:49 UTC",
- "generated_tw": "2026-06-23 12:49"
+ "generated_at": "2026-06-23 05:40 UTC",
+ "generated_tw": "2026-06-23 13:40"
 }
