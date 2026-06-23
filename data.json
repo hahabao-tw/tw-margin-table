@@ -3679,8 +3679,637 @@
    ],
    "update": "2026/06/22",
    "matched": 291
+  },
+  {
+   "key": "etf",
+   "title": "ETF股票期貨",
+   "kind": "stock",
+   "rows": [],
+   "update": "2026/06/22",
+   "matched": 0,
+   "search_id": "etfSearch",
+   "noresult_id": "etfNoResult"
   }
  ],
- "generated_at": "2026-06-23 02:27 UTC",
- "generated_tw": "2026-06-23 10:27"
+ "foreign_sections": [
+  {
+   "key": "us_eu",
+   "title": "美歐交易所",
+   "groups": [
+    {
+     "cat": "股價指數期貨類",
+     "rows": [
+      {
+       "cat": "股價指數期貨類",
+       "name": "小型那斯達克指數",
+       "code": "NQ",
+       "margin": 42610,
+       "currency": "USD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "微型那斯達克指數",
+       "code": "MNQ",
+       "margin": 4262,
+       "currency": "USD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "小型S&amp;P 500指數",
+       "code": "ES",
+       "margin": 27529,
+       "currency": "USD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "微型S&amp;P 500指數",
+       "code": "MES",
+       "margin": 2754,
+       "currency": "USD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "小型羅素2000",
+       "code": "RTY",
+       "margin": 12224,
+       "currency": "USD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "微型小羅素2000",
+       "code": "M2K",
+       "margin": 1223,
+       "currency": "USD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "(USD)日經225",
+       "code": "CNK",
+       "margin": 28492,
+       "currency": "USD"
+      }
+     ]
+    },
+    {
+     "cat": "外匯債券類",
+     "rows": [
+      {
+       "cat": "外匯債券類",
+       "name": "歐元",
+       "code": "EC",
+       "margin": 2640,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "迷你歐元",
+       "code": "E7",
+       "margin": 1320,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "微型歐元",
+       "code": "ECM",
+       "margin": 264,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "澳幣",
+       "code": "AD",
+       "margin": 2090,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "微型澳幣",
+       "code": "ADM",
+       "margin": 209,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "加幣",
+       "code": "CD",
+       "margin": 990,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "微型加幣",
+       "code": "CDM",
+       "margin": 99,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "日圓",
+       "code": "JY",
+       "margin": 2860,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "紐西蘭幣",
+       "code": "NE",
+       "margin": 1430,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "瑞士法郎",
+       "code": "SF",
+       "margin": 4400,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "墨西哥披索",
+       "code": "MP",
+       "margin": 1210,
+       "currency": "USD"
+      },
+      {
+       "cat": "外匯債券類",
+       "name": "英磅",
+       "code": "BP",
+       "margin": 2090,
+       "currency": "USD"
+      }
+     ]
+    },
+    {
+     "cat": "肉類產品",
+     "rows": [
+      {
+       "cat": "肉類產品",
+       "name": "活牛",
+       "code": "LC",
+       "margin": 3520,
+       "currency": "USD"
+      },
+      {
+       "cat": "肉類產品",
+       "name": "肉牛",
+       "code": "FC",
+       "margin": 6270,
+       "currency": "USD"
+      },
+      {
+       "cat": "肉類產品",
+       "name": "瘦肉豬",
+       "code": "LH",
+       "margin": 1650,
+       "currency": "USD"
+      }
+     ]
+    }
+   ],
+   "rows": [
+    {
+     "cat": "股價指數期貨類",
+     "name": "小型那斯達克指數",
+     "code": "NQ",
+     "margin": 42610,
+     "currency": "USD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "微型那斯達克指數",
+     "code": "MNQ",
+     "margin": 4262,
+     "currency": "USD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "小型S&amp;P 500指數",
+     "code": "ES",
+     "margin": 27529,
+     "currency": "USD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "微型S&amp;P 500指數",
+     "code": "MES",
+     "margin": 2754,
+     "currency": "USD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "小型羅素2000",
+     "code": "RTY",
+     "margin": 12224,
+     "currency": "USD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "微型小羅素2000",
+     "code": "M2K",
+     "margin": 1223,
+     "currency": "USD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "(USD)日經225",
+     "code": "CNK",
+     "margin": 28492,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "歐元",
+     "code": "EC",
+     "margin": 2640,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "迷你歐元",
+     "code": "E7",
+     "margin": 1320,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "微型歐元",
+     "code": "ECM",
+     "margin": 264,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "澳幣",
+     "code": "AD",
+     "margin": 2090,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "微型澳幣",
+     "code": "ADM",
+     "margin": 209,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "加幣",
+     "code": "CD",
+     "margin": 990,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "微型加幣",
+     "code": "CDM",
+     "margin": 99,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "日圓",
+     "code": "JY",
+     "margin": 2860,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "紐西蘭幣",
+     "code": "NE",
+     "margin": 1430,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "瑞士法郎",
+     "code": "SF",
+     "margin": 4400,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "墨西哥披索",
+     "code": "MP",
+     "margin": 1210,
+     "currency": "USD"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "英磅",
+     "code": "BP",
+     "margin": 2090,
+     "currency": "USD"
+    },
+    {
+     "cat": "肉類產品",
+     "name": "活牛",
+     "code": "LC",
+     "margin": 3520,
+     "currency": "USD"
+    },
+    {
+     "cat": "肉類產品",
+     "name": "肉牛",
+     "code": "FC",
+     "margin": 6270,
+     "currency": "USD"
+    },
+    {
+     "cat": "肉類產品",
+     "name": "瘦肉豬",
+     "code": "LH",
+     "margin": 1650,
+     "currency": "USD"
+    }
+   ],
+   "error": null
+  },
+  {
+   "key": "japan",
+   "title": "日本交易所",
+   "groups": [
+    {
+     "cat": "股價指數期貨類",
+     "rows": [
+      {
+       "cat": "股價指數期貨類",
+       "name": "大阪日經225",
+       "code": "JNI",
+       "margin": 5602205,
+       "currency": "JPY"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "大阪小日經225",
+       "code": "JNM",
+       "margin": 559480,
+       "currency": "JPY"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "大阪微型日經225",
+       "code": "JNU",
+       "margin": 55948,
+       "currency": "JPY"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "東證指數",
+       "code": "JTI",
+       "margin": 2532093,
+       "currency": "JPY"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "小東證指數",
+       "code": "JTM",
+       "margin": 253210,
+       "currency": "JPY"
+      }
+     ]
+    },
+    {
+     "cat": "外匯債券類",
+     "rows": [
+      {
+       "cat": "外匯債券類",
+       "name": "日本十年債",
+       "code": "JGB",
+       "margin": 1428116,
+       "currency": "JPY"
+      }
+     ]
+    }
+   ],
+   "rows": [
+    {
+     "cat": "股價指數期貨類",
+     "name": "大阪日經225",
+     "code": "JNI",
+     "margin": 5602205,
+     "currency": "JPY"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "大阪小日經225",
+     "code": "JNM",
+     "margin": 559480,
+     "currency": "JPY"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "大阪微型日經225",
+     "code": "JNU",
+     "margin": 55948,
+     "currency": "JPY"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "東證指數",
+     "code": "JTI",
+     "margin": 2532093,
+     "currency": "JPY"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "小東證指數",
+     "code": "JTM",
+     "margin": 253210,
+     "currency": "JPY"
+    },
+    {
+     "cat": "外匯債券類",
+     "name": "日本十年債",
+     "code": "JGB",
+     "margin": 1428116,
+     "currency": "JPY"
+    }
+   ],
+   "error": null
+  },
+  {
+   "key": "sgx",
+   "title": "新加坡期貨交易所 SGX",
+   "groups": [
+    {
+     "cat": "股價指數期貨類",
+     "rows": [
+      {
+       "cat": "股價指數期貨類",
+       "name": "富時台灣指數",
+       "code": "TWN",
+       "margin": 12430,
+       "currency": "USD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "微型富時台灣指數",
+       "code": "MTWN",
+       "margin": 1243,
+       "currency": "USD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "富時中國A50",
+       "code": "CN",
+       "margin": 1023,
+       "currency": "USD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "日經指數225",
+       "code": "NK",
+       "margin": 2970000,
+       "currency": "JPY"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "新加坡指數",
+       "code": "SG",
+       "margin": 2574,
+       "currency": "SGD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "富時越南30指數",
+       "code": "FVN",
+       "margin": 1254,
+       "currency": "USD"
+      }
+     ]
+    }
+   ],
+   "rows": [
+    {
+     "cat": "股價指數期貨類",
+     "name": "富時台灣指數",
+     "code": "TWN",
+     "margin": 12430,
+     "currency": "USD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "微型富時台灣指數",
+     "code": "MTWN",
+     "margin": 1243,
+     "currency": "USD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "富時中國A50",
+     "code": "CN",
+     "margin": 1023,
+     "currency": "USD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "日經指數225",
+     "code": "NK",
+     "margin": 2970000,
+     "currency": "JPY"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "新加坡指數",
+     "code": "SG",
+     "margin": 2574,
+     "currency": "SGD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "富時越南30指數",
+     "code": "FVN",
+     "margin": 1254,
+     "currency": "USD"
+    }
+   ],
+   "error": null
+  },
+  {
+   "key": "hkf",
+   "title": "香港交易所 HKF",
+   "groups": [
+    {
+     "cat": "股價指數期貨類",
+     "rows": [
+      {
+       "cat": "股價指數期貨類",
+       "name": "恒生指數",
+       "code": "HSI",
+       "margin": 113183,
+       "currency": "HKD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "小型恒生指數",
+       "code": "MHI",
+       "margin": 22636,
+       "currency": "HKD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "H股指數",
+       "code": "HHI",
+       "margin": 43491,
+       "currency": "HKD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "小型H股指數",
+       "code": "MCH",
+       "margin": 8698,
+       "currency": "HKD"
+      },
+      {
+       "cat": "股價指數期貨類",
+       "name": "恆生科技指數",
+       "code": "HTI",
+       "margin": 34353,
+       "currency": "HKD"
+      }
+     ]
+    }
+   ],
+   "rows": [
+    {
+     "cat": "股價指數期貨類",
+     "name": "恒生指數",
+     "code": "HSI",
+     "margin": 113183,
+     "currency": "HKD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "小型恒生指數",
+     "code": "MHI",
+     "margin": 22636,
+     "currency": "HKD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "H股指數",
+     "code": "HHI",
+     "margin": 43491,
+     "currency": "HKD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "小型H股指數",
+     "code": "MCH",
+     "margin": 8698,
+     "currency": "HKD"
+    },
+    {
+     "cat": "股價指數期貨類",
+     "name": "恆生科技指數",
+     "code": "HTI",
+     "margin": 34353,
+     "currency": "HKD"
+    }
+   ],
+   "error": null
+  }
+ ],
+ "generated_at": "2026-06-23 03:50 UTC",
+ "generated_tw": "2026-06-23 11:50"
 }
