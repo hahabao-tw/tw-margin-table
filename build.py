@@ -786,7 +786,7 @@ def render_foreign_section(sec):
                      '<th class="r">幣別</th>'
                      '</tr></thead><tbody>')
         for r in grp["rows"]:
-            cur_label = CURRENCY_LABEL.get(r["currency"], r["currency"])
+            cur_label = r["currency"]  # 只顯示代碼，如 USD、JPY
             parts.append(
                 f'<tr class="mrow">'
                 f'<td class="l">{esc(r["name"])}'
@@ -794,7 +794,7 @@ def render_foreign_section(sec):
                 f'<td class="r num">{r["margin"]:,}</td>'
                 f'<td class="r">'
                 f'<span class="cur-badge cur-{esc(r["currency"].lower())}">'
-                f'{esc(cur_label)}（{esc(r["currency"])}）</span></td>'
+                f'{esc(cur_label)}</span></td>'
                 f'</tr>')
         parts.append('</tbody></table></div>')
     parts.append('</div></details>')
@@ -997,14 +997,19 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     white-space:nowrap;transition:background .15s,border-color .15s;
     box-shadow:0 4px 16px rgba(0,0,0,.3);}
   .fab-item:hover{background:rgba(78,161,255,.12);border-color:var(--accent-b);}
-  .fab-btn{width:46px;height:46px;border-radius:50%;border:0;cursor:pointer;
+  @keyframes fab-pulse{
+    0%,100%{box-shadow:0 4px 20px rgba(53,224,214,.35),0 0 0 0 rgba(53,224,214,0);}
+    50%{box-shadow:0 4px 20px rgba(53,224,214,.5),0 0 0 8px rgba(53,224,214,.12);}
+  }
+  .fab-btn{width:37px;height:37px;border-radius:50%;border:0;cursor:pointer;
     background:linear-gradient(135deg,var(--accent),var(--accent-b));
-    color:#0a0e17;font-size:1.3rem;font-weight:900;
+    color:#0a0e17;font-size:1.05rem;font-weight:900;
     box-shadow:0 4px 20px rgba(53,224,214,.35);
     display:flex;align-items:center;justify-content:center;
-    transition:transform .15s,box-shadow .15s;}
-  .fab-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(53,224,214,.5);}
-  .fab-btn:active{transform:scale(.95);}
+    transition:transform .15s,box-shadow .15s;
+    animation:fab-pulse 2.5s ease-in-out infinite;}
+  .fab-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(53,224,214,.6);animation:none;}
+  .fab-btn:active{transform:scale(.92);}
 
   footer{color:var(--muted);font-size:.7rem;text-align:center;padding:16px 8px 0;line-height:1.75;}
   footer a{color:var(--accent-b);}
@@ -1072,8 +1077,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
   <footer>
     資料來源：台灣期貨交易所與華南期貨官方網站。<br>
-    資料早上 8 點與晚上 8 點自動更新；僅供參考，實際保證金以各交易所及期貨商公告為準。<br>
-    更新時間：{{GEN_TW}}（GMT+8）
+    資料早上 8 點與晚上 8 點自動更新。更新時間：{{GEN_TW}}（GMT+8）<br>
+    本資料僅供參考，實際保證金以各交易所及期貨商公告為準。
   </footer>
 </div>
 
