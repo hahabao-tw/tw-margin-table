@@ -5352,8 +5352,8 @@
    "error": null
   },
   {
-   "key": "japan",
-   "title": "日本交易所",
+   "key": "jp_ose",
+   "title": "大阪證券交易所 OSE",
    "groups": [
     {
      "cat": "股價指數期貨類",
@@ -5449,6 +5449,347 @@
      "name": "日本十年債",
      "code": "JGB",
      "margin": 1428116,
+     "currency": "JPY"
+    }
+   ],
+   "error": null
+  },
+  {
+   "key": "jp_tocom",
+   "title": "東工交易所 TOCOM",
+   "groups": [
+    {
+     "cat": "農產品類",
+     "rows": [
+      {
+       "cat": "農產品類",
+       "name": "橡膠",
+       "code": "JRU",
+       "margin": 74000,
+       "currency": "JPY"
+      },
+      {
+       "cat": "農產品類",
+       "name": "黃豆",
+       "code": "JAS",
+       "margin": 112000,
+       "currency": "JPY"
+      },
+      {
+       "cat": "農產品類",
+       "name": "玉米",
+       "code": "JCR",
+       "margin": 78000,
+       "currency": "JPY"
+      },
+      {
+       "cat": "農產品類",
+       "name": "紅小豆",
+       "code": "JRB",
+       "margin": 40000,
+       "currency": "JPY"
+      }
+     ]
+    },
+    {
+     "cat": "金屬能源類",
+     "rows": [
+      {
+       "cat": "金屬能源類",
+       "name": "黃金",
+       "code": "JAU",
+       "margin": 2008000,
+       "currency": "JPY"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "小黃金",
+       "code": "JAM",
+       "margin": 200800,
+       "currency": "JPY"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "白金",
+       "code": "JPL",
+       "margin": 616000,
+       "currency": "JPY"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "小白金",
+       "code": "JPM",
+       "margin": 123200,
+       "currency": "JPY"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "鈀金",
+       "code": "JPA",
+       "margin": 1920000,
+       "currency": "JPY"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "白銀",
+       "code": "JSV",
+       "margin": 1371000,
+       "currency": "JPY"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "原油",
+       "code": "JCO",
+       "margin": 591500,
+       "currency": "JPY"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "燃油",
+       "code": "JKE",
+       "margin": 537000,
+       "currency": "JPY"
+      },
+      {
+       "cat": "金屬能源類",
+       "name": "汽油",
+       "code": "JGL",
+       "margin": 357500,
+       "currency": "JPY"
+      }
+     ]
+    }
+   ],
+   "rows": [
+    {
+     "cat": "農產品類",
+     "name": "橡膠",
+     "code": "JRU",
+     "margin": 74000,
+     "currency": "JPY"
+    },
+    {
+     "cat": "農產品類",
+     "name": "黃豆",
+     "code": "JAS",
+     "margin": 112000,
+     "currency": "JPY"
+    },
+    {
+     "cat": "農產品類",
+     "name": "玉米",
+     "code": "JCR",
+     "margin": 78000,
+     "currency": "JPY"
+    },
+    {
+     "cat": "農產品類",
+     "name": "紅小豆",
+     "code": "JRB",
+     "margin": 40000,
+     "currency": "JPY"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "黃金",
+     "code": "JAU",
+     "margin": 2008000,
+     "currency": "JPY"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "小黃金",
+     "code": "JAM",
+     "margin": 200800,
+     "currency": "JPY"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "白金",
+     "code": "JPL",
+     "margin": 616000,
+     "currency": "JPY"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "小白金",
+     "code": "JPM",
+     "margin": 123200,
+     "currency": "JPY"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "鈀金",
+     "code": "JPA",
+     "margin": 1920000,
+     "currency": "JPY"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "白銀",
+     "code": "JSV",
+     "margin": 1371000,
+     "currency": "JPY"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "原油",
+     "code": "JCO",
+     "margin": 591500,
+     "currency": "JPY"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "燃油",
+     "code": "JKE",
+     "margin": 537000,
+     "currency": "JPY"
+    },
+    {
+     "cat": "金屬能源類",
+     "name": "汽油",
+     "code": "JGL",
+     "margin": 357500,
+     "currency": "JPY"
+    }
+   ],
+   "error": null
+  },
+  {
+   "key": "jp_tfx",
+   "title": "日本東京金融交易所 TFX",
+   "groups": [
+    {
+     "cat": "匯率期貨類",
+     "rows": [
+      {
+       "cat": "匯率期貨類",
+       "name": "里拉天天期貨",
+       "code": "JT1",
+       "margin": 3000,
+       "currency": "JPY"
+      },
+      {
+       "cat": "匯率期貨類",
+       "name": "波蘭幣天天期貨",
+       "code": "JP1",
+       "margin": 17450,
+       "currency": "JPY"
+      },
+      {
+       "cat": "匯率期貨類",
+       "name": "南非幣天天期貨",
+       "code": "JS1",
+       "margin": 39010,
+       "currency": "JPY"
+      },
+      {
+       "cat": "匯率期貨類",
+       "name": "美元天天期貨",
+       "code": "XJ1",
+       "margin": 64110,
+       "currency": "JPY"
+      },
+      {
+       "cat": "匯率期貨類",
+       "name": "英鎊天天期貨",
+       "code": "JB1",
+       "margin": 85790,
+       "currency": "JPY"
+      },
+      {
+       "cat": "匯率期貨類",
+       "name": "紐幣天天期貨",
+       "code": "JN1",
+       "margin": 37300,
+       "currency": "JPY"
+      },
+      {
+       "cat": "匯率期貨類",
+       "name": "歐元天天期貨",
+       "code": "JE1",
+       "margin": 74060,
+       "currency": "JPY"
+      },
+      {
+       "cat": "匯率期貨類",
+       "name": "加幣天天期貨",
+       "code": "JC1",
+       "margin": 45930,
+       "currency": "JPY"
+      },
+      {
+       "cat": "匯率期貨類",
+       "name": "澳幣天天期貨",
+       "code": "JA1",
+       "margin": 45090,
+       "currency": "JPY"
+      }
+     ]
+    }
+   ],
+   "rows": [
+    {
+     "cat": "匯率期貨類",
+     "name": "里拉天天期貨",
+     "code": "JT1",
+     "margin": 3000,
+     "currency": "JPY"
+    },
+    {
+     "cat": "匯率期貨類",
+     "name": "波蘭幣天天期貨",
+     "code": "JP1",
+     "margin": 17450,
+     "currency": "JPY"
+    },
+    {
+     "cat": "匯率期貨類",
+     "name": "南非幣天天期貨",
+     "code": "JS1",
+     "margin": 39010,
+     "currency": "JPY"
+    },
+    {
+     "cat": "匯率期貨類",
+     "name": "美元天天期貨",
+     "code": "XJ1",
+     "margin": 64110,
+     "currency": "JPY"
+    },
+    {
+     "cat": "匯率期貨類",
+     "name": "英鎊天天期貨",
+     "code": "JB1",
+     "margin": 85790,
+     "currency": "JPY"
+    },
+    {
+     "cat": "匯率期貨類",
+     "name": "紐幣天天期貨",
+     "code": "JN1",
+     "margin": 37300,
+     "currency": "JPY"
+    },
+    {
+     "cat": "匯率期貨類",
+     "name": "歐元天天期貨",
+     "code": "JE1",
+     "margin": 74060,
+     "currency": "JPY"
+    },
+    {
+     "cat": "匯率期貨類",
+     "name": "加幣天天期貨",
+     "code": "JC1",
+     "margin": 45930,
+     "currency": "JPY"
+    },
+    {
+     "cat": "匯率期貨類",
+     "name": "澳幣天天期貨",
+     "code": "JA1",
+     "margin": 45090,
      "currency": "JPY"
     }
    ],
@@ -5637,6 +5978,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-06-23 05:40 UTC",
- "generated_tw": "2026-06-23 13:40"
+ "generated_at": "2026-06-23 05:54 UTC",
+ "generated_tw": "2026-06-23 13:54"
 }
