@@ -36,16 +36,34 @@ MARGIN_SOURCES = [
 ]
 
 # 國外期貨保證金頁面（華南期貨官方網站 HTML 表格）
-FOREIGN_SOURCES = [
-    {"key": "us_eu",  "title": "美歐交易所",
-     "url": "https://ft.entrust.com.tw/entrustFutures/productMargin/margin.do?area_id=6045532e8e000000198ed97cfa994f09"},
-    {"key": "japan",  "title": "日本交易所",
-     "url": "https://ft.entrust.com.tw/entrustFutures/productMargin/margin.do?area_id=604f447ccb000000bc21641ef794eae8"},
-    {"key": "sgx",    "title": "新加坡期貨交易所 SGX",
-     "url": "https://ft.entrust.com.tw/entrustFutures/productMargin/margin.do?area_id=604f4550500000006688bebcfb52416a"},
-    {"key": "hkf",    "title": "香港交易所 HKF",
-     "url": "https://ft.entrust.com.tw/entrustFutures/productMargin/margin.do?area_id=604f45b55f0000001d713878698680a8"},
+# 美歐交易所底下再細分 8 個交易所（用 exchange_id 參數切換）
+_US_EU_AREA = "6045532e8e000000198ed97cfa994f09"
+_US_EU_EXCHANGES = [
+    ("us_cme",   "芝加哥商品交易所 CME",    "60a731daf000000016b2ed0bfbfd20ec"),
+    ("us_cbot",  "芝加哥期貨交易所 CBOT",   "60a7353e0900000047648366b4a664cf"),
+    ("us_nybot", "紐約期貨交易所 NYBOT",    "60a7379cbd000000778a9bc0d84d06af"),
+    ("us_nym",   "紐約商業交易所 NYM",      "61f730abb6000000faee9e721d85c1fc"),
+    ("us_cfe",   "美國CBOE期貨交易所 CFE",  "60a73665e20000004799e6f12d98a157"),
+    ("us_lme",   "英國倫敦金屬交易所 LME",  "61f733b9ec0000004585baf2602b56b5"),
+    ("us_eurex", "歐洲期貨交易所 EUREX",    "60a73a10240000006cef3f9b6d3f4adc"),
+    ("us_life",  "倫敦國際金融交易所 LIFE", "60a738c52e0000002653c044bdddd706"),
 ]
+
+_MARGIN_BASE = "https://ft.entrust.com.tw/entrustFutures/productMargin/margin.do"
+
+FOREIGN_SOURCES = (
+    [{"key": k, "title": t,
+      "url": f"{_MARGIN_BASE}?area_id={_US_EU_AREA}&exchange_id={x}&category_id="}
+     for (k, t, x) in _US_EU_EXCHANGES]
+    + [
+        {"key": "japan", "title": "日本交易所",
+         "url": f"{_MARGIN_BASE}?area_id=604f447ccb000000bc21641ef794eae8"},
+        {"key": "sgx", "title": "新加坡期貨交易所 SGX",
+         "url": f"{_MARGIN_BASE}?area_id=604f4550500000006688bebcfb52416a"},
+        {"key": "hkf", "title": "香港交易所 HKF",
+         "url": f"{_MARGIN_BASE}?area_id=604f45b55f0000001d713878698680a8"},
+    ]
+)
 
 # 國外期貨商品名稱覆寫（key = 原始名稱, value = 顯示名稱）
 FOREIGN_NAME_OVERRIDE = {
@@ -486,10 +504,13 @@ def build_foreign_dataset():
         "Accept": "text/html,application/xhtml+xml",
         "Accept-Language": "zh-TW,zh;q=0.9",
     }
+    seen_signatures = {}
     for src in FOREIGN_SOURCES:
         print(f"抓取國外 {src['title']} …", file=sys.stderr)
+        req_headers = dict(headers)
+        req_headers["Referer"] = src["url"]
         try:
-            raw = fetch_bytes(src["url"], headers=headers)
+            raw = fetch_bytes(src["url"], headers=req_headers)
             text = decode_text(raw)
         except Exception as e:  # noqa: BLE001
             print(f"  [error] {src['title']} 抓取失敗：{e}", file=sys.stderr)
@@ -522,6 +543,16 @@ def build_foreign_dataset():
             rows.append({"cat": cat, "name": name, "code": code,
                          "margin": int(orig), "currency": cur})
 
+        # 防呆：偵測美歐子交易所是否回傳「完全相同」的資料
+        # （代表 exchange_id 參數未生效，伺服器回了預設 CME 頁）
+        sig = tuple(sorted((r["code"], r["margin"]) for r in rows))
+        if src["key"].startswith("us_") and sig in seen_signatures and rows:
+            print(f"  [warn] {src['title']} 與 {seen_signatures[sig]} 資料相同，"
+                  f"exchange_id 可能未生效；略過避免重複。", file=sys.stderr)
+            continue
+        if rows:
+            seen_signatures[sig] = src["title"]
+
         # 按商品分類分組
         groups = {}
         group_order = []
@@ -533,6 +564,10 @@ def build_foreign_dataset():
             groups[g].append(r)
 
         print(f"  {src['title']}：{len(rows)} 筆", file=sys.stderr)
+        # 美歐子交易所若無資料則不顯示空白區塊；日/星/港即使空也保留
+        if not rows and src["key"].startswith("us_"):
+            print(f"  {src['title']} 無資料，略過。", file=sys.stderr)
+            continue
         sections.append({"key": src["key"], "title": src["title"],
                          "groups": [{"cat": g, "rows": groups[g]} for g in group_order],
                          "rows": rows, "error": None})
