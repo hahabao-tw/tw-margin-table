@@ -49,15 +49,23 @@ _US_EU_EXCHANGES = [
     ("us_life",  "倫敦國際金融交易所 LIFE", "60a738c52e0000002653c044bdddd706"),
 ]
 
+_JP_AREA = "604f447ccb000000bc21641ef794eae8"
+_JP_EXCHANGES = [
+    ("jp_ose",   "大阪證券交易所 OSE",        "604f44abf4000000a94f2f67eaa5931b"),
+    ("jp_tocom", "東工交易所 TOCOM",          "604f44ce9300000065b85128198b4caa"),
+    ("jp_tfx",   "日本東京金融交易所 TFX",    "604f44fcb70000006ae45d56d15df522"),
+]
+
 _MARGIN_BASE = "https://ft.entrust.com.tw/entrustFutures/productMargin/margin.do"
 
 FOREIGN_SOURCES = (
     [{"key": k, "title": t,
       "url": f"{_MARGIN_BASE}?area_id={_US_EU_AREA}&exchange_id={x}&category_id="}
      for (k, t, x) in _US_EU_EXCHANGES]
+    + [{"key": k, "title": t,
+        "url": f"{_MARGIN_BASE}?area_id={_JP_AREA}&exchange_id={x}&category_id="}
+       for (k, t, x) in _JP_EXCHANGES]
     + [
-        {"key": "japan", "title": "日本交易所",
-         "url": f"{_MARGIN_BASE}?area_id=604f447ccb000000bc21641ef794eae8"},
         {"key": "sgx", "title": "新加坡期貨交易所 SGX",
          "url": f"{_MARGIN_BASE}?area_id=604f4550500000006688bebcfb52416a"},
         {"key": "hkf", "title": "香港交易所 HKF",
@@ -543,10 +551,11 @@ def build_foreign_dataset():
             rows.append({"cat": cat, "name": name, "code": code,
                          "margin": int(orig), "currency": cur})
 
-        # 防呆：偵測美歐子交易所是否回傳「完全相同」的資料
-        # （代表 exchange_id 參數未生效，伺服器回了預設 CME 頁）
+        # 防呆：偵測子交易所是否回傳「完全相同」的資料
+        # （代表 exchange_id 參數未生效，伺服器回了預設頁）
+        is_sub = src["key"].startswith("us_") or src["key"].startswith("jp_")
         sig = tuple(sorted((r["code"], r["margin"]) for r in rows))
-        if src["key"].startswith("us_") and sig in seen_signatures and rows:
+        if is_sub and sig in seen_signatures and rows:
             print(f"  [warn] {src['title']} 與 {seen_signatures[sig]} 資料相同，"
                   f"exchange_id 可能未生效；略過避免重複。", file=sys.stderr)
             continue
@@ -564,8 +573,8 @@ def build_foreign_dataset():
             groups[g].append(r)
 
         print(f"  {src['title']}：{len(rows)} 筆", file=sys.stderr)
-        # 美歐子交易所若無資料則不顯示空白區塊；日/星/港即使空也保留
-        if not rows and src["key"].startswith("us_"):
+        # 子交易所若無資料則不顯示空白區塊；SGX/HKF 即使空也保留
+        if not rows and is_sub:
             print(f"  {src['title']} 無資料，略過。", file=sys.stderr)
             continue
         sections.append({"key": src["key"], "title": src["title"],
@@ -778,16 +787,18 @@ def render_html(ds):
     foreign_html = "\n".join(foreign_body)
 
     # 浮動快捷選單項目（國內）
-    domestic_nav = []
+    domestic_nav = ['<div class="fab-grid">']
     for sec in ds["sections"]:
         sid = f'cat-{sec["key"]}'
         domestic_nav.append(f'<button class="fab-item" data-target="{sid}">{esc(sec["title"])}</button>')
+    domestic_nav.append('</div>')
 
     # 浮動快捷選單項目（國外）
-    foreign_nav = []
+    foreign_nav = ['<div class="fab-grid">']
     for sec in ds.get("foreign_sections", []):
         sid = f'fcat-{sec["key"]}'
         foreign_nav.append(f'<button class="fab-item" data-target="{sid}">{esc(sec["title"])}</button>')
+    foreign_nav.append('</div>')
 
     return (HTML_TEMPLATE
             .replace("{{DOMESTIC_SECTIONS}}", domestic_html)
@@ -1024,13 +1035,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
   /* ---- 浮動快捷按鈕 ---- */
   .fab-wrap{position:fixed;bottom:24px;right:16px;z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
-  .fab-menu{display:none;flex-direction:column;align-items:flex-end;gap:6px;margin-bottom:4px;}
+  .fab-menu{display:none;flex-direction:column;align-items:flex-end;gap:6px;margin-bottom:4px;
+    max-height:70vh;overflow-y:auto;padding:2px;}
   .fab-menu.open{display:flex;}
-  .fab-section-label{font-size:.65rem;color:var(--muted);text-align:right;padding:0 4px 2px;letter-spacing:.3px;}
+  .fab-section-label{font-size:.65rem;color:var(--muted);text-align:right;padding:2px 4px 2px;letter-spacing:.3px;width:100%;}
+  .fab-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;}
   .fab-item{border:1px solid var(--line2);background:var(--card);color:var(--fg);
-    border-radius:10px;padding:6px 12px;font-size:.8rem;font-weight:600;cursor:pointer;
-    white-space:nowrap;transition:background .15s,border-color .15s;
-    box-shadow:0 4px 16px rgba(0,0,0,.3);}
+    border-radius:10px;padding:6px 10px;font-size:.74rem;font-weight:600;cursor:pointer;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .15s,border-color .15s;
+    box-shadow:0 4px 16px rgba(0,0,0,.3);text-align:center;}
   .fab-item:hover{background:rgba(78,161,255,.12);border-color:var(--accent-b);}
   @keyframes fab-pulse{
     0%,100%{box-shadow:0 4px 20px rgba(53,224,214,.35),0 0 0 0 rgba(53,224,214,0);}
