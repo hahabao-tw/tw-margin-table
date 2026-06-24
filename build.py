@@ -952,6 +952,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     flex:0 0 26px;transition:background .15s,transform .1s;line-height:1;}
   .stepper:hover{background:rgba(78,161,255,.28);}
   .stepper:active{transform:scale(.9);}
+  .vcounter{display:inline-block;margin-top:8px;font-size:.7rem;color:var(--muted);
+    padding:3px 10px;border:1px solid var(--line);border-radius:12px;background:var(--card2);
+    font-family:var(--mono);letter-spacing:.3px;}
   .hint{color:var(--muted);font-size:.73rem;margin:6px 2px 0;line-height:1.45;}
 
   /* 分頁內容 */
@@ -1147,7 +1150,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   <footer>
     資料來源：台灣期貨交易所與華南期貨官方網站。<br>
     本網頁於每日早上與晚上各更新 1 次。<br>
+<<<<<<< HEAD
     本資料僅供參考，實際保證金以各交易所及期貨商公告為準。
+=======
+    本資料僅供參考，實際保證金以各交易所及期貨商公告為準。<br>
+    <span class="vcounter" id="vcounter" title="累計瀏覽次數">👁 ...</span>
+>>>>>>> ed1e1a8e3e1e4b5982a3fa59d04b952251caba7b
   </footer>
 </div>
 
@@ -1186,6 +1194,19 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   document.getElementById('fsUp').addEventListener('click',function(){if(idx<sizes.length-1){idx++;applyFs();}});
   document.getElementById('fsDown').addEventListener('click',function(){if(idx>0){idx--;applyFs();}});
   document.getElementById('fsReset').addEventListener('click',function(){idx=5;applyFs();});
+<<<<<<< HEAD
+=======
+
+  /* ---- 訪客計數器（countapi.xyz） ---- */
+  (function(){
+    var el=document.getElementById('vcounter');
+    if(!el)return;
+    fetch('https://api.countapi.xyz/hit/hahabao-tw.github.io/tw-margin-table')
+      .then(function(r){return r.json();})
+      .then(function(d){if(d&&d.value)el.textContent='👁 '+d.value.toLocaleString();})
+      .catch(function(){el.style.display='none';});
+  })();
+>>>>>>> ed1e1a8e3e1e4b5982a3fa59d04b952251caba7b
 
   /* ---- 分頁切換 ---- */
   var tabs=Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
