@@ -833,8 +833,11 @@ def render_foreign_section(sec):
                      '</tr></thead><tbody>')
         for r in grp["rows"]:
             cur_label = r["currency"]  # 只顯示代碼，如 USD、JPY
+            search_key = f'{r["name"]} {r["code"]}'.lower()
             parts.append(
-                f'<tr class="mrow">'
+                f'<tr class="mrow frow" '
+                f'data-search="{esc(search_key)}" '
+                f'data-margin="{r["margin"]}">'
                 f'<td class="l">{esc(r["name"])}'
                 f'<span class="ucode">{esc(r["code"])}</span></td>'
                 f'<td class="r num">{r["margin"]:,}</td>'
@@ -857,7 +860,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <title>華南期貨商品保證金一覽</title>
 <style>
   :root{
-    --fs:14px;
+    --fs:16px;
     --bg:#0a0e17; --bg2:#0e1422;
     --card:#121a2b; --card2:#0f1626;
     --line:#23304a; --line2:#2e3e5e;
@@ -995,6 +998,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   .searchbar input::placeholder{color:var(--muted);}
   .sclear{border:0;background:transparent;color:var(--muted);font-size:1.1rem;line-height:1;cursor:pointer;padding:0 3px;visibility:hidden;}
   .searchbar.has-q .sclear{visibility:visible;}
+  /* 國外全域搜尋列：分頁頂端 */
+  .fsearch{margin:0 0 12px;position:sticky;top:0;z-index:5;}
+  .fsearch-hint{color:var(--accent-b);font-size:.75rem;margin:0 2px 12px;font-weight:600;}
 
   /* 表格 */
   .tw{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
@@ -1038,13 +1044,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   .fab-menu{display:none;flex-direction:column;align-items:flex-end;gap:6px;margin-bottom:4px;
     max-height:70vh;overflow-y:auto;padding:2px;}
   .fab-menu.open{display:flex;}
-  .fab-section-label{font-size:.65rem;color:var(--muted);text-align:right;padding:2px 4px 2px;letter-spacing:.3px;width:100%;}
-  .fab-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;}
-  .fab-item{border:1px solid var(--line2);background:var(--card);color:var(--fg);
-    border-radius:10px;padding:6px 10px;font-size:.74rem;font-weight:600;cursor:pointer;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .15s,border-color .15s;
-    box-shadow:0 4px 16px rgba(0,0,0,.3);text-align:center;}
-  .fab-item:hover{background:rgba(78,161,255,.12);border-color:var(--accent-b);}
+  .fab-section-label{font-size:.65rem;color:var(--accent);text-align:right;padding:2px 4px 2px;
+    letter-spacing:.4px;width:100%;font-weight:700;text-transform:uppercase;}
+  .fab-grid{display:flex;flex-direction:column;gap:5px;width:100%;}
+  .fab-item{border:1px solid var(--accent-b);background:rgba(14,22,38,.92);color:var(--fg);
+    border-radius:10px;padding:7px 14px;font-size:.8rem;font-weight:600;cursor:pointer;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .15s,border-color .15s,color .15s;
+    box-shadow:0 4px 16px rgba(0,0,0,.45);text-align:left;backdrop-filter:blur(8px);}
+  .fab-item:hover{background:rgba(78,161,255,.25);border-color:var(--accent);color:var(--accent);}
+  @media(prefers-color-scheme:light){
+    .fab-item{background:rgba(255,255,255,.96);color:var(--fg);border-color:var(--accent-b);}
+    .fab-item:hover{background:rgba(47,127,240,.12);}
+  }
   @keyframes fab-pulse{
     0%,100%{box-shadow:0 4px 20px rgba(53,224,214,.35),0 0 0 0 rgba(53,224,214,0);}
     50%{box-shadow:0 4px 20px rgba(53,224,214,.5),0 0 0 8px rgba(53,224,214,.12);}
@@ -1077,6 +1088,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         </svg>
         <span class="ttl">華南期貨商品保證金一覽</span>
       </h1>
+      <!-- 字級按鈕：固定在 header 右側，兩個 tab 都可用 -->
+      <div class="fsgroup" role="group" aria-label="字級調整" style="margin-left:auto;">
+        <button class="fsbtn" id="fsDown" aria-label="縮小字級">A−</button>
+        <button class="fsbtn mid" id="fsReset" aria-label="預設字級">A</button>
+        <button class="fsbtn" id="fsUp" aria-label="放大字級">A＋</button>
+      </div>
       <nav class="social" aria-label="社群">
         <a href="https://www.instagram.com/f1_futures/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1097,11 +1114,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       <button class="tab-btn"        role="tab" aria-selected="false" data-tab="foreign" >🌐 國外期貨</button>
     </div>
     <div id="domestic-controls" class="controls">
-      <div class="fsgroup" role="group" aria-label="字級調整">
-        <button class="fsbtn" id="fsDown" aria-label="縮小字級">A−</button>
-        <button class="fsbtn mid" id="fsReset" aria-label="預設字級">A</button>
-        <button class="fsbtn" id="fsUp" aria-label="放大字級">A＋</button>
-      </div>
       <div class="calc">
         <label for="avail">可用保證金</label>
         <button class="stepper" id="stepDown" aria-label="減少十萬">−</button>
@@ -1120,12 +1132,21 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
   <!-- 國外期貨 -->
   <div class="tab-panel" id="panel-foreign">
+    <div class="searchbar fsearch">
+      <svg class="sicon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+      <input id="foreignSearch" type="search" inputmode="search" autocomplete="off"
+             placeholder="搜尋商品名稱／代號，或輸入數字篩選保證金上限（例：黃金、JAU、50000）" />
+      <button type="button" id="foreignClear" class="sclear" aria-label="清除搜尋">×</button>
+    </div>
+    <p class="fsearch-hint" id="foreignSearchHint" hidden></p>
     {{FOREIGN_SECTIONS}}
   </div>
 
   <footer>
     資料來源：台灣期貨交易所與華南期貨官方網站。<br>
-    資料早上 8 點與晚上 8 點自動更新。更新時間：{{GEN_TW}}（GMT+8）<br>
+    本網頁於每日早上與晚上各更新 1 次。<br>
     本資料僅供參考，實際保證金以各交易所及期貨商公告為準。
   </footer>
 </div>
@@ -1160,11 +1181,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   var root=document.documentElement;
 
   /* ---- 字級 ---- */
-  var sizes=[11,12,13,14,15,16,18,20],idx=3;
+  var sizes=[11,12,13,14,15,16,18,20],idx=5; // 預設 16px
   function applyFs(){root.style.setProperty('--fs',sizes[idx]+'px');}
   document.getElementById('fsUp').addEventListener('click',function(){if(idx<sizes.length-1){idx++;applyFs();}});
   document.getElementById('fsDown').addEventListener('click',function(){if(idx>0){idx--;applyFs();}});
-  document.getElementById('fsReset').addEventListener('click',function(){idx=3;applyFs();});
+  document.getElementById('fsReset').addEventListener('click',function(){idx=5;applyFs();});
 
   /* ---- 分頁切換 ---- */
   var tabs=Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
@@ -1264,6 +1285,74 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   }
   initSearch('stockSearch','stockClear','stockNoResult','#cat-stock tr.srow');
   initSearch('etfSearch','etfClear','etfNoResult','#cat-etf tr.srow');
+
+  /* ---- 國外全域搜尋（文字搜商品 / 數字搜保證金上限）---- */
+  (function(){
+    var fs=document.getElementById('foreignSearch');
+    if(!fs)return;
+    var clr=document.getElementById('foreignClear');
+    var bar=fs.closest('.searchbar');
+    var hint=document.getElementById('foreignSearchHint');
+    var frows=Array.prototype.slice.call(document.querySelectorAll('tr.frow'));
+    var fdetails=Array.prototype.slice.call(document.querySelectorAll('#panel-foreign details.cat'));
+    function run(){
+      var q=(fs.value||'').trim();
+      bar.classList.toggle('has-q',q.length>0);
+      // 判斷是否為純數字（可含逗號）
+      var numQ=q.replace(/,/g,'');
+      var isNum=q!==''&&/^[0-9]+$/.test(numQ);
+      var threshold=isNum?parseInt(numQ,10):null;
+      var lq=q.toLowerCase();
+      var shown=0;
+      for(var i=0;i<frows.length;i++){
+        var tr=frows[i];
+        var hit;
+        if(q===''){
+          hit=true;
+        }else if(isNum){
+          var m=parseFloat(tr.getAttribute('data-margin'));
+          hit=(m<=threshold);   // 列出比輸入數字「少」的保證金
+        }else{
+          var key=tr.getAttribute('data-search')||'';
+          hit=key.indexOf(lq)!==-1;
+        }
+        tr.style.display=hit?'':'none';
+        if(hit)shown++;
+      }
+      // 有搜尋時自動展開所有國外交易所，方便看到結果
+      if(q!==''){fdetails.forEach(function(d){if(!d.open)d.open=true;});}
+      // 隱藏沒有可見列的「分類表格 + 其標題」
+      var tables=document.querySelectorAll('#panel-foreign table');
+      for(var t=0;t<tables.length;t++){
+        var tbl=tables[t];
+        var vis=tbl.querySelectorAll('tr.frow:not([style*="display: none"])').length;
+        var wrap=tbl.closest('.tw');
+        var label=wrap?wrap.previousElementSibling:null;
+        var hideGrp=(q!==''&&vis===0);
+        if(wrap)wrap.style.display=hideGrp?'none':'';
+        if(label&&label.classList.contains('grp-label'))label.style.display=hideGrp?'none':'';
+      }
+      // 隱藏完全沒有結果的交易所區塊
+      fdetails.forEach(function(d){
+        var visible=d.querySelectorAll('tr.frow:not([style*="display: none"])').length;
+        d.style.display=(q!==''&&visible===0)?'none':'';
+      });
+      // 提示文字
+      if(hint){
+        if(isNum){
+          hint.hidden=false;
+          hint.textContent='顯示原始保證金 ≤ '+threshold.toLocaleString()+' 的商品，共 '+shown+' 項';
+        }else if(q!==''){
+          hint.hidden=false;
+          hint.textContent='找到 '+shown+' 項商品';
+        }else{
+          hint.hidden=true;
+        }
+      }
+    }
+    fs.addEventListener('input',run);
+    if(clr){clr.addEventListener('click',function(){fs.value='';run();fs.focus();});}
+  })();
   /* ---- 浮動快捷按鈕 ---- */
   var fabBtn=document.getElementById('fabBtn');
   var fabMenu=document.getElementById('fabMenu');
