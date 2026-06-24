@@ -120,15 +120,25 @@ ENCODINGS = ["utf-8-sig", "big5", "cp950", "utf-8"]
 # ---------------------------------------------------------------------------
 
 def fetch_bytes(url, headers=None, retries=3, timeout=30):
-    """抓取網頁原始 bytes，含簡單重試。"""
+    """抓取網頁原始 bytes，含簡單重試。
+    遇到 SSL 錯誤時自動改用不驗證憑證的方式重試（應對 TAIFEX 等伺服器的 SSL 問題）。
+    """
+    import ssl
     last_err = None
     h = dict(COMMON_HEADERS)
     if headers:
         h.update(headers)
+
+    # 先嘗試正常 SSL，失敗後用不驗證憑證的 context 再試一次
+    ssl_contexts = [None, ssl.create_default_context()]
+    ssl_contexts[1].check_hostname = False
+    ssl_contexts[1].verify_mode = ssl.CERT_NONE
+
     for attempt in range(1, retries + 1):
+        ctx = ssl_contexts[1] if attempt > 1 else ssl_contexts[0]
         try:
             req = urllib.request.Request(url, headers=h)
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
+            with urllib.request.urlopen(req, timeout=timeout, context=ctx) as resp:
                 return resp.read()
         except Exception as e:  # noqa: BLE001
             last_err = e
@@ -952,9 +962,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     flex:0 0 26px;transition:background .15s,transform .1s;line-height:1;}
   .stepper:hover{background:rgba(78,161,255,.28);}
   .stepper:active{transform:scale(.9);}
-  .vcounter{display:inline-block;margin-top:8px;font-size:.7rem;color:var(--muted);
-    padding:3px 10px;border:1px solid var(--line);border-radius:12px;background:var(--card2);
-    font-family:var(--mono);letter-spacing:.3px;}
   .hint{color:var(--muted);font-size:.73rem;margin:6px 2px 0;line-height:1.45;}
 
   /* 分頁內容 */
@@ -1150,12 +1157,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   <footer>
     資料來源：台灣期貨交易所與華南期貨官方網站。<br>
     本網頁於每日早上與晚上各更新 1 次。<br>
-<<<<<<< HEAD
     本資料僅供參考，實際保證金以各交易所及期貨商公告為準。
-=======
-    本資料僅供參考，實際保證金以各交易所及期貨商公告為準。<br>
-    <span class="vcounter" id="vcounter" title="累計瀏覽次數">👁 ...</span>
->>>>>>> ed1e1a8e3e1e4b5982a3fa59d04b952251caba7b
   </footer>
 </div>
 
@@ -1194,19 +1196,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   document.getElementById('fsUp').addEventListener('click',function(){if(idx<sizes.length-1){idx++;applyFs();}});
   document.getElementById('fsDown').addEventListener('click',function(){if(idx>0){idx--;applyFs();}});
   document.getElementById('fsReset').addEventListener('click',function(){idx=5;applyFs();});
-<<<<<<< HEAD
-=======
-
-  /* ---- 訪客計數器（countapi.xyz） ---- */
-  (function(){
-    var el=document.getElementById('vcounter');
-    if(!el)return;
-    fetch('https://api.countapi.xyz/hit/hahabao-tw.github.io/tw-margin-table')
-      .then(function(r){return r.json();})
-      .then(function(d){if(d&&d.value)el.textContent='👁 '+d.value.toLocaleString();})
-      .catch(function(){el.style.display='none';});
-  })();
->>>>>>> ed1e1a8e3e1e4b5982a3fa59d04b952251caba7b
 
   /* ---- 分頁切換 ---- */
   var tabs=Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
