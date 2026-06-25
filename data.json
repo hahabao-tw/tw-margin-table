@@ -356,12 +356,12 @@
      "code": "CAF",
      "ucode": "1303",
      "name": "南亞期貨",
-     "ratio": 0.162,
+     "ratio": 0.243,
      "kind": "stock",
      "mult": 2000,
      "price": 163.0,
      "volume": 11967,
-     "margin": 52812,
+     "margin": 79218,
      "currency": "TWD"
     },
     {
@@ -620,12 +620,12 @@
      "code": "HBF",
      "ucode": "2492",
      "name": "華新科期貨",
-     "ratio": 0.162,
+     "ratio": 0.324,
      "kind": "stock",
      "mult": 2000,
      "price": 594.0,
      "volume": 3756,
-     "margin": 192456,
+     "margin": 384912,
      "currency": "TWD"
     },
     {
@@ -3677,7 +3677,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/06/23",
+   "update": "2026/06/25",
    "matched": 290
   },
   {
@@ -3974,7 +3974,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/06/23",
+   "update": "2026/06/25",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -5978,6 +5978,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-06-25 02:30 UTC",
- "generated_tw": "2026-06-25 10:30"
+ "generated_at": "2026-06-25 14:03 UTC",
+ "generated_tw": "2026-06-25 22:03"
 }
