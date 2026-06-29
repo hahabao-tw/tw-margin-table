@@ -680,12 +680,12 @@
      "code": "GYF",
      "ucode": "2481",
      "name": "強茂期貨",
-     "ratio": 0.162,
+     "ratio": 0.243,
      "kind": "stock",
      "mult": 2000,
      "price": 175.5,
      "volume": 3931,
-     "margin": 56862,
+     "margin": 85293,
      "currency": "TWD"
     },
     {
@@ -824,12 +824,12 @@
      "code": "PEF",
      "ucode": "5425",
      "name": "台半期貨",
-     "ratio": 0.162,
+     "ratio": 0.243,
      "kind": "stock",
      "mult": 2000,
      "price": 115.5,
      "volume": 2456,
-     "margin": 37422,
+     "margin": 56133,
      "currency": "TWD"
     },
     {
@@ -3677,7 +3677,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/06/25",
+   "update": "2026/06/29",
    "matched": 290
   },
   {
@@ -3974,7 +3974,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/06/25",
+   "update": "2026/06/29",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -5978,6 +5978,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-06-29 02:39 UTC",
- "generated_tw": "2026-06-29 10:39"
+ "generated_at": "2026-06-29 15:29 UTC",
+ "generated_tw": "2026-06-29 23:29"
 }
