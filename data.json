@@ -1424,12 +1424,12 @@
      "code": "PKF",
      "ucode": "6173",
      "name": "信昌電期貨",
-     "ratio": 0.324,
+     "ratio": 0.162,
      "kind": "stock",
      "mult": 2000,
      "price": 312.0,
      "volume": 589,
-     "margin": 202176,
+     "margin": 101088,
      "currency": "TWD"
     },
     {
@@ -3677,7 +3677,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/06/29",
+   "update": "2026/07/01",
    "price_date": "2026/06/30",
    "matched": 291
   },
@@ -3975,7 +3975,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/06/29",
+   "update": "2026/07/01",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -5979,6 +5979,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-07-01 02:39 UTC",
- "generated_tw": "2026-07-01 10:39"
+ "generated_at": "2026-07-01 14:10 UTC",
+ "generated_tw": "2026-07-01 22:10"
 }
