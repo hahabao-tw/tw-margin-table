@@ -313,6 +313,7 @@ KEY_SETTLE = ["SettlementPrice", "結算價", "Settlement"]
 KEY_SESSION = ["TradingSession", "交易時段", "Session"]
 KEY_NAME = ["ProductName", "中文簡稱", "商品名稱", "Name"]
 KEY_VOLUME = ["Volume", "成交量", "TradingVolume", "TradeVolume"]
+KEY_DATE = ["Date", "日期", "TradeDate", "交易日期"]
 
 
 def _get(rec, keys):
@@ -322,11 +323,20 @@ def _get(rec, keys):
     return None
 
 
+def _fmt_date(s):
+    """把 20260629 或 2026/06/29 等格式統一為 2026/06/29。"""
+    s = str(s or "").strip().replace("-", "").replace("/", "")
+    if len(s) == 8 and s.isdigit():
+        return f"{s[0:4]}/{s[4:6]}/{s[6:8]}"
+    return str(s) or None
+
+
 def get_close_prices():
     """
-    回傳 ({code: price}, {code: volume})。
+    回傳 ({code: price}, {code: volume}, price_date)。
     取一般交易時段、各商品近月（最早到期月份）有效成交價與成交量。
     無最後成交價時退而求其次用結算價。
+    price_date 為 OpenAPI 資料日期（收盤價實際日期）。
     """
     try:
         raw = fetch_bytes(DAILY_REPORT_URL,
@@ -334,14 +344,16 @@ def get_close_prices():
         data = json.loads(decode_text(raw))
     except Exception as e:  # noqa: BLE001
         print(f"  [warn] 每日行情抓取/解析失敗：{e}", file=sys.stderr)
-        return {}, {}
+        return {}, {}, None
 
     if not isinstance(data, list) or not data:
         print("  [warn] 每日行情回傳格式非預期（非陣列或空）", file=sys.stderr)
-        return {}, {}
+        return {}, {}, None
 
     print(f"  每日行情筆數：{len(data)}；首筆欄位：{list(data[0].keys())}",
           file=sys.stderr)
+
+    price_date = _fmt_date(_get(data[0], KEY_DATE))
 
     # best[code] = (month_str, price, volume)
     best = {}
@@ -378,8 +390,9 @@ def get_close_prices():
     for n, v in name_best.items():
         price_map.setdefault(n, v[1])
         vol_map.setdefault(n, v[2])
-    print(f"  收盤價可用商品數：{len(best)}（有效列 {kept}）", file=sys.stderr)
-    return price_map, vol_map
+    print(f"  收盤價可用商品數：{len(best)}（有效列 {kept}）；資料日期：{price_date}",
+          file=sys.stderr)
+    return price_map, vol_map, price_date
 
 
 # ---------------------------------------------------------------------------
@@ -412,7 +425,7 @@ def build_dataset():
     update_dates = {}
 
     print("抓取每日行情（收盤價＋成交量）…", file=sys.stderr)
-    price_map, vol_map = get_close_prices()
+    price_map, vol_map, price_date = get_close_prices()
 
     for src in MARGIN_SOURCES:
         print(f"抓取 {src['title']} …", file=sys.stderr)
@@ -492,6 +505,7 @@ def build_dataset():
             sections.append({"key": "stock", "title": "股票期貨",
                              "kind": "stock", "rows": stock_rows,
                              "update": update_dates[src["key"]],
+                             "price_date": price_date,
                              "matched": matched})
             sections.append({"key": "etf", "title": "ETF股票期貨",
                              "kind": "etf_fixed", "rows": etf_rows,
@@ -719,7 +733,10 @@ def render_stock_section(sec, search_id="stockSearch", clear_id="stockClear", no
     matched = sec.get("matched", 0)
     total = len(sec["rows"])
     parts.append(f'<summary><span class="cat-name">{esc(sec["title"])}</span>'
-                 f'<span class="upd">更新：{esc(sec.get("update") or "—")}</span>'
+                 f'<span class="upd upd2">'
+                 f'<span>比例 {esc(sec.get("update") or "—")}</span>'
+                 f'<span>收盤 {esc(sec.get("price_date") or "—")}</span>'
+                 f'</span>'
                  f'<span class="chev" aria-hidden="true"></span></summary>')
     parts.append('<div class="catbody">')
     if sec.get("error"):
@@ -983,6 +1000,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     background:linear-gradient(180deg,var(--accent),var(--accent-b));
     box-shadow:0 0 8px rgba(53,224,214,.5);}
   summary .upd{margin-left:auto;color:var(--muted);font-size:.68rem;font-weight:400;white-space:nowrap;}
+  summary .upd2{display:flex;flex-direction:column;align-items:flex-end;line-height:1.35;text-align:right;}
   summary .chev{width:14px;height:14px;flex:0 0 14px;position:relative;}
   summary .chev::before,summary .chev::after{content:"";position:absolute;top:6px;width:8px;height:2px;
     border-radius:2px;background:var(--muted);transition:transform .2s ease;}
