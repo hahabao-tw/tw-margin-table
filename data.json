@@ -860,12 +860,12 @@
      "code": "SFF",
      "ucode": "2383",
      "name": "小型台光電期貨",
-     "ratio": 0.3038,
+     "ratio": 0.2025,
      "kind": "mini",
      "mult": 100,
      "price": 5645.0,
      "volume": 2207,
-     "margin": 171495,
+     "margin": 114311,
      "currency": "TWD"
     },
     {
@@ -2120,12 +2120,12 @@
      "code": "PJF",
      "ucode": "2383",
      "name": "台光電期貨",
-     "ratio": 0.3038,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 5615.0,
      "volume": 216,
-     "margin": 3411674,
+     "margin": 2274075,
      "currency": "TWD"
     },
     {
@@ -3677,7 +3677,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/07/01",
+   "update": "2026/07/02",
    "price_date": "2026/07/01",
    "matched": 291
   },
@@ -3975,7 +3975,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/07/01",
+   "update": "2026/07/02",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -5979,6 +5979,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-07-02 02:29 UTC",
- "generated_tw": "2026-07-02 10:29"
+ "generated_at": "2026-07-02 13:28 UTC",
+ "generated_tw": "2026-07-02 21:28"
 }
