@@ -860,12 +860,12 @@
      "code": "IXF",
      "ucode": "3189",
      "name": "景碩期貨",
-     "ratio": 0.2025,
+     "ratio": 0.405,
      "kind": "stock",
      "mult": 2000,
      "price": 823.0,
      "volume": 1938,
-     "margin": 333315,
+     "margin": 666630,
      "currency": "TWD"
     },
     {
@@ -3677,7 +3677,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/07/03",
+   "update": "2026/07/06",
    "price_date": "2026/07/03",
    "matched": 291
   },
@@ -3975,7 +3975,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/07/03",
+   "update": "2026/07/06",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -5965,6 +5965,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-07-06 02:15 UTC",
- "generated_tw": "2026-07-06 10:15"
+ "generated_at": "2026-07-06 14:56 UTC",
+ "generated_tw": "2026-07-06 22:56"
 }
