@@ -52,7 +52,7 @@
     },
     {
      "name": "非金電期貨",
-     "margin": 77000.0,
+     "margin": 9000.0,
      "currency": "TWD"
     },
     {
@@ -116,7 +116,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/06/18"
+   "update": "2026/07/06"
   },
   {
    "key": "commodity",
@@ -125,12 +125,12 @@
    "rows": [
     {
      "name": "黃金期貨",
-     "margin": 5500.0,
+     "margin": 560.0,
      "currency": "USD"
     },
     {
      "name": "臺幣黃金期貨",
-     "margin": 207000.0,
+     "margin": 22000.0,
      "currency": "TWD"
     },
     {
@@ -139,7 +139,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/05/27"
+   "update": "2026/07/06"
   },
   {
    "key": "fx",
@@ -5965,6 +5965,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-07-05 13:06 UTC",
- "generated_tw": "2026-07-05 21:06"
+ "generated_at": "2026-07-06 02:15 UTC",
+ "generated_tw": "2026-07-06 10:15"
 }
