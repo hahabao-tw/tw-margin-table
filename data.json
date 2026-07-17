@@ -548,12 +548,12 @@
      "code": "HBF",
      "ucode": "2492",
      "name": "華新科期貨",
-     "ratio": 0.2025,
+     "ratio": 0.405,
      "kind": "stock",
      "mult": 2000,
      "price": 347.5,
      "volume": 3262,
-     "margin": 140738,
+     "margin": 281475,
      "currency": "TWD"
     },
     {
@@ -848,12 +848,12 @@
      "code": "IXF",
      "ucode": "3189",
      "name": "景碩期貨",
-     "ratio": 0.405,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 767.0,
      "volume": 1576,
-     "margin": 621270,
+     "margin": 310635,
      "currency": "TWD"
     },
     {
@@ -3677,7 +3677,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/07/16",
+   "update": "2026/07/17",
    "price_date": "2026/07/16",
    "matched": 291
   },
@@ -3975,7 +3975,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/07/16",
+   "update": "2026/07/17",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -5979,6 +5979,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-07-17 01:52 UTC",
- "generated_tw": "2026-07-17 09:52"
+ "generated_at": "2026-07-17 13:02 UTC",
+ "generated_tw": "2026-07-17 21:02"
 }
