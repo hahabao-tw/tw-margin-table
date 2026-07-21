@@ -992,12 +992,12 @@
      "code": "EYF",
      "ucode": "1718",
      "name": "中纖期貨",
-     "ratio": 0.27,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 12.85,
      "volume": 1474,
-     "margin": 6939,
+     "margin": 3470,
      "currency": "TWD"
     },
     {
@@ -3677,7 +3677,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/07/20",
+   "update": "2026/07/21",
    "price_date": "2026/07/20",
    "matched": 291
   },
@@ -3975,7 +3975,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/07/20",
+   "update": "2026/07/21",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -5979,6 +5979,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-07-21 01:50 UTC",
- "generated_tw": "2026-07-21 09:50"
+ "generated_at": "2026-07-21 13:15 UTC",
+ "generated_tw": "2026-07-21 21:15"
 }
