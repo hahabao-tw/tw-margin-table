@@ -404,12 +404,12 @@
      "code": "PLF",
      "ucode": "6182",
      "name": "合晶期貨",
-     "ratio": 0.2025,
+     "ratio": 0.3038,
      "kind": "stock",
      "mult": 2000,
      "price": 115.0,
      "volume": 5033,
-     "margin": 46575,
+     "margin": 69874,
      "currency": "TWD"
     },
     {
@@ -3677,7 +3677,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/07/22",
+   "update": "2026/07/27",
    "price_date": "2026/07/24",
    "matched": 291
   },
@@ -3975,7 +3975,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/07/22",
+   "update": "2026/07/27",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -5979,6 +5979,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-07-27 02:04 UTC",
- "generated_tw": "2026-07-27 10:04"
+ "generated_at": "2026-07-27 14:09 UTC",
+ "generated_tw": "2026-07-27 22:09"
 }
