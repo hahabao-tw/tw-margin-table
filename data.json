@@ -3557,6 +3557,30 @@
      "currency": "TWD"
     },
     {
+     "code": "VMF",
+     "ucode": "1519",
+     "name": "華城期貨",
+     "ratio": 0.2025,
+     "kind": "stock",
+     "mult": 2000,
+     "price": null,
+     "volume": 0,
+     "margin": null,
+     "currency": "TWD"
+    },
+    {
+     "code": "VNF",
+     "ucode": "1519",
+     "name": "小型華城期貨",
+     "ratio": 0.2025,
+     "kind": "mini",
+     "mult": 100,
+     "price": null,
+     "volume": 0,
+     "margin": null,
+     "currency": "TWD"
+    },
+    {
      "code": "QPF",
      "ucode": "1904",
      "name": "正隆期貨",
@@ -3581,6 +3605,18 @@
      "currency": "TWD"
     },
     {
+     "code": "VOF",
+     "ucode": "2449",
+     "name": "小型京元電子期貨",
+     "ratio": 0.2025,
+     "kind": "mini",
+     "mult": 100,
+     "price": null,
+     "volume": 0,
+     "margin": null,
+     "currency": "TWD"
+    },
+    {
      "code": "QQF",
      "ucode": "3078",
      "name": "僑威期貨",
@@ -3590,6 +3626,18 @@
      "price": 49.7,
      "volume": 0,
      "margin": 16103,
+     "currency": "TWD"
+    },
+    {
+     "code": "VPF",
+     "ucode": "3711",
+     "name": "小型日月光投控期貨",
+     "ratio": 0.162,
+     "kind": "mini",
+     "mult": 100,
+     "price": null,
+     "volume": 0,
+     "margin": null,
      "currency": "TWD"
     },
     {
@@ -3675,9 +3723,21 @@
      "volume": 0,
      "margin": 159408,
      "currency": "TWD"
+    },
+    {
+     "code": "VLF",
+     "ucode": "8932",
+     "name": "智通期貨",
+     "ratio": 0.162,
+     "kind": "stock",
+     "mult": 2000,
+     "price": null,
+     "volume": 0,
+     "margin": null,
+     "currency": "TWD"
     }
    ],
-   "update": "2026/07/27",
+   "update": "2026/08/03",
    "price_date": "2026/07/30",
    "matched": 289
   },
@@ -3975,7 +4035,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/07/27",
+   "update": "2026/08/03",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -5979,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-07-31 01:57 UTC",
- "generated_tw": "2026-07-31 09:57"
+ "generated_at": "2026-07-31 13:30 UTC",
+ "generated_tw": "2026-07-31 21:30"
 }
