@@ -668,12 +668,12 @@
      "code": "HBF",
      "ucode": "2492",
      "name": "華新科期貨",
-     "ratio": 0.405,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 220.0,
      "volume": 1404,
-     "margin": 178200,
+     "margin": 89100,
      "currency": "TWD"
     },
     {
@@ -740,12 +740,12 @@
      "code": "QDF",
      "ucode": "3532",
      "name": "台勝科期貨",
-     "ratio": 0.21600000000000003,
+     "ratio": 0.43200000000000005,
      "kind": "stock",
      "mult": 2000,
      "price": 263.0,
      "volume": 1334,
-     "margin": 113616,
+     "margin": 227232,
      "currency": "TWD"
     },
     {
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-08-03 01:57 UTC",
- "generated_tw": "2026-08-03 09:57"
+ "generated_at": "2026-08-03 14:14 UTC",
+ "generated_tw": "2026-08-03 22:14"
 }
