@@ -320,12 +320,12 @@
      "code": "QSF",
      "ucode": "8046",
      "name": "小型南電期貨",
-     "ratio": 0.21600000000000003,
+     "ratio": 0.324,
      "kind": "mini",
      "mult": 100,
      "price": 950.0,
      "volume": 8031,
-     "margin": 20520,
+     "margin": 30780,
      "currency": "TWD"
     },
     {
@@ -344,12 +344,12 @@
      "code": "PLF",
      "ucode": "6182",
      "name": "合晶期貨",
-     "ratio": 0.3038,
+     "ratio": 0.405,
      "kind": "stock",
      "mult": 2000,
      "price": 87.6,
      "volume": 6778,
-     "margin": 53226,
+     "margin": 70956,
      "currency": "TWD"
     },
     {
@@ -680,12 +680,12 @@
      "code": "LYF",
      "ucode": "8046",
      "name": "南電期貨",
-     "ratio": 0.21600000000000003,
+     "ratio": 0.324,
      "kind": "stock",
      "mult": 2000,
      "price": 950.0,
      "volume": 1922,
-     "margin": 410400,
+     "margin": 615600,
      "currency": "TWD"
     },
     {
@@ -1412,12 +1412,12 @@
      "code": "PKF",
      "ucode": "6173",
      "name": "信昌電期貨",
-     "ratio": 0.405,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 152.0,
      "volume": 504,
-     "margin": 123120,
+     "margin": 61560,
      "currency": "TWD"
     },
     {
@@ -3737,7 +3737,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/08/03",
+   "update": "2026/08/04",
    "price_date": "2026/08/03",
    "matched": 294
   },
@@ -4035,7 +4035,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/08/03",
+   "update": "2026/08/04",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-08-04 01:43 UTC",
- "generated_tw": "2026-08-04 09:43"
+ "generated_at": "2026-08-04 13:46 UTC",
+ "generated_tw": "2026-08-04 21:46"
 }
