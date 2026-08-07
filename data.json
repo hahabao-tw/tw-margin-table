@@ -524,12 +524,12 @@
      "code": "PLF",
      "ucode": "6182",
      "name": "合晶期貨",
-     "ratio": 0.405,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 108.0,
      "volume": 3940,
-     "margin": 87480,
+     "margin": 43740,
      "currency": "TWD"
     },
     {
@@ -1772,12 +1772,12 @@
      "code": "QDF",
      "ucode": "3532",
      "name": "台勝科期貨",
-     "ratio": 0.43200000000000005,
+     "ratio": 0.21600000000000003,
      "kind": "stock",
      "mult": 2000,
      "price": 315.5,
      "volume": 308,
-     "margin": 272592,
+     "margin": 136296,
      "currency": "TWD"
     },
     {
@@ -3737,7 +3737,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/08/04",
+   "update": "2026/08/07",
    "price_date": "2026/08/06",
    "matched": 294
   },
@@ -4035,7 +4035,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/08/04",
+   "update": "2026/08/07",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -4875,7 +4875,7 @@
        "name": "天然氣",
        "code": "NG",
        "margin": 3277,
-       "currency": "EUR"
+       "currency": "USD"
       },
       {
        "cat": "金屬能源類",
@@ -5005,7 +5005,7 @@
      "name": "天然氣",
      "code": "NG",
      "margin": 3277,
-     "currency": "EUR"
+     "currency": "USD"
     },
     {
      "cat": "金屬能源類",
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-08-07 02:10 UTC",
- "generated_tw": "2026-08-07 10:10"
+ "generated_at": "2026-08-07 12:38 UTC",
+ "generated_tw": "2026-08-07 20:38"
 }
