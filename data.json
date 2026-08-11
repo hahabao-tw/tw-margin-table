@@ -368,12 +368,12 @@
      "code": "QSF",
      "ucode": "8046",
      "name": "小型南電期貨",
-     "ratio": 0.324,
+     "ratio": 0.21600000000000003,
      "kind": "mini",
      "mult": 100,
      "price": 1138.0,
      "volume": 5726,
-     "margin": 36871,
+     "margin": 24581,
      "currency": "TWD"
     },
     {
@@ -692,12 +692,12 @@
      "code": "IXF",
      "ucode": "3189",
      "name": "景碩期貨",
-     "ratio": 0.2025,
+     "ratio": 0.405,
      "kind": "stock",
      "mult": 2000,
      "price": 845.0,
      "volume": 2223,
-     "margin": 342225,
+     "margin": 684450,
      "currency": "TWD"
     },
     {
@@ -836,12 +836,12 @@
      "code": "RGF",
      "ucode": "3653",
      "name": "小型健策期貨",
-     "ratio": 0.21600000000000003,
+     "ratio": 0.324,
      "kind": "mini",
      "mult": 100,
      "price": 4130.0,
      "volume": 1845,
-     "margin": 89208,
+     "margin": 133812,
      "currency": "TWD"
     },
     {
@@ -860,24 +860,24 @@
      "code": "IRF",
      "ucode": "3037",
      "name": "欣興期貨",
-     "ratio": 0.2025,
+     "ratio": 0.3038,
      "kind": "stock",
      "mult": 2000,
      "price": 991.0,
      "volume": 1826,
-     "margin": 401355,
+     "margin": 602132,
      "currency": "TWD"
     },
     {
      "code": "GUF",
      "ucode": "2455",
      "name": "全新期貨",
-     "ratio": 0.2025,
+     "ratio": 0.3038,
      "kind": "stock",
      "mult": 2000,
      "price": 389.0,
      "volume": 1823,
-     "margin": 157545,
+     "margin": 236356,
      "currency": "TWD"
     },
     {
@@ -932,12 +932,12 @@
      "code": "SVF",
      "ucode": "2059",
      "name": "小型川湖期貨",
-     "ratio": 0.2025,
+     "ratio": 0.3038,
      "kind": "mini",
      "mult": 100,
      "price": 11875.0,
      "volume": 1586,
-     "margin": 240469,
+     "margin": 360762,
      "currency": "TWD"
     },
     {
@@ -1160,12 +1160,12 @@
      "code": "LYF",
      "ucode": "8046",
      "name": "南電期貨",
-     "ratio": 0.324,
+     "ratio": 0.21600000000000003,
      "kind": "stock",
      "mult": 2000,
      "price": 1138.0,
      "volume": 1050,
-     "margin": 737424,
+     "margin": 491616,
      "currency": "TWD"
     },
     {
@@ -1436,12 +1436,12 @@
      "code": "OVF",
      "ucode": "6274",
      "name": "台燿期貨",
-     "ratio": 0.2025,
+     "ratio": 0.3038,
      "kind": "stock",
      "mult": 2000,
      "price": 1457.0,
      "volume": 646,
-     "margin": 590085,
+     "margin": 885273,
      "currency": "TWD"
     },
     {
@@ -2288,12 +2288,12 @@
      "code": "FGF",
      "ucode": "2059",
      "name": "川湖期貨",
-     "ratio": 0.2025,
+     "ratio": 0.3038,
      "kind": "stock",
      "mult": 2000,
      "price": 11880.0,
      "volume": 132,
-     "margin": 4811400,
+     "margin": 7218288,
      "currency": "TWD"
     },
     {
@@ -2900,12 +2900,12 @@
      "code": "JMF",
      "ucode": "3653",
      "name": "健策期貨",
-     "ratio": 0.21600000000000003,
+     "ratio": 0.324,
      "kind": "stock",
      "mult": 2000,
      "price": 4135.0,
      "volume": 37,
-     "margin": 1786320,
+     "margin": 2679480,
      "currency": "TWD"
     },
     {
@@ -3737,7 +3737,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/08/07",
+   "update": "2026/08/11",
    "price_date": "2026/08/10",
    "matched": 296
   },
@@ -4035,7 +4035,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/08/07",
+   "update": "2026/08/11",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-08-11 01:02 UTC",
- "generated_tw": "2026-08-11 09:02"
+ "generated_at": "2026-08-11 12:39 UTC",
+ "generated_tw": "2026-08-11 20:39"
 }
