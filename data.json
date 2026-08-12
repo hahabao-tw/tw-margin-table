@@ -7,22 +7,22 @@
    "rows": [
     {
      "name": "臺股期貨",
-     "margin": 636000.0,
+     "margin": 701000.0,
      "currency": "TWD"
     },
     {
      "name": "小型臺指",
-     "margin": 159000.0,
+     "margin": 175250.0,
      "currency": "TWD"
     },
     {
      "name": "客製化小型臺指期貨",
-     "margin": 159000.0,
+     "margin": 175250.0,
      "currency": "TWD"
     },
     {
      "name": "微型臺指期貨",
-     "margin": 31800.0,
+     "margin": 35050.0,
      "currency": "TWD"
     },
     {
@@ -32,27 +32,27 @@
     },
     {
      "name": "電子期貨",
-     "margin": 889000.0,
+     "margin": 978000.0,
      "currency": "TWD"
     },
     {
      "name": "小型電子期貨",
-     "margin": 111125.0,
+     "margin": 122250.0,
      "currency": "TWD"
     },
     {
      "name": "金融期貨",
-     "margin": 144000.0,
+     "margin": 158000.0,
      "currency": "TWD"
     },
     {
      "name": "小型金融期貨",
-     "margin": 36000.0,
+     "margin": 39500.0,
      "currency": "TWD"
     },
     {
      "name": "非金電期貨",
-     "margin": 9000.0,
+     "margin": 10000.0,
      "currency": "TWD"
     },
     {
@@ -67,17 +67,17 @@
     },
     {
      "name": "臺灣永續期貨",
-     "margin": 153000.0,
+     "margin": 169000.0,
      "currency": "TWD"
     },
     {
      "name": "臺灣生技期貨",
-     "margin": 14000.0,
+     "margin": 15000.0,
      "currency": "TWD"
     },
     {
      "name": "半導體30期貨",
-     "margin": 63000.0,
+     "margin": 69000.0,
      "currency": "TWD"
     },
     {
@@ -102,12 +102,12 @@
     },
     {
      "name": "美國那斯達克100期貨",
-     "margin": 88000.0,
+     "margin": 98000.0,
      "currency": "TWD"
     },
     {
      "name": "美國費城半導體期貨",
-     "margin": 80000.0,
+     "margin": 88000.0,
      "currency": "TWD"
     },
     {
@@ -116,7 +116,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/07/06"
+   "update": "2026/08/12"
   },
   {
    "key": "commodity",
@@ -536,12 +536,12 @@
      "code": "KBF",
      "ucode": "6213",
      "name": "聯茂期貨",
-     "ratio": 0.2025,
+     "ratio": 0.3038,
      "kind": "stock",
      "mult": 2000,
      "price": 457.5,
      "volume": 4177,
-     "margin": 185288,
+     "margin": 277977,
      "currency": "TWD"
     },
     {
@@ -1244,12 +1244,12 @@
      "code": "IIF",
      "ucode": "3006",
      "name": "晶豪科期貨",
-     "ratio": 0.21600000000000003,
+     "ratio": 0.324,
      "kind": "stock",
      "mult": 2000,
      "price": 269.0,
      "volume": 919,
-     "margin": 116208,
+     "margin": 174312,
      "currency": "TWD"
     },
     {
@@ -2024,12 +2024,12 @@
      "code": "OTF",
      "ucode": "3081",
      "name": "聯亞期貨",
-     "ratio": 0.22949999999999998,
+     "ratio": 0.3443,
      "kind": "stock",
      "mult": 2000,
      "price": 2500.0,
      "volume": 191,
-     "margin": 1147500,
+     "margin": 1721500,
      "currency": "TWD"
     },
     {
@@ -3737,7 +3737,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/08/11",
+   "update": "2026/08/12",
    "price_date": "2026/08/11",
    "matched": 296
   },
@@ -3755,7 +3755,7 @@
      "mult": 10000,
      "price": null,
      "volume": 0,
-     "margin": 79000,
+     "margin": 87000,
      "currency": "TWD"
     },
     {
@@ -3767,7 +3767,7 @@
      "mult": 10000,
      "price": null,
      "volume": 0,
-     "margin": 7900,
+     "margin": 8700,
      "currency": "TWD"
     },
     {
@@ -3779,7 +3779,7 @@
      "mult": 10000,
      "price": null,
      "volume": 0,
-     "margin": 50000,
+     "margin": 56000,
      "currency": "TWD"
     },
     {
@@ -3791,7 +3791,7 @@
      "mult": 10000,
      "price": null,
      "volume": 0,
-     "margin": 27000,
+     "margin": 30000,
      "currency": "TWD"
     },
     {
@@ -3803,7 +3803,7 @@
      "mult": 10000,
      "price": null,
      "volume": 0,
-     "margin": 2700,
+     "margin": 3000,
      "currency": "TWD"
     },
     {
@@ -3947,7 +3947,7 @@
      "mult": 10000,
      "price": null,
      "volume": 0,
-     "margin": 18000,
+     "margin": 21000,
      "currency": "TWD"
     },
     {
@@ -3995,7 +3995,7 @@
      "mult": 10000,
      "price": null,
      "volume": 0,
-     "margin": 33000,
+     "margin": 37000,
      "currency": "TWD"
     },
     {
@@ -4007,7 +4007,7 @@
      "mult": 10000,
      "price": null,
      "volume": 0,
-     "margin": 19000,
+     "margin": 22000,
      "currency": "TWD"
     },
     {
@@ -4035,7 +4035,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/08/11",
+   "update": "2026/08/12",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-08-12 01:09 UTC",
- "generated_tw": "2026-08-12 09:09"
+ "generated_at": "2026-08-12 12:43 UTC",
+ "generated_tw": "2026-08-12 20:43"
 }
