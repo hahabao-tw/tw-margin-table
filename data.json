@@ -752,12 +752,12 @@
      "code": "RGF",
      "ucode": "3653",
      "name": "小型健策期貨",
-     "ratio": 0.324,
+     "ratio": 0.21600000000000003,
      "kind": "mini",
      "mult": 100,
      "price": 4675.0,
      "volume": 2499,
-     "margin": 151470,
+     "margin": 100980,
      "currency": "TWD"
     },
     {
@@ -788,12 +788,12 @@
      "code": "IXF",
      "ucode": "3189",
      "name": "景碩期貨",
-     "ratio": 0.405,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 850.0,
      "volume": 2365,
-     "margin": 688500,
+     "margin": 344250,
      "currency": "TWD"
     },
     {
@@ -848,12 +848,12 @@
      "code": "IRF",
      "ucode": "3037",
      "name": "欣興期貨",
-     "ratio": 0.3038,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 1004.0,
      "volume": 1840,
-     "margin": 610030,
+     "margin": 406620,
      "currency": "TWD"
     },
     {
@@ -908,12 +908,12 @@
      "code": "GUF",
      "ucode": "2455",
      "name": "全新期貨",
-     "ratio": 0.3038,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 384.0,
      "volume": 1739,
-     "margin": 233318,
+     "margin": 155520,
      "currency": "TWD"
     },
     {
@@ -1160,12 +1160,12 @@
      "code": "OVF",
      "ucode": "6274",
      "name": "台燿期貨",
-     "ratio": 0.3038,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 1595.0,
      "volume": 1135,
-     "margin": 969122,
+     "margin": 645975,
      "currency": "TWD"
     },
     {
@@ -1664,12 +1664,12 @@
      "code": "SVF",
      "ucode": "2059",
      "name": "小型川湖期貨",
-     "ratio": 0.3038,
+     "ratio": 0.2025,
      "kind": "mini",
      "mult": 100,
      "price": 12200.0,
      "volume": 491,
-     "margin": 370636,
+     "margin": 247050,
      "currency": "TWD"
     },
     {
@@ -1868,12 +1868,12 @@
      "code": "FGF",
      "ucode": "2059",
      "name": "川湖期貨",
-     "ratio": 0.3038,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 11950.0,
      "volume": 306,
-     "margin": 7260820,
+     "margin": 4839750,
      "currency": "TWD"
     },
     {
@@ -2048,12 +2048,12 @@
      "code": "JMF",
      "ucode": "3653",
      "name": "健策期貨",
-     "ratio": 0.324,
+     "ratio": 0.21600000000000003,
      "kind": "stock",
      "mult": 2000,
      "price": 4610.0,
      "volume": 213,
-     "margin": 2987280,
+     "margin": 1991520,
      "currency": "TWD"
     },
     {
@@ -3737,7 +3737,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/08/12",
+   "update": "2026/08/14",
    "price_date": "2026/08/13",
    "matched": 295
   },
@@ -4035,7 +4035,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/08/12",
+   "update": "2026/08/14",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-08-14 01:10 UTC",
- "generated_tw": "2026-08-14 09:10"
+ "generated_at": "2026-08-14 12:39 UTC",
+ "generated_tw": "2026-08-14 20:39"
 }
