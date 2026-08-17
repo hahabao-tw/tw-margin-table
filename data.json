@@ -884,12 +884,12 @@
      "code": "KBF",
      "ucode": "6213",
      "name": "聯茂期貨",
-     "ratio": 0.3038,
+     "ratio": 0.405,
      "kind": "stock",
      "mult": 2000,
      "price": 483.5,
      "volume": 2200,
-     "margin": 293775,
+     "margin": 391635,
      "currency": "TWD"
     },
     {
@@ -1292,12 +1292,12 @@
      "code": "IIF",
      "ucode": "3006",
      "name": "晶豪科期貨",
-     "ratio": 0.324,
+     "ratio": 0.21600000000000003,
      "kind": "stock",
      "mult": 2000,
      "price": 274.0,
      "volume": 807,
-     "margin": 177552,
+     "margin": 118368,
      "currency": "TWD"
     },
     {
@@ -1724,12 +1724,12 @@
      "code": "OTF",
      "ucode": "3081",
      "name": "聯亞期貨",
-     "ratio": 0.3443,
+     "ratio": 0.22949999999999998,
      "kind": "stock",
      "mult": 2000,
      "price": 2570.0,
      "volume": 371,
-     "margin": 1769702,
+     "margin": 1179630,
      "currency": "TWD"
     },
     {
@@ -3737,7 +3737,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/08/14",
+   "update": "2026/08/17",
    "price_date": "2026/08/14",
    "matched": 295
   },
@@ -4035,7 +4035,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/08/14",
+   "update": "2026/08/17",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-08-17 00:42 UTC",
- "generated_tw": "2026-08-17 08:42"
+ "generated_at": "2026-08-17 12:20 UTC",
+ "generated_tw": "2026-08-17 20:20"
 }
