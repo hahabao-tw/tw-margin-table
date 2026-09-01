@@ -3783,18 +3783,6 @@
      "currency": "TWD"
     },
     {
-     "code": "PFF",
-     "ucode": "0056",
-     "name": "元大高股息ETF期貨",
-     "ratio": null,
-     "kind": "etf",
-     "mult": 10000,
-     "price": null,
-     "volume": 0,
-     "margin": 30000,
-     "currency": "TWD"
-    },
-    {
      "code": "SSF",
      "ucode": "0056",
      "name": "小型元大高股息ETF期貨",
@@ -3804,6 +3792,18 @@
      "price": null,
      "volume": 0,
      "margin": 3000,
+     "currency": "TWD"
+    },
+    {
+     "code": "PFF",
+     "ucode": "0056",
+     "name": "元大高股息ETF期貨",
+     "ratio": null,
+     "kind": "etf",
+     "mult": 10000,
+     "price": null,
+     "volume": 0,
+     "margin": 30000,
      "currency": "TWD"
     },
     {
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-09-01 02:44 UTC",
- "generated_tw": "2026-09-01 10:44"
+ "generated_at": "2026-09-01 15:43 UTC",
+ "generated_tw": "2026-09-01 23:43"
 }
