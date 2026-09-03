@@ -416,12 +416,12 @@
      "code": "QJF",
      "ucode": "3406",
      "name": "小型玉晶光期貨",
-     "ratio": 0.162,
+     "ratio": 0.243,
      "kind": "mini",
      "mult": 100,
      "price": 1032.0,
      "volume": 4388,
-     "margin": 16718,
+     "margin": 25078,
      "currency": "TWD"
     },
     {
@@ -800,24 +800,24 @@
      "code": "QLF",
      "ucode": "3374",
      "name": "精材期貨",
-     "ratio": 0.2025,
+     "ratio": 0.3038,
      "kind": "stock",
      "mult": 2000,
      "price": 416.5,
      "volume": 1605,
-     "margin": 168682,
+     "margin": 253065,
      "currency": "TWD"
     },
     {
      "code": "PQF",
      "ucode": "8358",
      "name": "金居期貨",
-     "ratio": 0.22949999999999998,
+     "ratio": 0.3443,
      "kind": "stock",
      "mult": 2000,
      "price": 495.0,
      "volume": 1573,
-     "margin": 227205,
+     "margin": 340857,
      "currency": "TWD"
     },
     {
@@ -1472,12 +1472,12 @@
      "code": "LEF",
      "ucode": "3406",
      "name": "玉晶光期貨",
-     "ratio": 0.162,
+     "ratio": 0.243,
      "kind": "stock",
      "mult": 2000,
      "price": 1025.0,
      "volume": 388,
-     "margin": 332100,
+     "margin": 498150,
      "currency": "TWD"
     },
     {
@@ -4053,49 +4053,49 @@
        "cat": "股價指數期貨類",
        "name": "小型那斯達克指數",
        "code": "NQ",
-       "margin": 46205,
+       "margin": 46253,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型那斯達克指數",
        "code": "MNQ",
-       "margin": 4620,
+       "margin": 4626,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "小型S&P 500指數",
        "code": "ES",
-       "margin": 28515,
+       "margin": 28569,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型S&P 500指數",
        "code": "MES",
-       "margin": 2852,
+       "margin": 2857,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "小型羅素2000",
        "code": "RTY",
-       "margin": 12162,
+       "margin": 12225,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型小羅素2000",
        "code": "M2K",
-       "margin": 1217,
+       "margin": 1223,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "日經225",
        "code": "CNK",
-       "margin": 27220,
+       "margin": 27112,
        "currency": "USD"
       }
      ]
@@ -4221,49 +4221,49 @@
      "cat": "股價指數期貨類",
      "name": "小型那斯達克指數",
      "code": "NQ",
-     "margin": 46205,
+     "margin": 46253,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型那斯達克指數",
      "code": "MNQ",
-     "margin": 4620,
+     "margin": 4626,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "小型S&P 500指數",
      "code": "ES",
-     "margin": 28515,
+     "margin": 28569,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型S&P 500指數",
      "code": "MES",
-     "margin": 2852,
+     "margin": 2857,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "小型羅素2000",
      "code": "RTY",
-     "margin": 12162,
+     "margin": 12225,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型小羅素2000",
      "code": "M2K",
-     "margin": 1217,
+     "margin": 1223,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "日經225",
      "code": "CNK",
-     "margin": 27220,
+     "margin": 27112,
      "currency": "USD"
     },
     {
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-09-03 02:10 UTC",
- "generated_tw": "2026-09-03 10:10"
+ "generated_at": "2026-09-03 15:26 UTC",
+ "generated_tw": "2026-09-03 23:26"
 }
