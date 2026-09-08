@@ -428,12 +428,12 @@
      "code": "QJF",
      "ucode": "3406",
      "name": "小型玉晶光期貨",
-     "ratio": 0.243,
+     "ratio": 0.162,
      "kind": "mini",
      "mult": 100,
      "price": 987.0,
      "volume": 4775,
-     "margin": 23984,
+     "margin": 15989,
      "currency": "TWD"
     },
     {
@@ -704,12 +704,12 @@
      "code": "GUF",
      "ucode": "2455",
      "name": "全新期貨",
-     "ratio": 0.2025,
+     "ratio": 0.405,
      "kind": "stock",
      "mult": 2000,
      "price": 503.0,
      "volume": 2222,
-     "margin": 203715,
+     "margin": 407430,
      "currency": "TWD"
     },
     {
@@ -1436,12 +1436,12 @@
      "code": "LEF",
      "ucode": "3406",
      "name": "玉晶光期貨",
-     "ratio": 0.243,
+     "ratio": 0.162,
      "kind": "stock",
      "mult": 2000,
      "price": 986.0,
      "volume": 567,
-     "margin": 479196,
+     "margin": 319464,
      "currency": "TWD"
     },
     {
@@ -3737,7 +3737,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/09/04",
+   "update": "2026/09/08",
    "price_date": "2026/09/07",
    "matched": 296
   },
@@ -4035,7 +4035,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/09/04",
+   "update": "2026/09/08",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -4095,7 +4095,7 @@
        "cat": "股價指數期貨類",
        "name": "日經225",
        "code": "CNK",
-       "margin": 27289,
+       "margin": 27295,
        "currency": "USD"
       }
      ]
@@ -4263,7 +4263,7 @@
      "cat": "股價指數期貨類",
      "name": "日經225",
      "code": "CNK",
-     "margin": 27289,
+     "margin": 27295,
      "currency": "USD"
     },
     {
@@ -5867,28 +5867,28 @@
        "cat": "股價指數期貨類",
        "name": "富時台灣指數",
        "code": "TWN",
-       "margin": 13640,
+       "margin": 13860,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型富時台灣指數",
        "code": "MTWN",
-       "margin": 1364,
+       "margin": 1386,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "富時中國A50",
        "code": "CN",
-       "margin": 968,
+       "margin": 979,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "日經指數225",
        "code": "NK",
-       "margin": 2662000,
+       "margin": 2695000,
        "currency": "JPY"
       },
       {
@@ -5902,7 +5902,7 @@
        "cat": "股價指數期貨類",
        "name": "富時越南30指數",
        "code": "FVN",
-       "margin": 1155,
+       "margin": 1177,
        "currency": "USD"
       }
      ]
@@ -5913,28 +5913,28 @@
      "cat": "股價指數期貨類",
      "name": "富時台灣指數",
      "code": "TWN",
-     "margin": 13640,
+     "margin": 13860,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型富時台灣指數",
      "code": "MTWN",
-     "margin": 1364,
+     "margin": 1386,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "富時中國A50",
      "code": "CN",
-     "margin": 968,
+     "margin": 979,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "日經指數225",
      "code": "NK",
-     "margin": 2662000,
+     "margin": 2695000,
      "currency": "JPY"
     },
     {
@@ -5948,7 +5948,7 @@
      "cat": "股價指數期貨類",
      "name": "富時越南30指數",
      "code": "FVN",
-     "margin": 1155,
+     "margin": 1177,
      "currency": "USD"
     }
    ],
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-09-08 02:11 UTC",
- "generated_tw": "2026-09-08 10:11"
+ "generated_at": "2026-09-08 15:37 UTC",
+ "generated_tw": "2026-09-08 23:37"
 }
