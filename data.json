@@ -812,12 +812,12 @@
      "code": "PQF",
      "ucode": "8358",
      "name": "金居期貨",
-     "ratio": 0.3443,
+     "ratio": 0.22949999999999998,
      "kind": "stock",
      "mult": 2000,
      "price": 526.0,
      "volume": 1560,
-     "margin": 362204,
+     "margin": 241434,
      "currency": "TWD"
     },
     {
@@ -1076,12 +1076,12 @@
      "code": "QLF",
      "ucode": "3374",
      "name": "精材期貨",
-     "ratio": 0.3038,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 481.0,
      "volume": 1013,
-     "margin": 292256,
+     "margin": 194805,
      "currency": "TWD"
     },
     {
@@ -3737,7 +3737,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/09/09",
+   "update": "2026/09/10",
    "price_date": "2026/09/09",
    "matched": 296
   },
@@ -4035,7 +4035,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/09/09",
+   "update": "2026/09/10",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-09-10 02:14 UTC",
- "generated_tw": "2026-09-10 10:14"
+ "generated_at": "2026-09-10 15:26 UTC",
+ "generated_tw": "2026-09-10 23:26"
 }
