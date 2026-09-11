@@ -4053,49 +4053,49 @@
        "cat": "股價指數期貨類",
        "name": "小型那斯達克指數",
        "code": "NQ",
-       "margin": 46462,
+       "margin": 46230,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型那斯達克指數",
        "code": "MNQ",
-       "margin": 4647,
+       "margin": 4624,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "小型S&P 500指數",
        "code": "ES",
-       "margin": 28526,
+       "margin": 28457,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型S&P 500指數",
        "code": "MES",
-       "margin": 2853,
+       "margin": 2846,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "小型羅素2000",
        "code": "RTY",
-       "margin": 12162,
+       "margin": 12108,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型小羅素2000",
        "code": "M2K",
-       "margin": 1217,
+       "margin": 1212,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "日經225",
        "code": "CNK",
-       "margin": 26851,
+       "margin": 26727,
        "currency": "USD"
       }
      ]
@@ -4221,49 +4221,49 @@
      "cat": "股價指數期貨類",
      "name": "小型那斯達克指數",
      "code": "NQ",
-     "margin": 46462,
+     "margin": 46230,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型那斯達克指數",
      "code": "MNQ",
-     "margin": 4647,
+     "margin": 4624,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "小型S&P 500指數",
      "code": "ES",
-     "margin": 28526,
+     "margin": 28457,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型S&P 500指數",
      "code": "MES",
-     "margin": 2853,
+     "margin": 2846,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "小型羅素2000",
      "code": "RTY",
-     "margin": 12162,
+     "margin": 12108,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型小羅素2000",
      "code": "M2K",
-     "margin": 1217,
+     "margin": 1212,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "日經225",
      "code": "CNK",
-     "margin": 26851,
+     "margin": 26727,
      "currency": "USD"
     },
     {
@@ -4385,7 +4385,7 @@
        "cat": "股價指數期貨類",
        "name": "小道瓊",
        "code": "YM",
-       "margin": 16855,
+       "margin": 16814,
        "currency": "USD"
       },
       {
@@ -4537,7 +4537,7 @@
      "cat": "股價指數期貨類",
      "name": "小道瓊",
      "code": "YM",
-     "margin": 16855,
+     "margin": 16814,
      "currency": "USD"
     },
     {
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-09-11 02:10 UTC",
- "generated_tw": "2026-09-11 10:10"
+ "generated_at": "2026-09-11 15:28 UTC",
+ "generated_tw": "2026-09-11 23:28"
 }
