@@ -4067,14 +4067,14 @@
        "cat": "股價指數期貨類",
        "name": "小型S&P 500指數",
        "code": "ES",
-       "margin": 28399,
+       "margin": 28528,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型S&P 500指數",
        "code": "MES",
-       "margin": 2841,
+       "margin": 2853,
        "currency": "USD"
       },
       {
@@ -4095,7 +4095,7 @@
        "cat": "股價指數期貨類",
        "name": "日經225",
        "code": "CNK",
-       "margin": 26614,
+       "margin": 26737,
        "currency": "USD"
       }
      ]
@@ -4235,14 +4235,14 @@
      "cat": "股價指數期貨類",
      "name": "小型S&P 500指數",
      "code": "ES",
-     "margin": 28399,
+     "margin": 28528,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型S&P 500指數",
      "code": "MES",
-     "margin": 2841,
+     "margin": 2853,
      "currency": "USD"
     },
     {
@@ -4263,7 +4263,7 @@
      "cat": "股價指數期貨類",
      "name": "日經225",
      "code": "CNK",
-     "margin": 26614,
+     "margin": 26737,
      "currency": "USD"
     },
     {
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-09-18 02:20 UTC",
- "generated_tw": "2026-09-18 10:20"
+ "generated_at": "2026-09-18 15:24 UTC",
+ "generated_tw": "2026-09-18 23:24"
 }
