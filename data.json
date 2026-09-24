@@ -548,12 +548,12 @@
      "code": "GUF",
      "ucode": "2455",
      "name": "全新期貨",
-     "ratio": 0.2025,
+     "ratio": 0.405,
      "kind": "stock",
      "mult": 2000,
      "price": 559.0,
      "volume": 3226,
-     "margin": 226395,
+     "margin": 452790,
      "currency": "TWD"
     },
     {
@@ -1208,12 +1208,12 @@
      "code": "PQF",
      "ucode": "8358",
      "name": "金居期貨",
-     "ratio": 0.45899999999999996,
+     "ratio": 0.22949999999999998,
      "kind": "stock",
      "mult": 2000,
      "price": 499.5,
      "volume": 782,
-     "margin": 458541,
+     "margin": 229270,
      "currency": "TWD"
     },
     {
@@ -3737,7 +3737,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/09/21",
+   "update": "2026/09/24",
    "price_date": "2026/09/23",
    "matched": 296
   },
@@ -4035,7 +4035,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/09/21",
+   "update": "2026/09/24",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-09-24 02:21 UTC",
- "generated_tw": "2026-09-24 10:21"
+ "generated_at": "2026-09-24 16:06 UTC",
+ "generated_tw": "2026-09-25 00:06"
 }
