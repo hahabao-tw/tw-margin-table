@@ -5881,7 +5881,7 @@
        "cat": "股價指數期貨類",
        "name": "富時中國A50",
        "code": "CN",
-       "margin": 1045,
+       "margin": 1034,
        "currency": "USD"
       },
       {
@@ -5895,7 +5895,7 @@
        "cat": "股價指數期貨類",
        "name": "新加坡指數",
        "code": "SG",
-       "margin": 2541,
+       "margin": 2552,
        "currency": "SGD"
       },
       {
@@ -5927,7 +5927,7 @@
      "cat": "股價指數期貨類",
      "name": "富時中國A50",
      "code": "CN",
-     "margin": 1045,
+     "margin": 1034,
      "currency": "USD"
     },
     {
@@ -5941,7 +5941,7 @@
      "cat": "股價指數期貨類",
      "name": "新加坡指數",
      "code": "SG",
-     "margin": 2541,
+     "margin": 2552,
      "currency": "SGD"
     },
     {
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-09-29 03:24 UTC",
- "generated_tw": "2026-09-29 11:24"
+ "generated_at": "2026-09-29 17:13 UTC",
+ "generated_tw": "2026-09-30 01:13"
 }
