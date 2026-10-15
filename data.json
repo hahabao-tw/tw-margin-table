@@ -1112,12 +1112,12 @@
      "code": "PQF",
      "ucode": "8358",
      "name": "金居期貨",
-     "ratio": 0.45899999999999996,
+     "ratio": 0.22949999999999998,
      "kind": "stock",
      "mult": 2000,
      "price": 503.0,
      "volume": 1208,
-     "margin": 461754,
+     "margin": 230877,
      "currency": "TWD"
     },
     {
@@ -3737,7 +3737,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/10/14",
+   "update": "2026/10/15",
    "price_date": "2026/10/14",
    "matched": 295
   },
@@ -4035,7 +4035,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/10/14",
+   "update": "2026/10/15",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-10-15 02:29 UTC",
- "generated_tw": "2026-10-15 10:29"
+ "generated_at": "2026-10-15 15:56 UTC",
+ "generated_tw": "2026-10-15 23:56"
 }
