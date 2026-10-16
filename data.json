@@ -272,12 +272,12 @@
      "code": "QZF",
      "ucode": "6770",
      "name": "力積電期貨",
-     "ratio": 0.2025,
+     "ratio": 0.21600000000000003,
      "kind": "stock",
      "mult": 2000,
      "price": 65.7,
      "volume": 11649,
-     "margin": 26608,
+     "margin": 28382,
      "currency": "TWD"
     },
     {
@@ -296,24 +296,24 @@
      "code": "FZF",
      "ucode": "2344",
      "name": "華邦電期貨",
-     "ratio": 0.21600000000000003,
+     "ratio": 0.22949999999999998,
      "kind": "stock",
      "mult": 2000,
      "price": 154.0,
      "volume": 10762,
-     "margin": 66528,
+     "margin": 70686,
      "currency": "TWD"
     },
     {
      "code": "KIF",
      "ucode": "8039",
      "name": "台虹期貨",
-     "ratio": 0.2025,
+     "ratio": 0.21600000000000003,
      "kind": "stock",
      "mult": 2000,
      "price": 282.5,
      "volume": 10351,
-     "margin": 114413,
+     "margin": 122040,
      "currency": "TWD"
     },
     {
@@ -380,36 +380,36 @@
      "code": "VPF",
      "ucode": "3711",
      "name": "小型日月光投控期貨",
-     "ratio": 0.162,
+     "ratio": 0.2025,
      "kind": "mini",
      "mult": 100,
      "price": 673.0,
      "volume": 7939,
-     "margin": 10903,
+     "margin": 13628,
      "currency": "TWD"
     },
     {
      "code": "QSF",
      "ucode": "8046",
      "name": "小型南電期貨",
-     "ratio": 0.21600000000000003,
+     "ratio": 0.22949999999999998,
      "kind": "mini",
      "mult": 100,
      "price": 1330.0,
      "volume": 7758,
-     "margin": 28728,
+     "margin": 30523,
      "currency": "TWD"
     },
     {
      "code": "DHF",
      "ucode": "2317",
      "name": "鴻海期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 239.0,
      "volume": 7285,
-     "margin": 77436,
+     "margin": 64530,
      "currency": "TWD"
     },
     {
@@ -428,24 +428,24 @@
      "code": "CYF",
      "ucode": "2408",
      "name": "南亞科期貨",
-     "ratio": 0.22949999999999998,
+     "ratio": 0.243,
      "kind": "stock",
      "mult": 2000,
      "price": 436.5,
      "volume": 7131,
-     "margin": 200353,
+     "margin": 212139,
      "currency": "TWD"
     },
     {
      "code": "KUF",
      "ucode": "1802",
      "name": "台玻期貨",
-     "ratio": 0.21600000000000003,
+     "ratio": 0.22949999999999998,
      "kind": "stock",
      "mult": 2000,
      "price": 62.7,
      "volume": 6828,
-     "margin": 27086,
+     "margin": 28779,
      "currency": "TWD"
     },
     {
@@ -500,12 +500,12 @@
      "code": "NSF",
      "ucode": "6147",
      "name": "頎邦期貨",
-     "ratio": 0.162,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 211.0,
      "volume": 5702,
-     "margin": 68364,
+     "margin": 85455,
      "currency": "TWD"
     },
     {
@@ -572,12 +572,12 @@
      "code": "QNF",
      "ucode": "8299",
      "name": "小型群聯期貨",
-     "ratio": 0.2025,
+     "ratio": 0.21600000000000003,
      "kind": "mini",
      "mult": 100,
      "price": 1826.0,
      "volume": 4385,
-     "margin": 36976,
+     "margin": 39442,
      "currency": "TWD"
     },
     {
@@ -596,12 +596,12 @@
      "code": "DGF",
      "ucode": "1326",
      "name": "台化期貨",
-     "ratio": 0.162,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 77.4,
      "volume": 3671,
-     "margin": 25078,
+     "margin": 31347,
      "currency": "TWD"
     },
     {
@@ -620,12 +620,12 @@
      "code": "KEF",
      "ucode": "6278",
      "name": "台表科期貨",
-     "ratio": 0.135,
+     "ratio": 0.162,
      "kind": "stock",
      "mult": 2000,
      "price": 300.5,
      "volume": 3524,
-     "margin": 81135,
+     "margin": 97362,
      "currency": "TWD"
     },
     {
@@ -644,12 +644,12 @@
      "code": "KCF",
      "ucode": "6239",
      "name": "力成期貨",
-     "ratio": 0.162,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 269.0,
      "volume": 3267,
-     "margin": 87156,
+     "margin": 108945,
      "currency": "TWD"
     },
     {
@@ -692,12 +692,12 @@
      "code": "DIF",
      "ucode": "2337",
      "name": "旺宏期貨",
-     "ratio": 0.21600000000000003,
+     "ratio": 0.22949999999999998,
      "kind": "stock",
      "mult": 2000,
      "price": 104.0,
      "volume": 2916,
-     "margin": 44928,
+     "margin": 47736,
      "currency": "TWD"
     },
     {
@@ -716,12 +716,12 @@
      "code": "OZF",
      "ucode": "3711",
      "name": "日月光投控期貨",
-     "ratio": 0.162,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 673.0,
      "volume": 2700,
-     "margin": 218052,
+     "margin": 272565,
      "currency": "TWD"
     },
     {
@@ -836,12 +836,12 @@
      "code": "IXF",
      "ucode": "3189",
      "name": "景碩期貨",
-     "ratio": 0.2025,
+     "ratio": 0.21600000000000003,
      "kind": "stock",
      "mult": 2000,
      "price": 970.0,
      "volume": 2131,
-     "margin": 392850,
+     "margin": 419040,
      "currency": "TWD"
     },
     {
@@ -908,12 +908,12 @@
      "code": "PQF",
      "ucode": "8358",
      "name": "金居期貨",
-     "ratio": 0.22949999999999998,
+     "ratio": 0.243,
      "kind": "stock",
      "mult": 2000,
      "price": 463.0,
      "volume": 1919,
-     "margin": 212517,
+     "margin": 225018,
      "currency": "TWD"
     },
     {
@@ -968,12 +968,12 @@
      "code": "IRF",
      "ucode": "3037",
      "name": "欣興期貨",
-     "ratio": 0.2025,
+     "ratio": 0.21600000000000003,
      "kind": "stock",
      "mult": 2000,
      "price": 1081.0,
      "volume": 1728,
-     "margin": 437805,
+     "margin": 466992,
      "currency": "TWD"
     },
     {
@@ -992,24 +992,24 @@
      "code": "NLF",
      "ucode": "5347",
      "name": "世界期貨",
-     "ratio": 0.162,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 159.0,
      "volume": 1702,
-     "margin": 51516,
+     "margin": 64395,
      "currency": "TWD"
     },
     {
      "code": "FQF",
      "ucode": "2301",
      "name": "光寶科期貨",
-     "ratio": 0.162,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 262.0,
      "volume": 1691,
-     "margin": 84888,
+     "margin": 106110,
      "currency": "TWD"
     },
     {
@@ -1076,12 +1076,12 @@
      "code": "CZF",
      "ucode": "2603",
      "name": "長榮期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 258.0,
      "volume": 1472,
-     "margin": 83592,
+     "margin": 69660,
      "currency": "TWD"
     },
     {
@@ -1220,12 +1220,12 @@
      "code": "PSF",
      "ucode": "3706",
      "name": "神達期貨",
-     "ratio": 0.2025,
+     "ratio": 0.162,
      "kind": "stock",
      "mult": 2000,
      "price": 81.0,
      "volume": 1076,
-     "margin": 32805,
+     "margin": 26244,
      "currency": "TWD"
     },
     {
@@ -1268,12 +1268,12 @@
      "code": "NOF",
      "ucode": "5483",
      "name": "中美晶期貨",
-     "ratio": 0.162,
+     "ratio": 0.2025,
      "kind": "stock",
      "mult": 2000,
      "price": 192.0,
      "volume": 999,
-     "margin": 62208,
+     "margin": 77760,
      "currency": "TWD"
     },
     {
@@ -1400,12 +1400,12 @@
      "code": "IIF",
      "ucode": "3006",
      "name": "晶豪科期貨",
-     "ratio": 0.21600000000000003,
+     "ratio": 0.22949999999999998,
      "kind": "stock",
      "mult": 2000,
      "price": 229.0,
      "volume": 835,
-     "margin": 98928,
+     "margin": 105111,
      "currency": "TWD"
     },
     {
@@ -1436,12 +1436,12 @@
      "code": "LYF",
      "ucode": "8046",
      "name": "南電期貨",
-     "ratio": 0.21600000000000003,
+     "ratio": 0.22949999999999998,
      "kind": "stock",
      "mult": 2000,
      "price": 1326.0,
      "volume": 793,
-     "margin": 572832,
+     "margin": 608634,
      "currency": "TWD"
     },
     {
@@ -1544,12 +1544,12 @@
      "code": "NWF",
      "ucode": "8299",
      "name": "群聯期貨",
-     "ratio": 0.2025,
+     "ratio": 0.21600000000000003,
      "kind": "stock",
      "mult": 2000,
      "price": 1826.0,
      "volume": 702,
-     "margin": 739530,
+     "margin": 788832,
      "currency": "TWD"
     },
     {
@@ -1760,12 +1760,12 @@
      "code": "OTF",
      "ucode": "3081",
      "name": "聯亞期貨",
-     "ratio": 0.22949999999999998,
+     "ratio": 0.243,
      "kind": "stock",
      "mult": 2000,
      "price": 2615.0,
      "volume": 424,
-     "margin": 1200285,
+     "margin": 1270890,
      "currency": "TWD"
     },
     {
@@ -1976,12 +1976,12 @@
      "code": "QDF",
      "ucode": "3532",
      "name": "台勝科期貨",
-     "ratio": 0.21600000000000003,
+     "ratio": 0.22949999999999998,
      "kind": "stock",
      "mult": 2000,
      "price": 394.5,
      "volume": 284,
-     "margin": 170424,
+     "margin": 181076,
      "currency": "TWD"
     },
     {
@@ -2072,12 +2072,12 @@
      "code": "CXF",
      "ucode": "2371",
      "name": "大同期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 28.85,
      "volume": 220,
-     "margin": 9347,
+     "margin": 7790,
      "currency": "TWD"
     },
     {
@@ -2144,12 +2144,12 @@
      "code": "GCF",
      "ucode": "2354",
      "name": "鴻準期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 61.5,
      "volume": 203,
-     "margin": 19926,
+     "margin": 16605,
      "currency": "TWD"
     },
     {
@@ -2204,12 +2204,12 @@
      "code": "SDF",
      "ucode": "1513",
      "name": "中興電期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 164.5,
      "volume": 191,
-     "margin": 53298,
+     "margin": 44415,
      "currency": "TWD"
     },
     {
@@ -2324,12 +2324,12 @@
      "code": "SWF",
      "ucode": "9958",
      "name": "小型世紀鋼期貨",
-     "ratio": 0.2025,
+     "ratio": 0.162,
      "kind": "mini",
      "mult": 100,
      "price": 88.0,
      "volume": 154,
-     "margin": 1782,
+     "margin": 1426,
      "currency": "TWD"
     },
     {
@@ -2504,24 +2504,24 @@
      "code": "RUF",
      "ucode": "9958",
      "name": "世紀鋼期貨",
-     "ratio": 0.2025,
+     "ratio": 0.162,
      "kind": "stock",
      "mult": 2000,
      "price": 87.2,
      "volume": 97,
-     "margin": 35316,
+     "margin": 28253,
      "currency": "TWD"
     },
     {
      "code": "SCF",
      "ucode": "1477",
      "name": "小型聚陽期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "mini",
      "mult": 100,
      "price": 207.5,
      "volume": 95,
-     "margin": 3362,
+     "margin": 2801,
      "currency": "TWD"
     },
     {
@@ -2852,12 +2852,12 @@
      "code": "HIF",
      "ucode": "2520",
      "name": "冠德期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 37.55,
      "volume": 46,
-     "margin": 12166,
+     "margin": 10138,
      "currency": "TWD"
     },
     {
@@ -2960,12 +2960,12 @@
      "code": "RBF",
      "ucode": "5388",
      "name": "中磊期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 74.9,
      "volume": 38,
-     "margin": 24268,
+     "margin": 20223,
      "currency": "TWD"
     },
     {
@@ -3248,12 +3248,12 @@
      "code": "SJF",
      "ucode": "3005",
      "name": "神基期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 121.0,
      "volume": 16,
-     "margin": 39204,
+     "margin": 32670,
      "currency": "TWD"
     },
     {
@@ -3296,12 +3296,12 @@
      "code": "LWF",
      "ucode": "1476",
      "name": "儒鴻期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 325.0,
      "volume": 12,
-     "margin": 105300,
+     "margin": 87750,
      "currency": "TWD"
     },
     {
@@ -3404,12 +3404,12 @@
      "code": "JWF",
      "ucode": "5534",
      "name": "長虹期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 70.8,
      "volume": 9,
-     "margin": 22939,
+     "margin": 19116,
      "currency": "TWD"
     },
     {
@@ -3500,12 +3500,12 @@
      "code": "QQF",
      "ucode": "3078",
      "name": "僑威期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 47.35,
      "volume": 4,
-     "margin": 15341,
+     "margin": 12784,
      "currency": "TWD"
     },
     {
@@ -3536,12 +3536,12 @@
      "code": "KSF",
      "ucode": "1477",
      "name": "聚陽期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 208.5,
      "volume": 3,
-     "margin": 67554,
+     "margin": 56295,
      "currency": "TWD"
     },
     {
@@ -3572,12 +3572,12 @@
      "code": "VQF",
      "ucode": "3718",
      "name": "中光電投控期貨",
-     "ratio": 0.2025,
+     "ratio": 0.21600000000000003,
      "kind": "stock",
      "mult": 2000,
      "price": 61.0,
      "volume": 3,
-     "margin": 24705,
+     "margin": 26352,
      "currency": "TWD"
     },
     {
@@ -3656,12 +3656,12 @@
      "code": "UUF",
      "ucode": "6757",
      "name": "台灣虎航期貨",
-     "ratio": 0.162,
+     "ratio": 0.135,
      "kind": "stock",
      "mult": 2000,
      "price": 54.2,
      "volume": 1,
-     "margin": 17561,
+     "margin": 14634,
      "currency": "TWD"
     },
     {
@@ -3716,7 +3716,7 @@
      "code": "PKF",
      "ucode": "6173",
      "name": "信昌電期貨",
-     "ratio": 0.2025,
+     "ratio": 0.21600000000000003,
      "kind": "stock",
      "mult": 2000,
      "price": null,
@@ -3737,7 +3737,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/10/15",
+   "update": "2026/10/16",
    "price_date": "2026/10/15",
    "matched": 295
   },
@@ -4035,7 +4035,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/10/15",
+   "update": "2026/10/16",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -4053,49 +4053,49 @@
        "cat": "股價指數期貨類",
        "name": "小型那斯達克指數",
        "code": "NQ",
-       "margin": 46957,
+       "margin": 46931,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型那斯達克指數",
        "code": "MNQ",
-       "margin": 4696,
+       "margin": 4693,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "小型S&P 500指數",
        "code": "ES",
-       "margin": 28784,
+       "margin": 28817,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型S&P 500指數",
        "code": "MES",
-       "margin": 2879,
+       "margin": 2882,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "小型羅素2000",
        "code": "RTY",
-       "margin": 11843,
+       "margin": 11911,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型小羅素2000",
        "code": "M2K",
-       "margin": 1185,
+       "margin": 1192,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "日經225",
        "code": "CNK",
-       "margin": 26603,
+       "margin": 26382,
        "currency": "USD"
       }
      ]
@@ -4221,49 +4221,49 @@
      "cat": "股價指數期貨類",
      "name": "小型那斯達克指數",
      "code": "NQ",
-     "margin": 46957,
+     "margin": 46931,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型那斯達克指數",
      "code": "MNQ",
-     "margin": 4696,
+     "margin": 4693,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "小型S&P 500指數",
      "code": "ES",
-     "margin": 28784,
+     "margin": 28817,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型S&P 500指數",
      "code": "MES",
-     "margin": 2879,
+     "margin": 2882,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "小型羅素2000",
      "code": "RTY",
-     "margin": 11843,
+     "margin": 11911,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型小羅素2000",
      "code": "M2K",
-     "margin": 1185,
+     "margin": 1192,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "日經225",
      "code": "CNK",
-     "margin": 26603,
+     "margin": 26382,
      "currency": "USD"
     },
     {
@@ -4385,14 +4385,14 @@
        "cat": "股價指數期貨類",
        "name": "小道瓊",
        "code": "YM",
-       "margin": 16810,
+       "margin": 16880,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型小道瓊",
        "code": "MYM",
-       "margin": 1681,
+       "margin": 1689,
        "currency": "USD"
       }
      ]
@@ -4537,14 +4537,14 @@
      "cat": "股價指數期貨類",
      "name": "小道瓊",
      "code": "YM",
-     "margin": 16810,
+     "margin": 16880,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型小道瓊",
      "code": "MYM",
-     "margin": 1681,
+     "margin": 1689,
      "currency": "USD"
     },
     {
@@ -4783,21 +4783,21 @@
        "cat": "金屬能源類",
        "name": "黃金",
        "code": "GC",
-       "margin": 22594,
+       "margin": 22937,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "小型黃金",
        "code": "QO",
-       "margin": 11297,
+       "margin": 11468,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "微型黃金",
        "code": "MGC",
-       "margin": 2260,
+       "margin": 2295,
        "currency": "USD"
       },
       {
@@ -4825,84 +4825,84 @@
        "cat": "金屬能源類",
        "name": "白銀",
        "code": "SI",
-       "margin": 24587,
+       "margin": 25150,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "微型白銀",
        "code": "SIL",
-       "margin": 4919,
+       "margin": 5031,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "白金",
        "code": "PL",
-       "margin": 7105,
+       "margin": 7135,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "鈀金",
        "code": "PA",
-       "margin": 10856,
+       "margin": 11173,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "輕原油",
        "code": "CL",
-       "margin": 10643,
+       "margin": 11164,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "小輕原油",
        "code": "QM",
-       "margin": 5333,
+       "margin": 5593,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "微型輕原油",
        "code": "MCL",
-       "margin": 1067,
+       "margin": 1119,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "天然氣",
        "code": "NG",
-       "margin": 3670,
+       "margin": 3735,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "小型天然氣",
        "code": "QG",
-       "margin": 923,
+       "margin": 940,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "無鉛汽油",
        "code": "RB",
-       "margin": 10426,
+       "margin": 10102,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "熱燃油",
        "code": "HO",
-       "margin": 16086,
+       "margin": 15552,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "布蘭特原油",
        "code": "BZ",
-       "margin": 11149,
+       "margin": 11108,
        "currency": "USD"
       }
      ]
@@ -4913,21 +4913,21 @@
      "cat": "金屬能源類",
      "name": "黃金",
      "code": "GC",
-     "margin": 22594,
+     "margin": 22937,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "小型黃金",
      "code": "QO",
-     "margin": 11297,
+     "margin": 11468,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "微型黃金",
      "code": "MGC",
-     "margin": 2260,
+     "margin": 2295,
      "currency": "USD"
     },
     {
@@ -4955,84 +4955,84 @@
      "cat": "金屬能源類",
      "name": "白銀",
      "code": "SI",
-     "margin": 24587,
+     "margin": 25150,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "微型白銀",
      "code": "SIL",
-     "margin": 4919,
+     "margin": 5031,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "白金",
      "code": "PL",
-     "margin": 7105,
+     "margin": 7135,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "鈀金",
      "code": "PA",
-     "margin": 10856,
+     "margin": 11173,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "輕原油",
      "code": "CL",
-     "margin": 10643,
+     "margin": 11164,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "小輕原油",
      "code": "QM",
-     "margin": 5333,
+     "margin": 5593,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "微型輕原油",
      "code": "MCL",
-     "margin": 1067,
+     "margin": 1119,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "天然氣",
      "code": "NG",
-     "margin": 3670,
+     "margin": 3735,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "小型天然氣",
      "code": "QG",
-     "margin": 923,
+     "margin": 940,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "無鉛汽油",
      "code": "RB",
-     "margin": 10426,
+     "margin": 10102,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "熱燃油",
      "code": "HO",
-     "margin": 16086,
+     "margin": 15552,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "布蘭特原油",
      "code": "BZ",
-     "margin": 11149,
+     "margin": 11108,
      "currency": "USD"
     }
    ],
@@ -5423,35 +5423,35 @@
        "cat": "股價指數期貨類",
        "name": "大阪日經225",
        "code": "JNI",
-       "margin": 4543068,
+       "margin": 4563451,
        "currency": "JPY"
       },
       {
        "cat": "股價指數期貨類",
        "name": "大阪小日經225",
        "code": "JNM",
-       "margin": 453723,
+       "margin": 456240,
        "currency": "JPY"
       },
       {
        "cat": "股價指數期貨類",
        "name": "大阪微型日經225",
        "code": "JNU",
-       "margin": 45373,
+       "margin": 45624,
        "currency": "JPY"
       },
       {
        "cat": "股價指數期貨類",
        "name": "東證指數",
        "code": "JTI",
-       "margin": 2261358,
+       "margin": 2252892,
        "currency": "JPY"
       },
       {
        "cat": "股價指數期貨類",
        "name": "小東證指數",
        "code": "JTM",
-       "margin": 226136,
+       "margin": 225290,
        "currency": "JPY"
       }
      ]
@@ -5463,7 +5463,7 @@
        "cat": "外匯債券類",
        "name": "日本十年債",
        "code": "JGB",
-       "margin": 1460959,
+       "margin": 1490448,
        "currency": "JPY"
       }
      ]
@@ -5474,42 +5474,42 @@
      "cat": "股價指數期貨類",
      "name": "大阪日經225",
      "code": "JNI",
-     "margin": 4543068,
+     "margin": 4563451,
      "currency": "JPY"
     },
     {
      "cat": "股價指數期貨類",
      "name": "大阪小日經225",
      "code": "JNM",
-     "margin": 453723,
+     "margin": 456240,
      "currency": "JPY"
     },
     {
      "cat": "股價指數期貨類",
      "name": "大阪微型日經225",
      "code": "JNU",
-     "margin": 45373,
+     "margin": 45624,
      "currency": "JPY"
     },
     {
      "cat": "股價指數期貨類",
      "name": "東證指數",
      "code": "JTI",
-     "margin": 2261358,
+     "margin": 2252892,
      "currency": "JPY"
     },
     {
      "cat": "股價指數期貨類",
      "name": "小東證指數",
      "code": "JTM",
-     "margin": 226136,
+     "margin": 225290,
      "currency": "JPY"
     },
     {
      "cat": "外匯債券類",
      "name": "日本十年債",
      "code": "JGB",
-     "margin": 1460959,
+     "margin": 1490448,
      "currency": "JPY"
     }
    ],
@@ -5526,7 +5526,7 @@
        "cat": "農產品類",
        "name": "橡膠",
        "code": "JRU",
-       "margin": 99000,
+       "margin": 100000,
        "currency": "JPY"
       },
       {
@@ -5559,56 +5559,56 @@
        "cat": "金屬能源類",
        "name": "黃金",
        "code": "JAU",
-       "margin": 1499000,
+       "margin": 1465000,
        "currency": "JPY"
       },
       {
        "cat": "金屬能源類",
        "name": "小黃金",
        "code": "JAM",
-       "margin": 149900,
+       "margin": 146500,
        "currency": "JPY"
       },
       {
        "cat": "金屬能源類",
        "name": "白金",
        "code": "JPL",
-       "margin": 448000,
+       "margin": 420000,
        "currency": "JPY"
       },
       {
        "cat": "金屬能源類",
        "name": "小白金",
        "code": "JPM",
-       "margin": 89600,
+       "margin": 84000,
        "currency": "JPY"
       },
       {
        "cat": "金屬能源類",
        "name": "鈀金",
        "code": "JPA",
-       "margin": 1563000,
+       "margin": 1470000,
        "currency": "JPY"
       },
       {
        "cat": "金屬能源類",
        "name": "白銀",
        "code": "JSV",
-       "margin": 978000,
+       "margin": 927000,
        "currency": "JPY"
       },
       {
        "cat": "金屬能源類",
        "name": "原油",
        "code": "JCO",
-       "margin": 561500,
+       "margin": 562000,
        "currency": "JPY"
       },
       {
        "cat": "金屬能源類",
        "name": "燃油",
        "code": "JKE",
-       "margin": 600500,
+       "margin": 615000,
        "currency": "JPY"
       },
       {
@@ -5626,7 +5626,7 @@
      "cat": "農產品類",
      "name": "橡膠",
      "code": "JRU",
-     "margin": 99000,
+     "margin": 100000,
      "currency": "JPY"
     },
     {
@@ -5654,56 +5654,56 @@
      "cat": "金屬能源類",
      "name": "黃金",
      "code": "JAU",
-     "margin": 1499000,
+     "margin": 1465000,
      "currency": "JPY"
     },
     {
      "cat": "金屬能源類",
      "name": "小黃金",
      "code": "JAM",
-     "margin": 149900,
+     "margin": 146500,
      "currency": "JPY"
     },
     {
      "cat": "金屬能源類",
      "name": "白金",
      "code": "JPL",
-     "margin": 448000,
+     "margin": 420000,
      "currency": "JPY"
     },
     {
      "cat": "金屬能源類",
      "name": "小白金",
      "code": "JPM",
-     "margin": 89600,
+     "margin": 84000,
      "currency": "JPY"
     },
     {
      "cat": "金屬能源類",
      "name": "鈀金",
      "code": "JPA",
-     "margin": 1563000,
+     "margin": 1470000,
      "currency": "JPY"
     },
     {
      "cat": "金屬能源類",
      "name": "白銀",
      "code": "JSV",
-     "margin": 978000,
+     "margin": 927000,
      "currency": "JPY"
     },
     {
      "cat": "金屬能源類",
      "name": "原油",
      "code": "JCO",
-     "margin": 561500,
+     "margin": 562000,
      "currency": "JPY"
     },
     {
      "cat": "金屬能源類",
      "name": "燃油",
      "code": "JKE",
-     "margin": 600500,
+     "margin": 615000,
      "currency": "JPY"
     },
     {
@@ -5734,56 +5734,56 @@
        "cat": "匯率期貨類",
        "name": "波蘭幣天天期貨",
        "code": "JP1",
-       "margin": 16310,
+       "margin": 16200,
        "currency": "JPY"
       },
       {
        "cat": "匯率期貨類",
        "name": "南非幣天天期貨",
        "code": "JS1",
-       "margin": 38170,
+       "margin": 38120,
        "currency": "JPY"
       },
       {
        "cat": "匯率期貨類",
        "name": "美元天天期貨",
        "code": "XJ1",
-       "margin": 63050,
+       "margin": 63230,
        "currency": "JPY"
       },
       {
        "cat": "匯率期貨類",
        "name": "英鎊天天期貨",
        "code": "JB1",
-       "margin": 83460,
+       "margin": 83690,
        "currency": "JPY"
       },
       {
        "cat": "匯率期貨類",
        "name": "紐幣天天期貨",
        "code": "JN1",
-       "margin": 35510,
+       "margin": 35460,
        "currency": "JPY"
       },
       {
        "cat": "匯率期貨類",
        "name": "歐元天天期貨",
        "code": "JE1",
-       "margin": 71290,
+       "margin": 70930,
        "currency": "JPY"
       },
       {
        "cat": "匯率期貨類",
        "name": "加幣天天期貨",
        "code": "JC1",
-       "margin": 44360,
+       "margin": 44390,
        "currency": "JPY"
       },
       {
        "cat": "匯率期貨類",
        "name": "澳幣天天期貨",
        "code": "JA1",
-       "margin": 43930,
+       "margin": 44090,
        "currency": "JPY"
       }
      ]
@@ -5801,56 +5801,56 @@
      "cat": "匯率期貨類",
      "name": "波蘭幣天天期貨",
      "code": "JP1",
-     "margin": 16310,
+     "margin": 16200,
      "currency": "JPY"
     },
     {
      "cat": "匯率期貨類",
      "name": "南非幣天天期貨",
      "code": "JS1",
-     "margin": 38170,
+     "margin": 38120,
      "currency": "JPY"
     },
     {
      "cat": "匯率期貨類",
      "name": "美元天天期貨",
      "code": "XJ1",
-     "margin": 63050,
+     "margin": 63230,
      "currency": "JPY"
     },
     {
      "cat": "匯率期貨類",
      "name": "英鎊天天期貨",
      "code": "JB1",
-     "margin": 83460,
+     "margin": 83690,
      "currency": "JPY"
     },
     {
      "cat": "匯率期貨類",
      "name": "紐幣天天期貨",
      "code": "JN1",
-     "margin": 35510,
+     "margin": 35460,
      "currency": "JPY"
     },
     {
      "cat": "匯率期貨類",
      "name": "歐元天天期貨",
      "code": "JE1",
-     "margin": 71290,
+     "margin": 70930,
      "currency": "JPY"
     },
     {
      "cat": "匯率期貨類",
      "name": "加幣天天期貨",
      "code": "JC1",
-     "margin": 44360,
+     "margin": 44390,
      "currency": "JPY"
     },
     {
      "cat": "匯率期貨類",
      "name": "澳幣天天期貨",
      "code": "JA1",
-     "margin": 43930,
+     "margin": 44090,
      "currency": "JPY"
     }
    ],
@@ -5881,7 +5881,7 @@
        "cat": "股價指數期貨類",
        "name": "富時中國A50",
        "code": "CN",
-       "margin": 957,
+       "margin": 946,
        "currency": "USD"
       },
       {
@@ -5895,7 +5895,7 @@
        "cat": "股價指數期貨類",
        "name": "新加坡指數",
        "code": "SG",
-       "margin": 2750,
+       "margin": 2695,
        "currency": "SGD"
       },
       {
@@ -5927,7 +5927,7 @@
      "cat": "股價指數期貨類",
      "name": "富時中國A50",
      "code": "CN",
-     "margin": 957,
+     "margin": 946,
      "currency": "USD"
     },
     {
@@ -5941,7 +5941,7 @@
      "cat": "股價指數期貨類",
      "name": "新加坡指數",
      "code": "SG",
-     "margin": 2750,
+     "margin": 2695,
      "currency": "SGD"
     },
     {
@@ -6039,6 +6039,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-10-16 02:23 UTC",
- "generated_tw": "2026-10-16 10:23"
+ "generated_at": "2026-10-16 15:44 UTC",
+ "generated_tw": "2026-10-16 23:44"
 }
