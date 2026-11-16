@@ -668,12 +668,12 @@
      "code": "IXF",
      "ucode": "3189",
      "name": "景碩期貨",
-     "ratio": 0.324,
+     "ratio": 0.21600000000000003,
      "kind": "stock",
      "mult": 2000,
      "price": 668.0,
      "volume": 3875,
-     "margin": 432864,
+     "margin": 288576,
      "currency": "TWD"
     },
     {
@@ -3797,7 +3797,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/11/13",
+   "update": "2026/11/16",
    "price_date": "2026/11/13",
    "matched": 300
   },
@@ -4107,7 +4107,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/11/13",
+   "update": "2026/11/16",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -4125,49 +4125,49 @@
        "cat": "股價指數期貨類",
        "name": "小型那斯達克指數",
        "code": "NQ",
-       "margin": 46162,
+       "margin": 45890,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型那斯達克指數",
        "code": "MNQ",
-       "margin": 4616,
+       "margin": 4590,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "小型S&P 500指數",
        "code": "ES",
-       "margin": 29298,
+       "margin": 29245,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型S&P 500指數",
        "code": "MES",
-       "margin": 2930,
+       "margin": 2925,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "小型羅素2000",
        "code": "RTY",
-       "margin": 12388,
+       "margin": 12368,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型小羅素2000",
        "code": "M2K",
-       "margin": 1239,
+       "margin": 1237,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "日經225",
        "code": "CNK",
-       "margin": 28254,
+       "margin": 28123,
        "currency": "USD"
       }
      ]
@@ -4293,49 +4293,49 @@
      "cat": "股價指數期貨類",
      "name": "小型那斯達克指數",
      "code": "NQ",
-     "margin": 46162,
+     "margin": 45890,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型那斯達克指數",
      "code": "MNQ",
-     "margin": 4616,
+     "margin": 4590,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "小型S&P 500指數",
      "code": "ES",
-     "margin": 29298,
+     "margin": 29245,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型S&P 500指數",
      "code": "MES",
-     "margin": 2930,
+     "margin": 2925,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "小型羅素2000",
      "code": "RTY",
-     "margin": 12388,
+     "margin": 12368,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型小羅素2000",
      "code": "M2K",
-     "margin": 1239,
+     "margin": 1237,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "日經225",
      "code": "CNK",
-     "margin": 28254,
+     "margin": 28123,
      "currency": "USD"
     },
     {
@@ -4457,7 +4457,7 @@
        "cat": "股價指數期貨類",
        "name": "小道瓊",
        "code": "YM",
-       "margin": 16931,
+       "margin": 16935,
        "currency": "USD"
       },
       {
@@ -4609,7 +4609,7 @@
      "cat": "股價指數期貨類",
      "name": "小道瓊",
      "code": "YM",
-     "margin": 16931,
+     "margin": 16935,
      "currency": "USD"
     },
     {
@@ -4855,21 +4855,21 @@
        "cat": "金屬能源類",
        "name": "黃金",
        "code": "GC",
-       "margin": 21370,
+       "margin": 21376,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "小型黃金",
        "code": "QO",
-       "margin": 10686,
+       "margin": 10688,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "微型黃金",
        "code": "MGC",
-       "margin": 2138,
+       "margin": 2139,
        "currency": "USD"
       },
       {
@@ -4897,84 +4897,84 @@
        "cat": "金屬能源類",
        "name": "白銀",
        "code": "SI",
-       "margin": 22029,
+       "margin": 21614,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "微型白銀",
        "code": "SIL",
-       "margin": 4407,
+       "margin": 4323,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "白金",
        "code": "PL",
-       "margin": 6765,
+       "margin": 6631,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "鈀金",
        "code": "PA",
-       "margin": 9817,
+       "margin": 9976,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "輕原油",
        "code": "CL",
-       "margin": 9913,
+       "margin": 9917,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "小輕原油",
        "code": "QM",
-       "margin": 4968,
+       "margin": 4970,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "微型輕原油",
        "code": "MCL",
-       "margin": 994,
+       "margin": 995,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "天然氣",
        "code": "NG",
-       "margin": 3430,
+       "margin": 3370,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "小型天然氣",
        "code": "QG",
-       "margin": 864,
+       "margin": 849,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "無鉛汽油",
        "code": "RB",
-       "margin": 9179,
+       "margin": 9037,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "熱燃油",
        "code": "HO",
-       "margin": 14291,
+       "margin": 14175,
        "currency": "USD"
       },
       {
        "cat": "金屬能源類",
        "name": "布蘭特原油",
        "code": "BZ",
-       "margin": 9997,
+       "margin": 10014,
        "currency": "USD"
       }
      ]
@@ -4985,21 +4985,21 @@
      "cat": "金屬能源類",
      "name": "黃金",
      "code": "GC",
-     "margin": 21370,
+     "margin": 21376,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "小型黃金",
      "code": "QO",
-     "margin": 10686,
+     "margin": 10688,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "微型黃金",
      "code": "MGC",
-     "margin": 2138,
+     "margin": 2139,
      "currency": "USD"
     },
     {
@@ -5027,84 +5027,84 @@
      "cat": "金屬能源類",
      "name": "白銀",
      "code": "SI",
-     "margin": 22029,
+     "margin": 21614,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "微型白銀",
      "code": "SIL",
-     "margin": 4407,
+     "margin": 4323,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "白金",
      "code": "PL",
-     "margin": 6765,
+     "margin": 6631,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "鈀金",
      "code": "PA",
-     "margin": 9817,
+     "margin": 9976,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "輕原油",
      "code": "CL",
-     "margin": 9913,
+     "margin": 9917,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "小輕原油",
      "code": "QM",
-     "margin": 4968,
+     "margin": 4970,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "微型輕原油",
      "code": "MCL",
-     "margin": 994,
+     "margin": 995,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "天然氣",
      "code": "NG",
-     "margin": 3430,
+     "margin": 3370,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "小型天然氣",
      "code": "QG",
-     "margin": 864,
+     "margin": 849,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "無鉛汽油",
      "code": "RB",
-     "margin": 9179,
+     "margin": 9037,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "熱燃油",
      "code": "HO",
-     "margin": 14291,
+     "margin": 14175,
      "currency": "USD"
     },
     {
      "cat": "金屬能源類",
      "name": "布蘭特原油",
      "code": "BZ",
-     "margin": 9997,
+     "margin": 10014,
      "currency": "USD"
     }
    ],
@@ -5184,7 +5184,7 @@
        "cat": "金屬能源類",
        "name": "鋁",
        "code": "AH",
-       "margin": 4700,
+       "margin": 4825,
        "currency": "USD"
       },
       {
@@ -5237,7 +5237,7 @@
      "cat": "金屬能源類",
      "name": "鋁",
      "code": "AH",
-     "margin": 4700,
+     "margin": 4825,
      "currency": "USD"
     },
     {
@@ -5460,7 +5460,7 @@
        "cat": "外匯債券類",
        "name": "英國長債",
        "code": "FLG",
-       "margin": 1941,
+       "margin": 1956,
        "currency": "英鎊"
       }
      ]
@@ -5478,7 +5478,7 @@
      "cat": "外匯債券類",
      "name": "英國長債",
      "code": "FLG",
-     "margin": 1941,
+     "margin": 1956,
      "currency": "英鎊"
     }
    ],
@@ -5939,14 +5939,14 @@
        "cat": "股價指數期貨類",
        "name": "富時台灣指數",
        "code": "TWN",
-       "margin": 11880,
+       "margin": 11660,
        "currency": "USD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "微型富時台灣指數",
        "code": "MTWN",
-       "margin": 1188,
+       "margin": 1166,
        "currency": "USD"
       },
       {
@@ -5960,21 +5960,21 @@
        "cat": "股價指數期貨類",
        "name": "日經指數225",
        "code": "NK",
-       "margin": 2530000,
+       "margin": 2486000,
        "currency": "JPY"
       },
       {
        "cat": "股價指數期貨類",
        "name": "新加坡指數",
        "code": "SG",
-       "margin": 2420,
+       "margin": 2376,
        "currency": "SGD"
       },
       {
        "cat": "股價指數期貨類",
        "name": "富時越南30指數",
        "code": "FVN",
-       "margin": 968,
+       "margin": 957,
        "currency": "USD"
       }
      ]
@@ -5985,14 +5985,14 @@
      "cat": "股價指數期貨類",
      "name": "富時台灣指數",
      "code": "TWN",
-     "margin": 11880,
+     "margin": 11660,
      "currency": "USD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "微型富時台灣指數",
      "code": "MTWN",
-     "margin": 1188,
+     "margin": 1166,
      "currency": "USD"
     },
     {
@@ -6006,21 +6006,21 @@
      "cat": "股價指數期貨類",
      "name": "日經指數225",
      "code": "NK",
-     "margin": 2530000,
+     "margin": 2486000,
      "currency": "JPY"
     },
     {
      "cat": "股價指數期貨類",
      "name": "新加坡指數",
      "code": "SG",
-     "margin": 2420,
+     "margin": 2376,
      "currency": "SGD"
     },
     {
      "cat": "股價指數期貨類",
      "name": "富時越南30指數",
      "code": "FVN",
-     "margin": 968,
+     "margin": 957,
      "currency": "USD"
     }
    ],
@@ -6111,6 +6111,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-11-16 03:56 UTC",
- "generated_tw": "2026-11-16 11:56"
+ "generated_at": "2026-11-16 21:24 UTC",
+ "generated_tw": "2026-11-17 05:24"
 }
