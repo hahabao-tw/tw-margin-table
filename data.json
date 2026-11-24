@@ -1136,12 +1136,12 @@
      "code": "QDF",
      "ucode": "3532",
      "name": "台勝科期貨",
-     "ratio": 0.22949999999999998,
+     "ratio": 0.45899999999999996,
      "kind": "stock",
      "mult": 2000,
      "price": 170.0,
      "volume": 1812,
-     "margin": 78030,
+     "margin": 156060,
      "currency": "TWD"
     },
     {
@@ -3797,7 +3797,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/11/17",
+   "update": "2026/11/24",
    "price_date": "2026/11/23",
    "matched": 301
   },
@@ -4107,7 +4107,7 @@
      "currency": "TWD"
     }
    ],
-   "update": "2026/11/17",
+   "update": "2026/11/24",
    "search_id": "etfSearch",
    "clear_id": "etfClear",
    "noresult_id": "etfNoResult"
@@ -6111,6 +6111,6 @@
    "error": null
   }
  ],
- "generated_at": "2026-11-23 23:01 UTC",
- "generated_tw": "2026-11-24 07:01"
+ "generated_at": "2026-11-24 07:41 UTC",
+ "generated_tw": "2026-11-24 15:41"
 }
